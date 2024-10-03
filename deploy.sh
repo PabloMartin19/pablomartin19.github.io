@@ -8,15 +8,15 @@ DIR_SITE="_site" # Directorio generado por Jekyll
 echo "Construyendo el sitio con Jekyll..."
 jekyll build
 
-# Ve al directorio _site
-cd $DIR_SITE || { echo "Directorio $DIR_SITE no encontrado"; exit 1; }
+# Clonar el repositorio de despliegue en una carpeta temporal
+TEMP_DIR=$(mktemp -d)
+git clone $REPO_DEPLOY $TEMP_DIR
 
-# Inicializa el repositorio en el _site si no está inicializado
-if [ ! -d ".git" ]; then
-  echo "Inicializando el repositorio en $DIR_SITE..."
-  git init
-  git remote add origin $REPO_DEPLOY
-fi
+# Copiar los archivos del _site al repositorio de despliegue
+rsync -av --delete $DIR_SITE/ $TEMP_DIR/
+
+# Cambiar al directorio temporal
+cd $TEMP_DIR
 
 # Agregar y hacer commit de los cambios
 echo "Añadiendo cambios al repositorio de despliegue..."
@@ -26,6 +26,9 @@ git commit -m "Actualización del sitio: $(date)"
 # Subir los cambios
 echo "Subiendo cambios al repositorio de despliegue..."
 git push origin main --force
+
+# Limpiar el directorio temporal
+rm -rf $TEMP_DIR
 
 # Regresar al directorio principal
 cd ..
