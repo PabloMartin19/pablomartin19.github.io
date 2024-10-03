@@ -4,7 +4,7 @@
   <id>/</id>
   <title>My site</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-10-03T12:13:54+02:00</updated>
+  <updated>2024-10-03T12:19:13+02:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/mi-primer-post/" rel="alternate" type="text/html" title="Prueba" />
     <published>2024-09-03T12:00:00+02:00</published>
   
-    <updated>2024-10-03T10:31:18+02:00</updated>
+    <updated>2024-10-03T12:19:04+02:00</updated>
   
     <id>/posts/mi-primer-post/</id>
     <content src="/posts/mi-primer-post/" />
@@ -34,9 +34,9 @@
 
   
     
-    <category term="Prueba" />
+    <category term="KK" />
     
-    <category term="Prueba2" />
+    <category term="KK2" />
     
   
 
