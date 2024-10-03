@@ -1,0 +1,127 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>/</id>
+  <title>My site</title>
+  <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
+  <updated>2024-10-03T12:13:54+02:00</updated>
+  <author>
+    <name>Pablo Martín Hidalgo</name>
+    <uri>/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="es"
+    href="/"/>
+  <generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator>
+  <rights> © 2024 Pablo Martín Hidalgo </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Prueba</title>
+    <link href="/posts/mi-primer-post/" rel="alternate" type="text/html" title="Prueba" />
+    <published>2024-09-03T12:00:00+02:00</published>
+  
+    <updated>2024-10-03T10:31:18+02:00</updated>
+  
+    <id>/posts/mi-primer-post/</id>
+    <content src="/posts/mi-primer-post/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Prueba" />
+    
+    <category term="Prueba2" />
+    
+  
+
+  <summary>prueba prueba</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Comandos para programación de tareas</title>
+    <link href="/posts/comandos-programacion/" rel="alternate" type="text/html" title="Comandos para programación de tareas" />
+    <published>2024-09-02T20:00:00+02:00</published>
+  
+    <updated>2024-10-02T18:59:43+02:00</updated>
+  
+    <id>/posts/comandos-programacion/</id>
+    <content src="/posts/comandos-programacion/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Sistemas" />
+    
+    <category term="Automatización" />
+    
+  
+
+  <summary>Explora los comandos esenciales para programar tareas en Linux. Aprende a automatizar procesos y optimizar tu flujo de trabajo en el sistema operativo, asegurando que las tareas críticas se realicen de manera eficiente y sin intervención manual.</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Creación de máquina virtual en VirtualBox con arranque dual</title>
+    <link href="/posts/dual-boot/" rel="alternate" type="text/html" title="Creación de máquina virtual en VirtualBox con arranque dual" />
+    <published>2024-09-02T14:09:00+02:00</published>
+  
+    <updated>2024-09-02T14:09:00+02:00</updated>
+  
+    <id>/posts/dual-boot/</id>
+    <content src="/posts/dual-boot/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Sistemas" />
+    
+    <category term="Virtualización" />
+    
+  
+
+  <summary>Creación de una máquina virtual en VirtualBox con arranque dual que permita ejecutar dos sistemas operativos: Windows y Debian Bookworm.</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Compartición de carpetas</title>
+    <link href="/posts/comparticion-carpetas/" rel="alternate" type="text/html" title="Compartición de carpetas" />
+    <published>2024-09-01T15:30:00+02:00</published>
+  
+    <updated>2024-09-01T15:30:00+02:00</updated>
+  
+    <id>/posts/comparticion-carpetas/</id>
+    <content src="/posts/comparticion-carpetas/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Redes" />
+    
+    <category term="Compartición de archivos" />
+    
+  
+
+  <summary>Práctica sobre la configuración y gestión de carpetas compartidas en una red local en Windows, Linux y Android.</summary>
+
+  </entry>
+
+</feed>
+
+
