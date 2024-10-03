@@ -2,9 +2,9 @@
 
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>/</id>
-  <title>My site</title>
+  <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-10-03T12:21:14+02:00</updated>
+  <updated>2024-10-03T12:23:25+02:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
