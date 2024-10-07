@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-10-07T10:18:15+02:00</updated>
+  <updated>2024-10-07T10:20:43+02:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,32 +17,6 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
-
-  
-  <entry>
-    <title>Prueba</title>
-    <link href="/posts/prueba/" rel="alternate" type="text/html" title="Prueba" />
-    <published>2024-09-07T12:15:00+02:00</published>
-  
-    <updated>2024-09-07T12:15:00+02:00</updated>
-  
-    <id>/posts/prueba/</id>
-    <content src="/posts/prueba/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Prueba" />
-    
-    <category term="KK" />
-    
-  
-
-  <summary>prueba de KK</summary>
-
-  </entry>
 
   
   <entry>
