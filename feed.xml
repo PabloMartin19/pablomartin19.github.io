@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-10-14T11:05:06+02:00</updated>
+  <updated>2024-10-14T11:06:19+02:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Prueba: Introducción a la implantación de aplicaciones web</title>
+    <link href="/posts/pruebas-iaw/" rel="alternate" type="text/html" title="Prueba: Introducción a la implantación de aplicaciones web" />
+    <published>2024-09-14T13:00:00+02:00</published>
+  
+    <updated>2024-09-14T13:00:00+02:00</updated>
+  
+    <id>/posts/pruebas-iaw/</id>
+    <content src="/posts/pruebas-iaw/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Prueba" />
+    
+    <category term="KK" />
+    
+  
+
+  <summary>Prueba IAW</summary>
+
+  </entry>
 
   
   <entry>
