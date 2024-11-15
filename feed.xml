@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-11-15T18:50:27+01:00</updated>
+  <updated>2024-11-15T18:56:46+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/instalacion-wordpress/" rel="alternate" type="text/html" title="Instalación de WordPress en un servidor LEMP" />
     <published>2024-11-15T18:15:00+01:00</published>
   
-    <updated>2024-11-15T18:47:22+01:00</updated>
+    <updated>2024-11-15T18:56:45+01:00</updated>
   
     <id>/posts/instalacion-wordpress/</id>
     <content src="/posts/instalacion-wordpress/" />
