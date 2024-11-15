@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-10-18T09:28:35+02:00</updated>
+  <updated>2024-11-15T18:32:05+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Instalación de WordPress en un servidor LEMP</title>
+    <link href="/posts/instalacion-wordpress/" rel="alternate" type="text/html" title="Instalación de WordPress en un servidor LEMP" />
+    <published>2024-11-15T18:15:00+01:00</published>
+  
+    <updated>2024-11-15T18:31:39+01:00</updated>
+  
+    <id>/posts/instalacion-wordpress/</id>
+    <content src="/posts/instalacion-wordpress/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Implantación Web" />
+    
+    <category term="Aplicaciones" />
+    
+  
+
+  <summary>Aprende a instalar y configurar un servidor LEMP para alojar WordPress, incluyendo ajustes en nginx, base de datos, y configuración para URL amigables. 🚀</summary>
+
+  </entry>
 
   
   <entry>
