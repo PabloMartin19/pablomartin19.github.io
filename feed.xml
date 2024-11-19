@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-11-15T18:56:46+01:00</updated>
+  <updated>2024-11-19T14:08:03+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Instalación de Oracle 19c en Debian 12</title>
+    <link href="/posts/instalacion-oracle19c/" rel="alternate" type="text/html" title="Instalación de Oracle 19c en Debian 12" />
+    <published>2024-11-15T18:15:00+01:00</published>
+  
+    <updated>2024-11-15T18:15:00+01:00</updated>
+  
+    <id>/posts/instalacion-oracle19c/</id>
+    <content src="/posts/instalacion-oracle19c/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Base de Datos" />
+    
+    <category term="Instalación" />
+    
+  
+
+  <summary>Este post muestra cómo instalar y configurar Oracle 19c en Debian 12, cubriendo los pasos clave desde la instalación hasta la configuración básica. 🚀</summary>
+
+  </entry>
 
   
   <entry>
