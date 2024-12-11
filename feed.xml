@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-12-11T19:45:10+01:00</updated>
+  <updated>2024-12-11T19:47:49+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -20,11 +20,11 @@
 
   
   <entry>
-    <title>KK</title>
-    <link href="/posts/kk/" rel="alternate" type="text/html" title="KK" />
+    <title>Escenario en OpenStack</title>
+    <link href="/posts/kk/" rel="alternate" type="text/html" title="Escenario en OpenStack" />
     <published>2024-12-11T18:15:00+01:00</published>
   
-    <updated>2024-12-11T19:45:09+01:00</updated>
+    <updated>2024-12-11T19:47:48+01:00</updated>
   
     <id>/posts/kk/</id>
     <content src="/posts/kk/" />
@@ -34,13 +34,13 @@
 
   
     
-    <category term="Base de Datos" />
+    <category term="Servicios" />
     
-    <category term="Instalación" />
+    <category term="Cloud" />
     
   
 
-  <summary>Este post muestra cómo instalar y configurar Oracle 19c en Debian 12, cubriendo los pasos clave desde la instalación hasta la configuración básica. 🚀</summary>
+  <summary>En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.</summary>
 
   </entry>
 
