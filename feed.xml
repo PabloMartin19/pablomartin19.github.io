@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-12-11T19:34:28+01:00</updated>
+  <updated>2024-12-11T19:36:56+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>kk</title>
+    <link href="/posts/kk/" rel="alternate" type="text/html" title="kk" />
+    <published>2024-12-11T18:15:00+01:00</published>
+  
+    <updated>2024-12-11T18:15:00+01:00</updated>
+  
+    <id>/posts/kk/</id>
+    <content src="/posts/kk/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Base de Datos" />
+    
+    <category term="Instalación" />
+    
+  
+
+  <summary>Este post muestra cómo instalar y configurar Oracle 19c en Debian 12, cubriendo los pasos clave desde la instalación hasta la configuración básica. 🚀</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>Creación de una máquina virtual en VirtualBox con arranque dual que permita ejecutar dos sistemas operativos: Windows y Debian Bookworm.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Compartición de carpetas</title>
-    <link href="/posts/comparticion-carpetas/" rel="alternate" type="text/html" title="Compartición de carpetas" />
-    <published>2024-09-01T15:30:00+02:00</published>
-  
-    <updated>2024-09-01T15:30:00+02:00</updated>
-  
-    <id>/posts/comparticion-carpetas/</id>
-    <content src="/posts/comparticion-carpetas/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Redes" />
-    
-    <category term="Compartición de archivos" />
-    
-  
-
-  <summary>Práctica sobre la configuración y gestión de carpetas compartidas en una red local en Windows, Linux y Android.</summary>
 
   </entry>
 
