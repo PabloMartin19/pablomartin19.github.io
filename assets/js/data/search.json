@@ -1,23 +1,6 @@
 [
   
   {
-    "title": "kk",
-    "url": "/posts/kk/",
-    "categories": "Base de Datos, Instalación",
-    "tags": "Instalación",
-    "date": "2024-12-11 18:15:00 +0100",
-    
-
-
-
-
-
-    
-    "snippet": "kkkk2Hola",
-    "content": "kkkk2Hola"
-  },
-  
-  {
     "title": "Instalación de Oracle 19c en Debian 12",
     "url": "/posts/instalacion-oracle19c/",
     "categories": "Base de Datos, Instalación",
