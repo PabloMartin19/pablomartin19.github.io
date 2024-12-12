@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-12T10:31:01+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-12T14:25:24+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -963,7 +963,7 @@
 
 <time
   
-  data-ts="1733995861"
+  data-ts="1734009924"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -1028,9 +1028,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="3636 words"
+  title="3962 words"
 >
-  <em>20 min</em> read</span>
+  <em>22 min</em> read</span>
 
         </div>
       </div>
@@ -1451,7 +1451,7 @@
 +----------------------+--------------------------------------+
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Aunque no configuramos la puerta de enlace en la red (para evitar que cloud-init lo haga automáticamente), las instancias pueden configurarla manualmente si es necesario.</p>
+<p>Aunque no configuramos la puerta de enlace en la red (para evitar que cloud-init lo haga automáticamente), las instancias se pueden configurar manualmente si es necesario.</p>
 
 <p>La dirección <code class="language-plaintext highlighter-rouge">172.16.0.1</code> será la puerta de enlace predeterminada que los dispositivos pueden usar.</p>
 
@@ -2295,6 +2295,127 @@ rtt min/avg/max/mdev <span class="o">=</span> 17.086/17.607/17.958/0.325 ms
 <p>Ya habríamos terminado la primera parte del escenario de OpenStack, quedando la topología de la siguiente forma:
 <a href="/assets/img/posts/openstack/proyecto2.png" class="popup img-link  shimmer"><img src="/assets/img/posts/openstack/proyecto2.png" alt="image3" loading="lazy"></a></p>
 
+<p>Si queremos hacer algunas comprobaciones como por ejemplo acceder a los FQDN del otro, tendremos que configurar los <code class="language-plaintext highlighter-rouge">/etc/hosts</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">cat</span> /etc/hosts
+127.0.0.1	localhost
+::1		localhost ip6-localhost ip6-loopback
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+
+172.16.0.16 luffy.pablo.gonzalonazareno.org luffy
+172.16.0.200 zoro.pablo.gonzalonazareno.org zoro
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span><span class="nb">cat</span> /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+172.16.0.16 luffy.pablo.gonzalonazareno.org luffy
+172.16.0.200 zoro.pablo.gonzalonazareno.org zoro
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>De forma que tenemos conectividad entre ambos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span>ping <span class="nt">-c</span> 2 zoro.pablo.gonzalonazareno.org 
+PING zoro.pablo.gonzalonazareno.org <span class="o">(</span>172.16.0.200<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from zoro.pablo.gonzalonazareno.org <span class="o">(</span>172.16.0.200<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>2.40 ms
+64 bytes from zoro.pablo.gonzalonazareno.org <span class="o">(</span>172.16.0.200<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.510 ms
+
+<span class="nt">---</span> zoro.pablo.gonzalonazareno.org ping statistics <span class="nt">---</span>
+2 packets transmitted, 2 received, 0% packet loss, <span class="nb">time </span>1002ms
+rtt min/avg/max/mdev <span class="o">=</span> 0.510/1.457/2.404/0.947 ms
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span>ping <span class="nt">-c</span> 2 luffy.pablo.gonzalonazareno.org
+PING luffy.pablo.gonzalonazareno.org <span class="o">(</span>172.16.0.16<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from luffy.pablo.gonzalonazareno.org <span class="o">(</span>172.16.0.16<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.218 ms
+64 bytes from luffy.pablo.gonzalonazareno.org <span class="o">(</span>172.16.0.16<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.441 ms
+
+<span class="nt">---</span> luffy.pablo.gonzalonazareno.org ping statistics <span class="nt">---</span>
+2 packets transmitted, 2 received, 0% packet loss, <span class="nb">time </span>1026ms
+rtt min/avg/max/mdev <span class="o">=</span> 0.218/0.329/0.441/0.111 ms
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Por último, podemos ver que tenemos conectividad a Internet en ambas máquinas:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span>ping <span class="nt">-c</span> 2 google.com
+PING google.com <span class="o">(</span>142.250.186.78<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from fra24s05-in-f14.1e100.net <span class="o">(</span>142.250.186.78<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>101 <span class="nb">time</span><span class="o">=</span>40.0 ms
+64 bytes from fra24s05-in-f14.1e100.net <span class="o">(</span>142.250.186.78<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>101 <span class="nb">time</span><span class="o">=</span>38.2 ms
+
+<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+2 packets transmitted, 2 received, 0% packet loss, <span class="nb">time </span>1002ms
+rtt min/avg/max/mdev <span class="o">=</span> 38.183/39.114/40.045/0.931 ms
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span>ping <span class="nt">-c</span> 2 google.com
+PING google.com <span class="o">(</span>142.250.186.78<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from fra24s05-in-f14.1e100.net <span class="o">(</span>142.250.186.78<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>100 <span class="nb">time</span><span class="o">=</span>40.4 ms
+64 bytes from fra24s05-in-f14.1e100.net <span class="o">(</span>142.250.186.78<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>100 <span class="nb">time</span><span class="o">=</span>37.1 ms
+
+<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+2 packets transmitted, 2 received, 0% packet loss, <span class="nb">time </span>1001ms
+rtt min/avg/max/mdev <span class="o">=</span> 37.124/38.739/40.355/1.615 ms
+</pre></td></tr></tbody></table></code></div></div>
 
   </div>
 
