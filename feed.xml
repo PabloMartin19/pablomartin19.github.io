@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-12-12T10:10:31+01:00</updated>
+  <updated>2024-12-12T10:31:02+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/openstack/" rel="alternate" type="text/html" title="Escenario en OpenStack" />
     <published>2024-12-11T18:15:00+01:00</published>
   
-    <updated>2024-12-12T10:10:30+01:00</updated>
+    <updated>2024-12-12T10:31:01+01:00</updated>
   
     <id>/posts/openstack/</id>
     <content src="/posts/openstack/" />
