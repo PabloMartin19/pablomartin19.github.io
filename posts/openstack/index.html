@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-12T00:22:40+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-12T09:06:06+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -900,7 +900,7 @@
 
 <time
   
-  data-ts="1733959360"
+  data-ts="1733990766"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -965,9 +965,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="2416 words"
+  title="2817 words"
 >
-  <em>13 min</em> read</span>
+  <em>15 min</em> read</span>
 
         </div>
       </div>
@@ -1478,7 +1478,67 @@
 <span class="na">final_message</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Instancia</span><span class="nv"> </span><span class="s">configurada</span><span class="nv"> </span><span class="s">correctamente."</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Este fichero esta destinado a la configuración de la instancia <em>luffy</em>.</p>
+<p>Este fichero está destinado a la configuración de la instancia <em>luffy</em>.</p>
+
+<p>A continuación, crearé el archivo <code class="language-plaintext highlighter-rouge">cloud-init-zoro.yaml</code> para la posterior creación de la instancia <em>zoro</em>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="code-header">
+        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre><span class="c1">#cloud-config</span>
+<span class="na">package_update</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="na">package_upgrade</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="na">hostname</span><span class="pi">:</span> <span class="s">zoro</span>
+<span class="na">fqdn</span><span class="pi">:</span> <span class="s">zoro.pablo.gonzalonazareno.org</span>
+<span class="na">users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pablo</span>
+    <span class="na">gecos</span><span class="pi">:</span> <span class="s">Usuario sin privilegios</span>
+    <span class="na">groups</span><span class="pi">:</span> <span class="pi">[]</span>
+    <span class="na">shell</span><span class="pi">:</span> <span class="s">/bin/bash</span>
+    <span class="na">sudo</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL'</span><span class="pi">]</span>
+    <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">ssh-rsa</span><span class="nv"> </span><span class="s">AAAAB3NzaC1yc2EAAAADAQABAAABgQClFcnIhYd1oaEpvGi/f4psQc4+DaAZvSNIxVRRJHtRoJui8wbJybi3Om8yTOflgEcmBaUrJLkfmzmWqVq1j6MpESq72p7J2hdq2lXnvzdt3huYv5evFwyd0p/r72RfpVZzr3ILi/BS//SJqfVKlDEVbZRaOE5MU2XuElmFFY4EO7NiiZAkbatVqUOT8H/nrfXcad0mjZVxroVqHhsHV+06rxiB0xifG0xZv204Qj4zRura8uqZlEVAAwU+NO/SIGdRwpLY7n7xbQGe1DbjHgPUeVPjJX6HpMK41a43eGj4XYdYtZBLugaU8Mq1y6Kl3tE6cvYkQ9WFTYTLLNy3bvNRZpP2p6qAy5qn03ZLFICiXBNXPmrl5+KVrKaSipNaPHkmInvczbYJjXpfyVBsfEabt+0Y1629M+eEKkkl+iZmVr2ySDSS1gHxMC7zlJRaUhG27o26agpNPYPHH3mVXVjqdGg0ryH0YHZk1V8+Gt1Z9hZ7UYWE1UX8DCgFfecqdX0=</span><span class="nv"> </span><span class="s">pavlo@debian"</span>
+
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">profesor</span>
+    <span class="na">gecos</span><span class="pi">:</span> <span class="s">Usuario Profesor</span>
+    <span class="na">groups</span><span class="pi">:</span> <span class="s">sudo</span>
+    <span class="na">shell</span><span class="pi">:</span> <span class="s">/bin/bash</span>
+    <span class="na">sudo</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL'</span><span class="pi">]</span>
+    <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">ssh-rsa</span><span class="nv"> </span><span class="s">AAAAB3NzaC1yc2EAAAADAQABAAABAQCmjoVIoZCx4QFXvljqozXGqxxlSvO7V2aizqyPgMfGqnyl0J9YXo6zrcWYwyWMnMdRdwYZgHqfiiFCUn2QDm6ZuzC4Lcx0K3ZwO2lgL4XaATykVLneHR1ib6RNroFcClN69cxWsdwQW6dpjpiBDXf8m6/qxVP3EHwUTsP8XaOV7WkcCAqfYAMvpWLISqYme6e+6ZGJUIPkDTxavu5JTagDLwY+py1WB53eoDWsG99gmvyit2O1Eo+jRWN+mgRHIxJTrFtLS6o4iWeshPZ6LvCZ/Pum12Oj4B4bjGSHzrKjHZgTwhVJ/LDq3v71/PP4zaI3gVB9ZalemSxqomgbTlnT</span><span class="nv"> </span><span class="s">jose@debian"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">ssh-rsa</span><span class="nv"> </span><span class="s">AAAAB3NzaC1yc2EAAAADAQABAAABgQDf9lnBH2nCT2ezpDZnqSBeDuSsVGGFD1Kzqa4KyIVkzkrD7pNHHkkpSuO4isKcCsUcopYOcA38QtG7wB0v/qn8Jsq731N8bjaKOdQN25vqLjwVj8DpYtvGc+ZA0uaChe7TS+QBzlMC9ypwj4wf15Q/z3v/ip4FF2cORT0cQC04cNRQDgUg4p1rlOs8+ma7OPh3P3UvzlPfLhi2H1yl+/mo4XLOcAMNr/jiZCwYxom6OEOYVBNk8MZX/Zn+qRi71D0RPiKg27AcXSD/FPWdQW9hBH1Zq5xGicUFS4C9yXvHKru7cMmmxV2G80p/ArRscKWq92UT5jIJQpccmHxsxdIi6o25LhcxH1dOnZy6kHcJ2yP24CnBHK5Y3SsovCD0Th6MN1VlTySbl8Ar0ypmY+GYO+oVd4bM3ioHzL0AMqYnS29m0UtEDvFEUUoSkOoLK4uSlcvej+OIVp7X5G7oZ56nZZf+qHEgodv++a6vPmhH2ZSgoOj1sE39DK7InuKSqCE=</span><span class="nv"> </span><span class="s">rafa@eco"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">ssh-rsa</span><span class="nv"> </span><span class="s">AAAAB3NzaC1yc2EAAAADAQABAAABgQDASDwvkY5SbIgM+/j14mNQluPV+/HGcM3ZgXrYDWt7zhQKq8KAXqJLs1vw1HcRv5PRV071caZQxV2ssfrNqIDofjSzWM1I1JkVIqIj4NCOsRFsQQFN8HwfkE9ic/X6vRaV+NfkEF+t3VmX2YgBd02ZbmGt53qjDaGMQRS/qxw3MPS+ynf2Fj8ZibT6DZeWnyjEGhFcyrggFWiPDqw77MNaiDr+31SO0TaP1WeIWFMrSwPVMVG1zvSxAQ9L13SQ5XzwK0Xs2A8kBPiZmPuUFRqYlBWeffhUnRPSg4TdOsWqJjEwFb5OwpQmTDCT5z0MSFCNVLV5GGwvvqCrw5jd1Xfdswdqazc8mCaIPIrCmhsiwz7uZvQDYr1HDrKxJ1L8LLo3usp4FM5cCCM5jptK+XffhmIyJSkMrcg6tYawBeNuAiY3dwPRIyKeV1Ku3UUctkN+kbuOpMQ4nSvAK0DyhUiTakc8qMJDNLD8oHhSEp49G2bzsLwFOmaEgb8falVMLyk=</span><span class="nv"> </span><span class="s">javji@Javier"</span>
+<span class="na">chpasswd</span><span class="pi">:</span>
+  <span class="na">list</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">root:root</span>
+  <span class="na">expire</span><span class="pi">:</span> <span class="s">False</span>
+</pre></td></tr></tbody></table></code></div></div>
 
 <h4 id="creación-de-las-instancias"><span class="me-2">Creación de las instancias</span><a href="#creación-de-las-instancias" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
 
@@ -1770,6 +1830,110 @@ Chain POSTROUTING <span class="o">(</span>policy ACCEPT 0 packets, 0 bytes<span 
     <p>Comprueba que tiene acceso a internet.</p>
   </li>
 </ul>
+
+<p>Empezamos creando el volumen a partir de la imagen:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre><span class="o">(</span>os<span class="o">)</span> pavlo@debian:~/OpenStack<span class="o">()</span><span class="nv">$ </span>openstack volume create <span class="nt">--size</span> 15 <span class="nt">--image</span> <span class="s2">"Rocky Linux 9"</span> volumen-zoro
++---------------------+------------------------------------------------------------------+
+| Field               | Value                                                            |
++---------------------+------------------------------------------------------------------+
+| attachments         | <span class="o">[]</span>                                                               |
+| availability_zone   | nova                                                             |
+| bootable            | <span class="nb">false</span>                                                            |
+| consistencygroup_id | None                                                             |
+| created_at          | 2024-12-12T07:44:39.479661                                       |
+| description         | None                                                             |
+| encrypted           | False                                                            |
+| <span class="nb">id</span>                  | 786b9400-013c-4bf3-9986-1896891628bf                             |
+| multiattach         | False                                                            |
+| name                | volumen-zoro                                                     |
+| properties          |                                                                  |
+| replication_status  | None                                                             |
+| size                | 15                                                               |
+| snapshot_id         | None                                                             |
+| source_volid        | None                                                             |
+| status              | creating                                                         |
+| <span class="nb">type</span>                | lvmdriver-1                                                      |
+| updated_at          | None                                                             |
+| user_id             | a74499e28f7622936621adb74c2b02fe4a18a1f6964a32bdbb23af09b776065f |
++---------------------+------------------------------------------------------------------+
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Seguidamente creamos la instancia a partir del volumen, conectándola en un principio a una red con DHCP como <code class="language-plaintext highlighter-rouge">red-intra-pablo</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="o">(</span>os<span class="o">)</span> pavlo@debian:~/OpenStack<span class="o">()</span><span class="nv">$ </span>openstack server create zoro <span class="se">\</span>
+    <span class="nt">--flavor</span> vol.medium <span class="se">\</span>
+    <span class="nt">--volume</span> volumen-zoro <span class="se">\</span>
+    <span class="nt">--network</span> red-intra-pablo <span class="se">\</span>
+    <span class="nt">--user-data</span> cloud-init-zoro.yaml <span class="se">\</span>
+    <span class="nt">--security-group</span> default
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Comprobamos que se haya creado correctamente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="o">(</span>os<span class="o">)</span> pavlo@debian:~/OpenStack<span class="o">()</span><span class="nv">$ </span>openstack server list
++--------------------------------------+-------+--------+-------------------------------------------------------------------------+--------------------------+------------+
+| ID                                   | Name  | Status | Networks                                                                | Image                    | Flavor     |
++--------------------------------------+-------+--------+-------------------------------------------------------------------------+--------------------------+------------+
+| 82692c6d-9d36-4bdd-86b6-46e90bea1892 | zoro  | ACTIVE | red-intra-pablo<span class="o">=</span>10.0.200.132                                            | N/A <span class="o">(</span>booted from volume<span class="o">)</span> | vol.medium |
+| 9c9e8c12-7712-404e-aa3b-2e2bf566ca0c | luffy | ACTIVE | red-dmz-pablo<span class="o">=</span>172.16.0.16<span class="p">;</span> red-intra-pablo<span class="o">=</span>10.0.200.231, 172.22.200.100 | N/A <span class="o">(</span>booted from volume<span class="o">)</span> | vol.medium |
++--------------------------------------+-------+--------+-------------------------------------------------------------------------+--------------------------+------------+
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Ya que se ha creado la instancia y el cloud-init se ha configurado correctamente, apagamos la máquina y le quitamos la interfaz:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">(</span>os<span class="o">)</span> pavlo@debian:~/OpenStack<span class="o">()</span><span class="nv">$ </span>openstack server stop zoro
+</pre></td></tr></tbody></table></code></div></div>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">(</span>os<span class="o">)</span> pavlo@debian:~/OpenStack<span class="o">()</span><span class="nv">$ </span>openstack server remove network zoro red-intra-pablo
+</pre></td></tr></tbody></table></code></div></div>
 
   </div>
 
