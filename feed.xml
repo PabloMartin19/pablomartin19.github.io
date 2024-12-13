@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-12-13T09:06:37+01:00</updated>
+  <updated>2024-12-13T09:08:50+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/gpg-openssl/" rel="alternate" type="text/html" title="Cifrado asimétrico con gpg y openssl" />
     <published>2024-12-12T21:15:00+01:00</published>
   
-    <updated>2024-12-13T09:06:36+01:00</updated>
+    <updated>2024-12-13T09:08:49+01:00</updated>
   
     <id>/posts/gpg-openssl/</id>
     <content src="/posts/gpg-openssl/" />

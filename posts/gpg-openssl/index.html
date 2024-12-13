@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-13T09:06:36+01:00","datePublished":"2024-12-12T21:15:00+01:00","description":"En esta práctica vamos a cifrar ficheros utilizando cifrado asimétrico utilizando el programa gpg.","headline":"Cifrado asimétrico con gpg y openssl","image":"/assets/img/posts/gpg/portadagpg.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/gpg-openssl/"},"url":"/posts/gpg-openssl/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-13T09:08:49+01:00","datePublished":"2024-12-12T21:15:00+01:00","description":"En esta práctica vamos a cifrar ficheros utilizando cifrado asimétrico utilizando el programa gpg.","headline":"Cifrado asimétrico con gpg y openssl","image":"/assets/img/posts/gpg/portadagpg.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/gpg-openssl/"},"url":"/posts/gpg-openssl/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1403,7 +1403,7 @@
 
 <time
   
-  data-ts="1734077196"
+  data-ts="1734077329"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -1468,9 +1468,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="4366 words"
+  title="4146 words"
 >
-  <em>24 min</em> read</span>
+  <em>23 min</em> read</span>
 
         </div>
       </div>
@@ -1716,56 +1716,6 @@ ssb   rsa3072 2024-12-12 <span class="o">[</span>E] <span class="o">[</span>cadu
 </ol>
 
 <p>La separación entre pares de claves maestros y secundarios permite revocar estos últimos sin afectar a los primeros y almacenarlos por separado. En esencia, los pares de claves secundarios son independientes, pero están vinculados al par maestro.</p>
-
-<p>Cuando ejecutamos <code class="language-plaintext highlighter-rouge">gpg --list-keys</code>, la salida incluyó información sobre:</p>
-
-<ul>
-  <li><strong>Claves públicas del par maestro (pub)</strong>.</li>
-  <li><strong>Claves públicas del par secundario (sub)</strong>.</li>
-</ul>
-
-<p>Al ejecutar <code class="language-plaintext highlighter-rouge">gpg --list-secret-keys</code>, vimos información sobre:</p>
-
-<ul>
-  <li><strong>Claves privadas del par maestro (sec)</strong>.</li>
-  <li><strong>Claves privadas del par secundario (ssb)</strong>.</li>
-</ul>
-
-<p>En ambos casos, también se mostró un <strong>uid</strong> que representa la identidad del usuario asociada a las claves.</p>
-
-<p>La relación entre los pares de claves es la siguiente:</p>
-
-<ul>
-  <li><strong>pub ↔ sec</strong>: Clave primaria pública y su clave privada asociada.</li>
-  <li><strong>sub ↔ ssb</strong>: Clave secundaria pública y su clave privada asociada.</li>
-</ul>
-
-<p>Además, la salida incluyó información adicional como:</p>
-
-<ul>
-  <li>El algoritmo utilizado (por ejemplo, <code class="language-plaintext highlighter-rouge">rsa3072</code>).</li>
-  <li>La fecha de creación del par de claves (por ejemplo, <code class="language-plaintext highlighter-rouge">2020-10-07</code>).</li>
-  <li>Los flags de las claves.</li>
-  <li>La fecha de caducidad (por ejemplo, <code class="language-plaintext highlighter-rouge">2022-10-07</code>).</li>
-</ul>
-
-<p>Cada par de claves tiene flags que indican sus funciones:</p>
-
-<ul>
-  <li><strong>S</strong>: Firmar archivos (Signing).</li>
-  <li><strong>C</strong>: Certificar claves (Certify).</li>
-  <li><strong>A</strong>: Autenticarse (Authenticate), como iniciar sesión en una máquina.</li>
-  <li><strong>E</strong>: Encriptar información (Encrypt).</li>
-</ul>
-
-<p>Por ejemplo:</p>
-
-<ul>
-  <li>El par de claves maestro suele tener los flags <strong>[SC]</strong>, indicando que puede firmar archivos y certificar claves.</li>
-  <li>El par de claves secundario tiene el flag <strong>[E]</strong>, utilizado para encriptar y desencriptar información.</li>
-</ul>
-
-<p>El par de claves maestro es utilizado para firmar y comprobar firmas (<strong>[SC]</strong>), mientras que el par de claves secundario es empleado para encriptar y desencriptar información (<strong>[E]</strong>).</p>
 
 <h2 id="tarea-2-importarexportar-clave-pública-gpg"><span class="me-2">Tarea 2: Importar/exportar clave pública (gpg)</span><a href="#tarea-2-importarexportar-clave-pública-gpg" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
