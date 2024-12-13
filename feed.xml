@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-12-12T14:25:24+01:00</updated>
+  <updated>2024-12-13T09:03:46+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Cifrado asimétrico con gpg y openssl</title>
+    <link href="/posts/gpg-openssl/" rel="alternate" type="text/html" title="Cifrado asimétrico con gpg y openssl" />
+    <published>2024-12-12T21:15:00+01:00</published>
+  
+    <updated>2024-12-12T21:15:00+01:00</updated>
+  
+    <id>/posts/gpg-openssl/</id>
+    <content src="/posts/gpg-openssl/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="Criptografía" />
+    
+  
+
+  <summary>En esta práctica vamos a cifrar ficheros utilizando cifrado asimétrico utilizando el programa gpg.</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>Explora los comandos esenciales para programar tareas en Linux. Aprende a automatizar procesos y optimizar tu flujo de trabajo en el sistema operativo, asegurando que las tareas críticas se realicen de manera eficiente y sin intervención manual.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Creación de máquina virtual en VirtualBox con arranque dual</title>
-    <link href="/posts/dual-boot/" rel="alternate" type="text/html" title="Creación de máquina virtual en VirtualBox con arranque dual" />
-    <published>2024-09-02T14:09:00+02:00</published>
-  
-    <updated>2024-09-02T14:09:00+02:00</updated>
-  
-    <id>/posts/dual-boot/</id>
-    <content src="/posts/dual-boot/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Sistemas" />
-    
-    <category term="Virtualización" />
-    
-  
-
-  <summary>Creación de una máquina virtual en VirtualBox con arranque dual que permita ejecutar dos sistemas operativos: Windows y Debian Bookworm.</summary>
 
   </entry>
 
