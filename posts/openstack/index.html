@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-12T14:25:24+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-16T12:02:59+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -826,6 +826,17 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -841,6 +852,17 @@
       
         
         
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
       
 
       
@@ -963,13 +985,13 @@
 
 <time
   
-  data-ts="1734009924"
+  data-ts="1734346979"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Dec 12, 2024
+  Dec 16, 2024
 </time>
 
         </span>
@@ -1028,9 +1050,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="3962 words"
+  title="5445 words"
 >
-  <em>22 min</em> read</span>
+  <em>30 min</em> read</span>
 
         </div>
       </div>
@@ -2417,6 +2439,643 @@ PING google.com <span class="o">(</span>142.250.186.78<span class="o">)</span> 5
 rtt min/avg/max/mdev <span class="o">=</span> 37.124/38.739/40.355/1.615 ms
 </pre></td></tr></tbody></table></code></div></div>
 
+<h2 id="práctica-2--2-escenario-en-openstack"><span class="me-2">Práctica (2 / 2): Escenario en OpenStack</span><a href="#práctica-2--2-escenario-en-openstack" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="instalación-de-los-contenedores"><span class="me-2">Instalación de los contenedores</span><a href="#instalación-de-los-contenedores" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>En <strong>máquina1 (luffy)</strong> vamos a crear dos contenedores en un red interna, para ello:</p>
+
+<ul>
+  <li>Crea en <strong>máquina1 (luffy)</strong> un linux bridge llamado <code class="language-plaintext highlighter-rouge">br-intra</code> (no lo hagas con <code class="language-plaintext highlighter-rouge">virsh</code> ya que se configura una reglas de cortafuego muy estrictas) y asigna una dirección IP estática <code class="language-plaintext highlighter-rouge">192.168.0.1</code>. Esta será la IP de <strong>máquina1 (luffy)</strong> conectada a este switch virtual y será la puerta de enlace de los contenedores. Tienes que tener en cuenta que la imagen de Debian 12 Bookworm de OpenStack tiene <strong>netplan</strong> para la configuración de las redes, por lo tanto tienes que configurar el bridge usando el fichero de configuración de netplan, para ello te puede ser útil esta <a href="https://fabianlee.org/2022/09/20/kvm-creating-a-bridged-network-with-netplan-on-ubuntu-22-04/">página</a>. No olvides poner la mtu a 1442 al crear el bridge.</li>
+</ul>
+
+<p>Para crear el puente tendremos que modificar la configuración del fichero <strong>netplan</strong>, en donde añadiremos las siguientes líneas:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>bridges:
+      br-intra:
+        addresses: <span class="o">[</span>192.168.0.1/24]
+        mtu: 1442
+        dhcp4: no
+        dhcp6: no
+        nameservers:
+          addresses: <span class="o">[</span>172.22.0.1]
+</pre></td></tr></tbody></table></code></div></div>
+<p>Una vez añadido, aplicamos los cambios:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>netplan generate
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>netplan apply
+</pre></td></tr></tbody></table></code></div></div>
+
+<ul>
+  <li>Instala LXC y crea dos contenedores con la distribución <strong>Ubuntu 22.04</strong>. Estos contenedores serán la <strong>máquina3 (nami)</strong> y la <strong>máquina4 (sanji)</strong>.</li>
+</ul>
+
+<p>Para instalar LXC ejecutamos el siguiente comando:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>lxc
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Una vez instalado, pasamos a instalar los contenedores:</p>
+
+<ul>
+  <li><strong>Nami</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-create <span class="nt">-n</span> nami <span class="nt">-t</span> ubuntu <span class="nt">--</span> <span class="nt">-r</span> jammy
+</pre></td></tr></tbody></table></code></div></div>
+
+<ul>
+  <li><strong>Sanji</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-create <span class="nt">-n</span> sanji <span class="nt">-t</span> ubuntu <span class="nt">--</span> <span class="nt">-r</span> jammy
+</pre></td></tr></tbody></table></code></div></div>
+
+<ul>
+  <li>Configura de forma permanente la regla SNAT para que los contenedores tengan acceso a internet.</li>
+</ul>
+
+<p>Para ello es tan simple como añadir la siguiente regla:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>iptables <span class="nt">-t</span> nat <span class="nt">-A</span> POSTROUTING <span class="nt">-s</span> 192.168.0.0/24 <span class="nt">-o</span> ens3 <span class="nt">-j</span> MASQUERADE
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Importante hacer las reglas persistentes para posibles futuros reinicios:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo</span> <span class="nt">-i</span>
+root@luffy:~# iptables-save <span class="o">&gt;</span> /etc/iptables/rules.v4
+root@luffy:~# <span class="nb">exit
+logout</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<ul>
+  <li>Conecta los contenedores al bridge <code class="language-plaintext highlighter-rouge">br-intra</code> y configúralo de forma estática con las siguientes direcciones: <strong>máquina3 (nami)</strong> la <code class="language-plaintext highlighter-rouge">192.168.0.2</code> y <strong>máquina4 (sanji)</strong> la <code class="language-plaintext highlighter-rouge">192.168.0.3</code>. Su DNS será el <code class="language-plaintext highlighter-rouge">172.22.0.1</code>.</li>
+</ul>
+
+<p>Para la configuración de red modificaremos el fichero <code class="language-plaintext highlighter-rouge">/var/lib/lxc/nombrecontenedor/config</code>, quedando de la siguiente forma:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo cat</span> /var/lib/lxc/nami/config
+<span class="c"># Template used to create this container: /usr/share/lxc/templates/lxc-ubuntu</span>
+<span class="c"># Parameters passed to the template: -r jammy</span>
+<span class="c"># For additional config options, please look at lxc.container.conf(5)</span>
+
+<span class="c"># Uncomment the following line to support nesting containers:</span>
+<span class="c">#lxc.include = /usr/share/lxc/config/nesting.conf</span>
+<span class="c"># (Be aware this has security implications)</span>
+
+
+<span class="c"># Common configuration</span>
+lxc.include <span class="o">=</span> /usr/share/lxc/config/ubuntu.common.conf
+
+<span class="c"># Container specific configuration</span>
+lxc.apparmor.profile <span class="o">=</span> generated
+lxc.apparmor.allow_nesting <span class="o">=</span> 1
+lxc.rootfs.path <span class="o">=</span> <span class="nb">dir</span>:/var/lib/lxc/nami/rootfs
+lxc.uts.name <span class="o">=</span> nami
+lxc.arch <span class="o">=</span> amd64
+
+<span class="c"># Network configuration</span>
+lxc.net.0.type <span class="o">=</span> veth
+lxc.net.0.hwaddr <span class="o">=</span> 00:16:3e:40:e4:da
+lxc.net.0.link <span class="o">=</span> br-intra
+lxc.net.0.flags <span class="o">=</span> up
+lxc.net.0.ipv4.address <span class="o">=</span> 192.168.0.2/24
+lxc.net.0.ipv4.gateway <span class="o">=</span> 192.168.0.1
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Los DNS debemos configurarlos dentro del contenedor, para ello:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>root@nami:/# <span class="nb">rm</span> /etc/resolv.conf
+root@nami:/# <span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"nameserver 172.22.0.1</span><span class="se">\n</span><span class="s2">nameserver 8.8.8.8"</span> <span class="o">&gt;</span> /etc/resolv.conf
+root@nami:/# <span class="nb">cat</span> /etc/resolv.conf 
+nameserver 172.22.0.1
+nameserver 8.8.8.8
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>En <em>sanji</em> añadimos prácticamente la misma configuración:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c"># Network configuration</span>
+lxc.net.0.type <span class="o">=</span> veth
+lxc.net.0.hwaddr <span class="o">=</span> 00:16:3e:c5:5c:70
+lxc.net.0.link <span class="o">=</span> br-intra
+lxc.net.0.flags <span class="o">=</span> up
+lxc.net.0.ipv4.address <span class="o">=</span> 192.168.0.3/24
+lxc.net.0.ipv4.gateway <span class="o">=</span> 192.168.0.1
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Antes de acceder tenemos que iniciar los contenedores:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-start nami
+pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-start sanji
+</pre></td></tr></tbody></table></code></div></div>
+
+<ul>
+  <li>Para que la red de OpenStack funcione de forma adecuada las imágenes que usamos tienen configurado la mtu (Unidad máxima de transferencia) a 1442 bytes. Tenemos que adecuar los contenedores a este tamaño de trama. Para ello introduce en la configuración de los contenedores la línea: <code class="language-plaintext highlighter-rouge">lxc.net.0.mtu = 1442</code>.</li>
+</ul>
+
+<p>Para ello tendremos que modificar el fichero <strong>config</strong> de ambos contenedores en donde añadimos esta línea:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>lxc.net.0.mtu <span class="o">=</span> 1442
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para aplicar los cambios apagamos y encendemos el contenedor:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-stop <span class="nt">-n</span> nami
+pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-start <span class="nt">-n</span> nami
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-stop <span class="nt">-n</span> sanji
+pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-start <span class="nt">-n</span> sanji
+</pre></td></tr></tbody></table></code></div></div>
+
+<ul>
+  <li>Configura los contenedores para que se auto inicien al reiniciar la instancia.</li>
+</ul>
+
+<p>Para ello añadimos en el archivo <strong>config</strong> mencionado anteriormente la siguiente línea:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>lxc.start.auto <span class="o">=</span> 1
+</pre></td></tr></tbody></table></code></div></div>
+
+<ul>
+  <li>
+    <p>Los contenedores tendrán características parecidas a las instancias anteriormente:</p>
+
+    <ul>
+      <li>Debes actualizar los paquetes de la distribución instalada.</li>
+    </ul>
+
+    <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>root@nami:/# apt update
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>root@sanji:/# apt update
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <ul>
+      <li>El dominio utilizado será del tipo <code class="language-plaintext highlighter-rouge">tunombre.gonzalonazareno.org</code>. Por lo tanto configura de manera adecuada el hostname y el FQDN.</li>
+    </ul>
+
+    <p><strong>Nami</strong></p>
+
+    <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>root@nami:/# <span class="nb">cat</span> /etc/hosts
+127.0.0.1   localhost
+127.0.1.1   nami.pablo.gonzalonazareno.org nami
+
+<span class="c"># The following lines are desirable for IPv6 capable hosts</span>
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <p>Comprobamos:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>root@nami:/# <span class="nb">hostname
+</span>nami
+root@nami:/# <span class="nb">hostname</span> <span class="nt">-f</span>
+nami.pablo.gonzalonazareno.org
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <p><strong>Sanji</strong></p>
+
+    <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>root@sanji:/# <span class="nb">cat</span> /etc/hosts
+127.0.0.1   localhost
+127.0.1.1   sanji.pablo.gonzalonazareno.org sanji
+
+<span class="c"># The following lines are desirable for IPv6 capable hosts</span>
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <p>Comprobamos:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>root@sanji:/# <span class="nb">hostname
+</span>sanji
+root@sanji:/# <span class="nb">hostname</span> <span class="nt">-f</span>
+sanji.pablo.gonzalonazareno.org
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <ul>
+      <li>
+        <p>Para acceder a los contenedores vamos a usar ssh.</p>
+      </li>
+      <li>
+        <p>Crea dos usuarios:</p>
+
+        <ul>
+          <li>Un usuario sin privilegios. Se puede llamar como quieras (el nombre de usuario que usaste en las instancias) y accederás a los contenedores usando tu clave ssh privada.</li>
+        </ul>
+
+        <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>root@nami:/# useradd <span class="nt">-m</span> <span class="nt">-s</span> /bin/bash pablo
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>root@sanji:/# useradd <span class="nt">-m</span> <span class="nt">-s</span> /bin/bash pablo
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <p>Luego, en ambos contenedores añadimos nuestra clave pública dentro del <code class="language-plaintext highlighter-rouge">authorized_keys</code>:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>root@sanji:/# su - pablo
+pablo@sanji:~<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /home/pablo/.ssh
+pablo@sanji:~<span class="nv">$ </span><span class="nb">echo </span>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQClFcnIhYd1oaEpvGi/f4psQc4+DaAZvSNIxVRRJHtRoJui8wbJybi3Om8yTOflgEcmBaUrJLkfmzmWqVq1j6MpESq72p7J2hdq2lXnvzdt3huYv5evFwyd0p/r72RfpVZzr3ILi/BS//SJqfVKlDEVbZRaOE5MU2XuElmFFY4EO7NiiZAkbatVqUOT8H/nrfXcad0mjZVxroVqHhsHV+06rxiB0xifG0xZv204Qj4zRura8uqZlEVAAwU+NO/SIGdRwpLY7n7xbQGe1DbjHgPUeVPjJX6HpMK41a43eGj4XYdYtZBLugaU8Mq1y6Kl3tE6cvYkQ9WFTYTLLNy3bvNRZpP2p6qAy5qn03ZLFICiXBNXPmrl5+KVrKaSipNaPHkmInvczbYJjXpfyVBsfEabt+0Y1629M+eEKkkl+iZmVr2ySDSS1gHxMC7zlJRaUhG27o26agpNPYPHH3mVXVjqdGg0ryH0YHZk1V8+Gt1Z9hZ7UYWE1UX8DCgFfecqdX0<span class="o">=</span> pavlo@debian <span class="o">&gt;</span> /home/pablo/.ssh/authorized_keys
+pablo@sanji:~<span class="nv">$ </span><span class="nb">chown</span> <span class="nt">-R</span> pablo:pablo /home/pablo/.ssh
+pablo@sanji:~<span class="nv">$ </span><span class="nb">chmod </span>700 /home/pablo/.ssh
+pablo@sanji:~<span class="nv">$ </span><span class="nb">chmod </span>600 /home/pablo/.ssh/authorized_keys
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <p>Modificamos también el fichero <code class="language-plaintext highlighter-rouge">/etc/sudoers</code> para que no pida contraseña a mi usuario <em>pablo</em>:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c"># User privilege specification</span>
+root    <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
+pablo   <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> NOPASSWD:ALL
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <ul>
+          <li>Un usuario <code class="language-plaintext highlighter-rouge">profesor</code>, que puede utilizar <code class="language-plaintext highlighter-rouge">sudo</code> sin contraseña. Copia de las claves públicas de todos los profesores en los contenedores para que puedan acceder con el usuario <code class="language-plaintext highlighter-rouge">profesor</code>.</li>
+        </ul>
+
+        <p>Añadimos el usuario en ambos contenedores:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>root@nami:~# useradd <span class="nt">-m</span> <span class="nt">-s</span> /bin/bash profesor
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>root@sanji:~# useradd <span class="nt">-m</span> <span class="nt">-s</span> /bin/bash profesor
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <p>Y repetimos el mismo proceso que anteriormente.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Cambia la contraseña al usuario <code class="language-plaintext highlighter-rouge">root</code>.</p>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>root@nami:~# passwd root
+New password: 
+Retype new password: 
+passwd: password updated successfully
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Ya está todo configurado, solo nos quedaría crear los accesos por ssh, para ello en el fichero <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> añadimos lo siguiente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre>pavlo@debian:~<span class="o">()</span><span class="nv">$ </span><span class="nb">cat</span> .ssh/config 
+Host luffy
+  HostName 172.22.200.100
+  User pablo
+  ForwardAgent <span class="nb">yes
+
+</span>Host zoro
+  HostName 172.16.0.200
+  User pablo
+  ForwardAgent <span class="nb">yes
+  </span>ProxyJump luffy
+
+Host nami
+  HostName 192.168.0.2
+  User pablo
+  ForwardAgent <span class="nb">yes
+  </span>ProxyJump luffy
+
+Host sanji
+  HostName 192.168.0.3
+  User pablo
+  ForwardAgent <span class="nb">yes
+  </span>ProxyJump luffy
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>De esta forma, desde nuestro host principal podemos acceder a todas las máquinas, incluyendo los contenedores:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre>pavlo@debian:~<span class="o">()</span><span class="nv">$ </span>ssh nami
+Welcome to Ubuntu 22.04.5 LTS <span class="o">(</span>GNU/Linux 6.1.0-28-amd64 x86_64<span class="o">)</span>
+
+ <span class="k">*</span> Documentation:  https://help.ubuntu.com
+ <span class="k">*</span> Management:     https://landscape.canonical.com
+ <span class="k">*</span> Support:        https://ubuntu.com/pro
+Last login: Mon Dec 16 10:54:43 2024 from 192.168.0.1
+pablo@nami:~<span class="nv">$ </span>
+<span class="nb">logout
+</span>Connection to 192.168.0.2 closed.
+pavlo@debian:~<span class="o">()</span><span class="nv">$ </span>ssh sanji
+Welcome to Ubuntu 22.04.5 LTS <span class="o">(</span>GNU/Linux 6.1.0-28-amd64 x86_64<span class="o">)</span>
+
+ <span class="k">*</span> Documentation:  https://help.ubuntu.com
+ <span class="k">*</span> Management:     https://landscape.canonical.com
+ <span class="k">*</span> Support:        https://ubuntu.com/pro
+Last login: Mon Dec 16 10:49:30 2024 from 192.168.0.1
+pablo@sanji:~<span class="err">$</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Otras comprobaciones que podemos hacer:</p>
+
+<ol>
+  <li>La salida del comando <code class="language-plaintext highlighter-rouge">sudo lxc-ls -f</code>.</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>lxc-ls <span class="nt">-f</span>
+NAME  STATE   AUTOSTART GROUPS IPV4        IPV6 UNPRIVILEGED 
+nami  RUNNING 0         -      192.168.0.2 -    <span class="nb">false        
+</span>sanji RUNNING 1         -      192.168.0.3 -    <span class="nb">false</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<ol>
+  <li>Prueba de funcionamiento de que los contenedores tienen acceso a internet accediendo a un nombre de dominio, para comprobar que funciona el DNS.</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>pavlo@debian:~<span class="o">()</span><span class="nv">$ </span>ssh nami
+Welcome to Ubuntu 22.04.5 LTS <span class="o">(</span>GNU/Linux 6.1.0-28-amd64 x86_64<span class="o">)</span>
+
+ <span class="k">*</span> Documentation:  https://help.ubuntu.com
+ <span class="k">*</span> Management:     https://landscape.canonical.com
+ <span class="k">*</span> Support:        https://ubuntu.com/pro
+Last login: Mon Dec 16 10:57:54 2024 from 192.168.0.1
+pablo@nami:~<span class="nv">$ </span>ping <span class="nt">-c</span> 2 www.google.es
+PING www.google.es <span class="o">(</span>142.250.186.163<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from fra24s08-in-f3.1e100.net <span class="o">(</span>142.250.186.163<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>100 <span class="nb">time</span><span class="o">=</span>51.8 ms
+64 bytes from fra24s08-in-f3.1e100.net <span class="o">(</span>142.250.186.163<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>100 <span class="nb">time</span><span class="o">=</span>38.7 ms
+
+<span class="nt">---</span> www.google.es ping statistics <span class="nt">---</span>
+2 packets transmitted, 2 received, 0% packet loss, <span class="nb">time </span>1001ms
+rtt min/avg/max/mdev <span class="o">=</span> 38.722/45.277/51.832/6.555 ms
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>pavlo@debian:~<span class="o">()</span><span class="nv">$ </span>ssh sanji
+Welcome to Ubuntu 22.04.5 LTS <span class="o">(</span>GNU/Linux 6.1.0-28-amd64 x86_64<span class="o">)</span>
+
+ <span class="k">*</span> Documentation:  https://help.ubuntu.com
+ <span class="k">*</span> Management:     https://landscape.canonical.com
+ <span class="k">*</span> Support:        https://ubuntu.com/pro
+Last login: Mon Dec 16 10:57:59 2024 from 192.168.0.1
+pablo@sanji:~<span class="nv">$ </span>ping <span class="nt">-c</span> 2 www.youtube.com
+PING youtube-ui.l.google.com <span class="o">(</span>216.58.206.78<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from lhr35s11-in-f14.1e100.net <span class="o">(</span>216.58.206.78<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>99 <span class="nb">time</span><span class="o">=</span>43.6 ms
+64 bytes from tzfraa-aa-in-f14.1e100.net <span class="o">(</span>216.58.206.78<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>99 <span class="nb">time</span><span class="o">=</span>42.9 ms
+
+<span class="nt">---</span> youtube-ui.l.google.com ping statistics <span class="nt">---</span>
+2 packets transmitted, 2 received, 0% packet loss, <span class="nb">time </span>1002ms
+rtt min/avg/max/mdev <span class="o">=</span> 42.871/43.247/43.624/0.376 ms
+</pre></td></tr></tbody></table></code></div></div>
+
   </div>
 
   <div class="post-tail-wrapper text-muted">
@@ -2543,14 +3202,14 @@ rtt min/avg/max/mdev <span class="o">=</span> 37.124/38.739/40.355/1.615 ms
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/gpg-openssl/">Cifrado asimétrico con gpg y openssl</a>
+          <a href="/posts/openstack/">Escenario en OpenStack</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/openstack/">Escenario en OpenStack</a>
+          <a href="/posts/gpg-openssl/">Cifrado asimétrico con gpg y openssl</a>
         </li>
       
         
