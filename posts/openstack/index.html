@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-16T12:02:59+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2024-12-16T12:17:02+01:00","datePublished":"2024-12-11T18:15:00+01:00","description":"En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.","headline":"Escenario en OpenStack","image":"/assets/img/posts/openstack/openstack.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/openstack/"},"url":"/posts/openstack/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -985,7 +985,7 @@
 
 <time
   
-  data-ts="1734346979"
+  data-ts="1734347822"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -1050,9 +1050,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="5445 words"
+  title="5587 words"
 >
-  <em>30 min</em> read</span>
+  <em>31 min</em> read</span>
 
         </div>
       </div>
@@ -3074,6 +3074,68 @@ PING youtube-ui.l.google.com <span class="o">(</span>216.58.206.78<span class="o
 <span class="nt">---</span> youtube-ui.l.google.com ping statistics <span class="nt">---</span>
 2 packets transmitted, 2 received, 0% packet loss, <span class="nb">time </span>1002ms
 rtt min/avg/max/mdev <span class="o">=</span> 42.871/43.247/43.624/0.376 ms
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Finalmente comprueba que todo el escenario está funcionando después de reiniciar la <strong>máquina1 (luffy)</strong>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>reboot
+
+Broadcast message from root@luffy on pts/1 <span class="o">(</span>Mon 2024-12-16 11:15:21 UTC<span class="o">)</span>:
+
+The system will reboot now!
+
+pablo@luffy:~<span class="nv">$ </span>Connection to 172.22.200.100 closed by remote host.
+Connection to 172.22.200.100 closed.
+pavlo@debian:~<span class="o">()</span><span class="nv">$ </span>ssh nami
+Welcome to Ubuntu 22.04.5 LTS <span class="o">(</span>GNU/Linux 6.1.0-28-amd64 x86_64<span class="o">)</span>
+
+ <span class="k">*</span> Documentation:  https://help.ubuntu.com
+ <span class="k">*</span> Management:     https://landscape.canonical.com
+ <span class="k">*</span> Support:        https://ubuntu.com/pro
+Last login: Mon Dec 16 11:01:53 2024 from 192.168.0.1
+pablo@nami:~<span class="nv">$ </span>
+<span class="nb">logout
+</span>Connection to 192.168.0.2 closed.
+pavlo@debian:~<span class="o">()</span><span class="nv">$ </span>ssh sanji
+Welcome to Ubuntu 22.04.5 LTS <span class="o">(</span>GNU/Linux 6.1.0-28-amd64 x86_64<span class="o">)</span>
+
+ <span class="k">*</span> Documentation:  https://help.ubuntu.com
+ <span class="k">*</span> Management:     https://landscape.canonical.com
+ <span class="k">*</span> Support:        https://ubuntu.com/pro
+Last login: Mon Dec 16 11:13:31 2024 from 192.168.0.1
+pablo@sanji:~<span class="nv">$ </span>
+<span class="nb">logout
+</span>Connection to 192.168.0.3 closed.
 </pre></td></tr></tbody></table></code></div></div>
 
   </div>
