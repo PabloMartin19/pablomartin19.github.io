@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-12-19T18:42:06+01:00</updated>
+  <updated>2024-12-19T18:43:04+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Integridad, firmas y autenticación</title>
+    <link href="/posts/integridad/" rel="alternate" type="text/html" title="Integridad, firmas y autenticación" />
+    <published>2024-12-19T18:30:00+01:00</published>
+  
+    <updated>2024-12-19T18:43:04+01:00</updated>
+  
+    <id>/posts/integridad/</id>
+    <content src="/posts/integridad/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="Criptografía" />
+    
+  
+
+  <summary>En esta práctica trabajaremos con firmas electrónicas, integridad de ficheros y autenticación.</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>Aprende a instalar y configurar un servidor LEMP para alojar WordPress, incluyendo ajustes en nginx, base de datos, y configuración para URL amigables. 🚀</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Comandos para programación de tareas</title>
-    <link href="/posts/comandos-programacion/" rel="alternate" type="text/html" title="Comandos para programación de tareas" />
-    <published>2024-09-02T20:00:00+02:00</published>
-  
-    <updated>2024-10-02T18:59:43+02:00</updated>
-  
-    <id>/posts/comandos-programacion/</id>
-    <content src="/posts/comandos-programacion/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Sistemas" />
-    
-    <category term="Automatización" />
-    
-  
-
-  <summary>Explora los comandos esenciales para programar tareas en Linux. Aprende a automatizar procesos y optimizar tu flujo de trabajo en el sistema operativo, asegurando que las tareas críticas se realicen de manera eficiente y sin intervención manual.</summary>
 
   </entry>
 
