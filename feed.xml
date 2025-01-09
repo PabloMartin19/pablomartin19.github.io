@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-09T10:31:02+01:00</updated>
+  <updated>2025-01-09T11:55:45+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -50,7 +50,7 @@
     <link href="/posts/certificado/" rel="alternate" type="text/html" title="Práctica: Certificados digitales. HTTPS" />
     <published>2024-12-19T18:30:00+01:00</published>
   
-    <updated>2024-12-19T18:30:00+01:00</updated>
+    <updated>2025-01-09T11:55:44+01:00</updated>
   
     <id>/posts/certificado/</id>
     <content src="/posts/certificado/" />
