@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-12-19T18:43:04+01:00</updated>
+  <updated>2025-01-09T10:29:14+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -13,10 +13,62 @@
   <link rel="alternate" type="text/html" hreflang="es"
     href="/"/>
   <generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator>
-  <rights> © 2024 Pablo Martín Hidalgo </rights>
+  <rights> © 2025 Pablo Martín Hidalgo </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>systemd/sshfs</title>
+    <link href="/posts/systemd/" rel="alternate" type="text/html" title="systemd/sshfs" />
+    <published>2024-12-19T18:30:00+01:00</published>
+  
+    <updated>2024-12-19T18:30:00+01:00</updated>
+  
+    <id>/posts/systemd/</id>
+    <content src="/posts/systemd/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Sistemas" />
+    
+    <category term="Automatización" />
+    
+  
+
+  <summary>....</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Práctica: Certificados digitales. HTTPS</title>
+    <link href="/posts/certificado/" rel="alternate" type="text/html" title="Práctica: Certificados digitales. HTTPS" />
+    <published>2024-12-19T18:30:00+01:00</published>
+  
+    <updated>2024-12-19T18:30:00+01:00</updated>
+  
+    <id>/posts/certificado/</id>
+    <content src="/posts/certificado/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="Criptografía" />
+    
+  
+
+  <summary>....</summary>
+
+  </entry>
 
   
   <entry>
@@ -93,58 +145,6 @@
   
 
   <summary>En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Instalación de Oracle 19c en Debian 12</title>
-    <link href="/posts/instalacion-oracle19c/" rel="alternate" type="text/html" title="Instalación de Oracle 19c en Debian 12" />
-    <published>2024-11-15T18:15:00+01:00</published>
-  
-    <updated>2024-11-19T14:12:23+01:00</updated>
-  
-    <id>/posts/instalacion-oracle19c/</id>
-    <content src="/posts/instalacion-oracle19c/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Base de Datos" />
-    
-    <category term="Instalación" />
-    
-  
-
-  <summary>Este post muestra cómo instalar y configurar Oracle 19c en Debian 12, cubriendo los pasos clave desde la instalación hasta la configuración básica. 🚀</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Instalación de WordPress en un servidor LEMP</title>
-    <link href="/posts/instalacion-wordpress/" rel="alternate" type="text/html" title="Instalación de WordPress en un servidor LEMP" />
-    <published>2024-11-15T18:15:00+01:00</published>
-  
-    <updated>2024-11-15T18:56:45+01:00</updated>
-  
-    <id>/posts/instalacion-wordpress/</id>
-    <content src="/posts/instalacion-wordpress/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Implantación Web" />
-    
-    <category term="Aplicaciones" />
-    
-  
-
-  <summary>Aprende a instalar y configurar un servidor LEMP para alojar WordPress, incluyendo ajustes en nginx, base de datos, y configuración para URL amigables. 🚀</summary>
 
   </entry>
 
