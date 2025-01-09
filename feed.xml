@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-09T10:29:14+01:00</updated>
+  <updated>2025-01-09T10:31:02+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/systemd/" rel="alternate" type="text/html" title="systemd/sshfs" />
     <published>2024-12-19T18:30:00+01:00</published>
   
-    <updated>2024-12-19T18:30:00+01:00</updated>
+    <updated>2025-01-09T10:31:02+01:00</updated>
   
     <id>/posts/systemd/</id>
     <content src="/posts/systemd/" />
@@ -40,7 +40,7 @@
     
   
 
-  <summary>....</summary>
+  <summary>Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.</summary>
 
   </entry>
 
