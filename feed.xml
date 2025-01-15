@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-11T14:15:01+01:00</updated>
+  <updated>2025-01-15T13:31:02+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -20,11 +20,37 @@
 
   
   <entry>
+    <title>Systemd-Boot</title>
+    <link href="/posts/systemd-boot/" rel="alternate" type="text/html" title="Systemd-Boot" />
+    <published>2025-01-14T14:30:00+01:00</published>
+  
+    <updated>2025-01-14T14:30:00+01:00</updated>
+  
+    <id>/posts/systemd-boot/</id>
+    <content src="/posts/systemd-boot/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Sistemas" />
+    
+    <category term="Systemd" />
+    
+  
+
+  <summary>....</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>systemd/sshfs</title>
     <link href="/posts/systemd/" rel="alternate" type="text/html" title="systemd/sshfs" />
     <published>2024-12-19T18:30:00+01:00</published>
   
-    <updated>2025-01-09T10:31:02+01:00</updated>
+    <updated>2025-01-15T13:31:01+01:00</updated>
   
     <id>/posts/systemd/</id>
     <content src="/posts/systemd/" />
@@ -36,7 +62,7 @@
     
     <category term="Sistemas" />
     
-    <category term="Automatización" />
+    <category term="Systemd" />
     
   
 
@@ -50,7 +76,7 @@
     <link href="/posts/certificado/" rel="alternate" type="text/html" title="Práctica: Certificados digitales. HTTPS" />
     <published>2024-12-19T18:30:00+01:00</published>
   
-    <updated>2025-01-11T14:15:00+01:00</updated>
+    <updated>2025-01-15T13:31:01+01:00</updated>
   
     <id>/posts/certificado/</id>
     <content src="/posts/certificado/" />
@@ -119,32 +145,6 @@
   
 
   <summary>En esta práctica vamos a cifrar ficheros utilizando cifrado asimétrico utilizando el programa gpg.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Escenario en OpenStack</title>
-    <link href="/posts/openstack/" rel="alternate" type="text/html" title="Escenario en OpenStack" />
-    <published>2024-12-11T18:15:00+01:00</published>
-  
-    <updated>2024-12-16T12:17:02+01:00</updated>
-  
-    <id>/posts/openstack/</id>
-    <content src="/posts/openstack/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Servicios" />
-    
-    <category term="Cloud" />
-    
-  
-
-  <summary>En esta tarea se va a crear el escenario de trabajo que se va a usar durante todo el curso, que va a constar inicialmente de 4 máquinas: 2 instancias en OpenStack y dos contenedores LXC que se ejecutarán en una de las instancias.</summary>
 
   </entry>
 

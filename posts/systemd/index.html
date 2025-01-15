@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-09T10:31:02+01:00","datePublished":"2024-12-19T18:30:00+01:00","description":"Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.","headline":"systemd/sshfs","image":"/assets/img/posts/systemd/systemd.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/systemd/"},"url":"/posts/systemd/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-15T13:31:01+01:00","datePublished":"2024-12-19T18:30:00+01:00","description":"Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.","headline":"systemd/sshfs","image":"/assets/img/posts/systemd/systemd.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/systemd/"},"url":"/posts/systemd/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -880,13 +880,13 @@
 
 <time
   
-  data-ts="1736415062"
+  data-ts="1736944261"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jan  9, 2025
+  Jan 15, 2025
 </time>
 
         </span>
@@ -1615,7 +1615,7 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <i class="far fa-folder-open fa-fw me-1"></i>
         
           <a href="/categories/sistemas/">Sistemas</a>,
-          <a href="/categories/automatizaci%C3%B3n/">Automatización</a>
+          <a href="/categories/systemd/">Systemd</a>
       </div>
     
 
@@ -1625,9 +1625,9 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/automatizaci%C3%B3n/"
+            href="/tags/systemd/"
             class="post-tag no-text-decoration"
-          >Automatización</a>
+          >Systemd</a>
         
       </div>
     
@@ -1746,6 +1746,13 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/systemd-boot/">Systemd-Boot</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/integridad/">Integridad, firmas y autenticación</a>
         </li>
       
@@ -1754,13 +1761,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         
         <li class="text-truncate lh-lg">
           <a href="/posts/openstack/">Escenario en OpenStack</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/gpg-openssl/">Cifrado asimétrico con gpg y openssl</a>
         </li>
       
     </ul>
@@ -1823,10 +1823,26 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
-      
-        
-        
-
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1842,33 +1858,9 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
         
         
 
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1897,6 +1889,61 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1937,11 +1984,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
-  
-    
-    
-    
-    
       
     
   
@@ -1956,12 +1998,24 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+      
+    
+  
+    
+    
+    
+    
   
     
     
     
     
       
+    
+  
+    
+    
+    
     
   
     
@@ -1982,10 +2036,13 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <a class="post-tag btn btn-outline-primary" href="/tags/criptograf%C3%ADa/">Criptografía</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/automatizaci%C3%B3n/">Automatización</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/systemd/">Systemd</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/aplicaciones/">Aplicaciones</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/automatizaci%C3%B3n/">Automatización</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/cloud/">Cloud</a>
@@ -2078,6 +2135,18 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2091,6 +2160,34 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">Further Reading</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/systemd-boot/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1736861400"
+  data-df="ll"
+  
+>
+  Jan 14, 2025
+</time>
+
+              <h4 class="pt-0 my-2">Systemd-Boot</h4>
+              <div class="text-muted">
+                <p>....</p>
+              </div>
+            </div>
+          </a>
+        </article>
       
         <article class="col">
           <a href="/posts/comandos-programacion/" class="post-preview card h-100">
@@ -2172,9 +2269,13 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="Newer">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/systemd-boot/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>Systemd-Boot</p>
+    </a>
   
 </nav>
 
@@ -2284,10 +2385,26 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
-      
-        
-        
-
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -2303,33 +2420,9 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
         
         
 
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2358,6 +2451,61 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2398,11 +2546,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
-  
-    
-    
-    
-    
       
     
   
@@ -2417,12 +2560,24 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+      
+    
+  
+    
+    
+    
+    
   
     
     
     
     
       
+    
+  
+    
+    
+    
     
   
     
@@ -2443,10 +2598,13 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <a class="post-tag btn btn-outline-primary" href="/tags/criptograf%C3%ADa/">Criptografía</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/automatizaci%C3%B3n/">Automatización</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/systemd/">Systemd</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/aplicaciones/">Aplicaciones</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/automatizaci%C3%B3n/">Automatización</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/cloud/">Cloud</a>
