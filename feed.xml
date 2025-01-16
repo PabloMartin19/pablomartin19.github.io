@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-16T19:24:30+01:00</updated>
+  <updated>2025-01-16T19:27:20+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/systemd-boot/" rel="alternate" type="text/html" title="Systemd-Boot" />
     <published>2025-01-14T14:30:00+01:00</published>
   
-    <updated>2025-01-16T19:24:29+01:00</updated>
+    <updated>2025-01-16T19:27:19+01:00</updated>
   
     <id>/posts/systemd-boot/</id>
     <content src="/posts/systemd-boot/" />
@@ -40,7 +40,7 @@
     
   
 
-  <summary>....</summary>
+  <summary>En este post aprenderemos a instalar Debian 13 Trixie con systemd-boot en donde nos familiarizaremos con el sistema. Además, haremos un cambio de gestor de arranque iniciando por grub y finalmente acabando con systemd-boot.</summary>
 
   </entry>
 
