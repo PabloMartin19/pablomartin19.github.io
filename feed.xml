@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-16T13:09:22+01:00</updated>
+  <updated>2025-01-16T13:16:33+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/systemd-boot/" rel="alternate" type="text/html" title="Systemd-Boot" />
     <published>2025-01-14T14:30:00+01:00</published>
   
-    <updated>2025-01-16T13:09:20+01:00</updated>
+    <updated>2025-01-16T13:16:32+01:00</updated>
   
     <id>/posts/systemd-boot/</id>
     <content src="/posts/systemd-boot/" />
