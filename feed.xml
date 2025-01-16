@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-15T13:31:02+01:00</updated>
+  <updated>2025-01-16T10:07:38+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -76,7 +76,7 @@
     <link href="/posts/certificado/" rel="alternate" type="text/html" title="Práctica: Certificados digitales. HTTPS" />
     <published>2024-12-19T18:30:00+01:00</published>
   
-    <updated>2025-01-15T13:31:01+01:00</updated>
+    <updated>2025-01-16T10:07:37+01:00</updated>
   
     <id>/posts/certificado/</id>
     <content src="/posts/certificado/" />
@@ -92,7 +92,7 @@
     
   
 
-  <summary>....</summary>
+  <summary>En esta práctica vamos a trabajar con certificados digitales para autenticarnos, firmar documentos y securizar una página web con HTTPS. Primero, instalaremos un certificado digital de persona física en nuestro navegador y aprenderemos a hacer copias de seguridad. Luego, validaremos el certificado con Autofirma y la plataforma VALIDe. También utilizaremos nuestra firma digital para firmar y ver...</summary>
 
   </entry>
 
