@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-17T19:04:40+01:00</updated>
+  <updated>2025-01-17T19:07:35+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -102,7 +102,7 @@
     <link href="/posts/integridad/" rel="alternate" type="text/html" title="Integridad, firmas y autenticación" />
     <published>2024-12-19T18:30:00+01:00</published>
   
-    <updated>2024-12-19T18:43:04+01:00</updated>
+    <updated>2025-01-17T19:07:35+01:00</updated>
   
     <id>/posts/integridad/</id>
     <content src="/posts/integridad/" />
