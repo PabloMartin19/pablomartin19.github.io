@@ -30,28 +30,28 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="systemd/sshfs" />
+<meta property="og:title" content="Recolección centralizada de logs de sistema, mediante journald" />
 <meta name="author" content="Pablo Martín Hidalgo" />
 <meta property="og:locale" content="es" />
-<meta name="description" content="Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad." />
-<meta property="og:description" content="Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad." />
-<link rel="canonical" href="/posts/systemd/" />
-<meta property="og:url" content="/posts/systemd/" />
+<meta name="description" content="En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura." />
+<meta property="og:description" content="En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura." />
+<link rel="canonical" href="/posts/journald/" />
+<meta property="og:url" content="/posts/journald/" />
 <meta property="og:site_name" content="Blog personal" />
-<meta property="og:image" content="/assets/img/posts/systemd/systemd.png" />
+<meta property="og:image" content="/assets/img/posts/journald/portada.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-12-19T18:30:00+01:00" />
+<meta property="article:published_time" content="2025-01-21T14:00:00+01:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/assets/img/posts/systemd/systemd.png" />
-<meta property="twitter:title" content="systemd/sshfs" />
+<meta property="twitter:image" content="/assets/img/posts/journald/portada.png" />
+<meta property="twitter:title" content="Recolección centralizada de logs de sistema, mediante journald" />
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-15T13:31:01+01:00","datePublished":"2024-12-19T18:30:00+01:00","description":"Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.","headline":"systemd/sshfs","image":"/assets/img/posts/systemd/systemd.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/systemd/"},"url":"/posts/systemd/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-21T14:00:00+01:00","datePublished":"2025-01-21T14:00:00+01:00","description":"En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura.","headline":"Recolección centralizada de logs de sistema, mediante journald","image":"/assets/img/posts/journald/portada.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/journald/"},"url":"/posts/journald/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>systemd/sshfs | Blog personal
+  <title>Recolección centralizada de logs de sistema, mediante journald | Blog personal
   </title>
 
   <!--
@@ -439,7 +439,7 @@
         
           
             
-              <span>systemd/sshfs</span>
+              <span>Recolección centralizada de logs de sistema, mediante journald</span>
             
 
           
@@ -601,132 +601,6 @@
     <!-- combine -->
     
   
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
 
   
 
@@ -815,6 +689,27 @@
   
 
   
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
 
   
   
@@ -836,9 +731,9 @@
 
 <article class="px-1">
   <header>
-    <h1 data-toc-skip>systemd/sshfs</h1>
+    <h1 data-toc-skip>Recolección centralizada de logs de sistema, mediante journald</h1>
     
-      <p class="post-desc fw-light mb-4">Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.</p>
+      <p class="post-desc fw-light mb-4">En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura.</p>
     
 
     <div class="post-meta text-muted">
@@ -855,41 +750,18 @@
 
 <time
   
-  data-ts="1734629400"
+  data-ts="1737464400"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Dec 19, 2024
+  Jan 21, 2025
 </time>
 
       </span>
 
       <!-- lastmod date -->
-      
-        <span>
-          Updated
-          <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1736944261"
-  data-df="ll"
-  
-    data-bs-toggle="tooltip" data-bs-placement="bottom"
-  
->
-  Jan 15, 2025
-</time>
-
-        </span>
       
 
       
@@ -900,7 +772,7 @@
         
 
         <div class="mt-3 mb-3">
-          <a href="/assets/img/posts/systemd/systemd.png" class="popup img-link preview-img shimmer"><img src="/assets/img/posts/systemd/systemd.png"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
+          <a href="/assets/img/posts/journald/portada.png" class="popup img-link preview-img shimmer"><img src="/assets/img/posts/journald/portada.png"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
       
 
       <div class="d-flex justify-content-between">
@@ -945,9 +817,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="2101 words"
+  title="2465 words"
 >
-  <em>11 min</em> read</span>
+  <em>13 min</em> read</span>
 
         </div>
       </div>
@@ -955,38 +827,11 @@
   </header>
 
   <div class="content">
-    <h2 id="enunciado"><span class="me-2">Enunciado</span><a href="#enunciado" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+    <p>Implementa en tu escenario de trabajo de Openstack, un sistema de recolección de log mediante journald. Para ello debes, implementar un sistema de recolección de log mediante el paquete systemd-journal-remote, o similares.</p>
 
-<p>Crea dos instancias en OpenStack, basadas en la distribución de tu elección, anexa un volumen de 2GB.</p>
+<h2 id="instalación-de-systemd-journal-remote"><span class="me-2">Instalación de systemd-journal-remote</span><a href="#instalación-de-systemd-journal-remote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Una de las instancias hará de servidor, donde anexarás el volumen anterior. Deberás configurar sshfs en el escenario, de tal forma que el cliente pueda montar el sistema de archivos remoto usando sshfs y systemd. La validación del usuario se realizará mediante clave pública/privada.</p>
-
-<ol>
-  <li>
-    <p>Monta manualmente el sistema de archivos remoto.</p>
-  </li>
-  <li>
-    <p>Monta el sistema de archivos remoto de forma automática, mediante fichero /etc/fstab.</p>
-  </li>
-  <li>
-    <p>Monta el sistema de archivos remoto de forma automática, mediante fichero unidad .mount</p>
-  </li>
-  <li>
-    <p>Mediante fichero unidad .mount creado en el punto 3 y crea un fichero unidad de automontaje. unidad.automount, para que se monte automáticamente cuando detecte peticiones al sistema de archivos remoto y se desmonte automáticamente transcurrido un tiempo.</p>
-  </li>
-</ol>
-
-<h2 id="ejercicio-1"><span class="me-2">Ejercicio 1</span><a href="#ejercicio-1" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<p>Comenzamos creando el escenario necesario para la práctica, en donde utilizaremos dos instancias de OpenStack. Una de ellas actuará como <strong>servidor</strong> y otra como <strong>cliente</strong>.</p>
-
-<p><a href="/assets/img/posts/systemd/image1.png" class="popup img-link  shimmer"><img src="/assets/img/posts/systemd/image1.png" alt="image" loading="lazy"></a></p>
-
-<p>Luego, anexamos un volumen de 2GB a la instancia del servidor:</p>
-
-<p><a href="/assets/img/posts/systemd/image2.png" class="popup img-link  shimmer"><img src="/assets/img/posts/systemd/image2.png" alt="image" loading="lazy"></a></p>
-
-<p>Seguidamente accedemos a las máquinas y generamos un par de claves en ellas:</p>
+<p>En nuestro entorno, el primer paso será instalar el paquete <code class="language-plaintext highlighter-rouge">systemd-journal-remote</code>, que nos brindará la posibilidad de acceder a estas máquinas de manera remota. Para llevar a cabo la instalación en las máquinas de nuestro escenario, emplearemos el gestor de paquetes apt en Luffy, que está basado en Debian 12. Además, instalaremos el mismo paquete en los contenedores Nami y Sanji, que están alojados dentro de Luffy. Por otro lado, en Zoro, que ejecuta Rocky, utilizaremos el gestor de paquetes <code class="language-plaintext highlighter-rouge">dnf</code> para realizar la instalación.</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -994,113 +839,93 @@
 2
 3
 4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span>ssh-keygen
-Generating public/private rsa key pair.
-Enter file <span class="k">in </span>which to save the key <span class="o">(</span>/home/debian/.ssh/id_rsa<span class="o">)</span>: 
-Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: 
-Enter same passphrase again: 
-Your identification has been saved <span class="k">in</span> /home/debian/.ssh/id_rsa
-Your public key has been saved <span class="k">in</span> /home/debian/.ssh/id_rsa.pub
-The key fingerprint is:
-SHA256:nUOO1c1ppJFcV7DSmpBD3PUqjQkfIQttT7cf4k+F0Qw debian@systemd-server
-The key<span class="s1">'s randomart image is:
-+---[RSA 3072]----+
-|        .oooo+E=+|
-|         o+==Oo=o|
-|         .Oo=.B+.|
-|         * *.@oo.|
-|        S = O +.o|
-|           . o ..|
-|              o  |
-|               . |
-|                 |
-+----[SHA256]-----+
-</span></pre></td></tr></tbody></table></code></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span>ssh-keygen 
-Generating public/private rsa key pair.
-Enter file <span class="k">in </span>which to save the key <span class="o">(</span>/home/debian/.ssh/id_rsa<span class="o">)</span>: 
-Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: 
-Enter same passphrase again: 
-Your identification has been saved <span class="k">in</span> /home/debian/.ssh/id_rsa
-Your public key has been saved <span class="k">in</span> /home/debian/.ssh/id_rsa.pub
-The key fingerprint is:
-SHA256:Mzy940zFH1GQxcXWT73pMETToeu9eVZ8yOP24PReETA debian@systemd-client
-The key<span class="s1">'s randomart image is:
-+---[RSA 3072]----+
-|            .EoBO|
-|             .*oB|
-|            ...++|
-|       . . . o.+o|
-|        S . oo=+ |
-|         + o..=o=|
-|          +  o+o+|
-|         + . ooo*|
-|          o  ..*=|
-+----[SHA256]-----+
-</span></pre></td></tr></tbody></table></code></div></div>
-
-<p>Comprobamos que el volumen que hemos anexado anteriormente aparezca en la instancia:</p>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span>lsblk
-NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-vda     254:0    0   10G  0 disk 
-├─vda1  254:1    0  9.9G  0 part /
-├─vda14 254:14   0    3M  0 part 
-└─vda15 254:15   0  124M  0 part /boot/efi
-vdb     254:16   0    2G  0 disk 
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>systemd-journal-remote <span class="nt">-y</span>
+<span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span><span class="nb">sudo </span>dnf <span class="nb">install </span>systemd-journal-remote <span class="nt">-y</span>
+pablo@sanji:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>systemd-journal-remote <span class="nt">-y</span>
+pablo@nami:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>systemd-journal-remote <span class="nt">-y</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Como vemos el volumen ha sido añadido, por lo que ahora vamos a usar <code class="language-plaintext highlighter-rouge">fdisk</code> para crear una nueva partición en el volumen <code class="language-plaintext highlighter-rouge">vdb</code>:</p>
+<p>En el servidor, habilitaremos y activaremos los dos componentes de systemd necesarios para recibir los mensajes de registro con el siguiente comando:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> systemd-journal-remote.socket
+Created symlink /etc/systemd/system/sockets.target.wants/systemd-journal-remote.socket → /lib/systemd/system/systemd-journal-remote.socket.
+pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>systemd-journal-remote.service
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>En el cliente, habilitaremos el componente que systemd usa para enviar los mensajes de registro al servidor:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>systemd-journal-upload.service
+Created symlink /etc/systemd/system/multi-user.target.wants/systemd-journal-upload.service → /usr/lib/systemd/system/systemd-journal-upload.service.
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Luego, en el servidor, abriremos los puertos 19532 y 80 en el firewall. Esto permitirá que el servidor reciba los mensajes de registro del cliente. El puerto 80 será utilizado por certbot para generar el certificado TLS. Sin embargo, en nuestro caso no tenemos ningún cortafuegos, por lo que no será necesario realizar esta configuración.</p>
+
+<h2 id="generación-de-claves-y-certificados"><span class="me-2">Generación de claves y certificados</span><a href="#generación-de-claves-y-certificados" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Dado que utilizaremos el servicio con cifrado para asegurar que nuestros registros estén protegidos, procederemos a generar los certificados utilizando OpenSSL. Aunque podemos generar los certificados manualmente, existe una herramienta llamada Easy RSA que facilita este proceso de forma automatizada. Yo me encargaré de generar todos los certificados en Odin y luego los transferiré a las máquinas correspondientes.</p>
+
+<p>Para comenzar, en Odin ejecutaremos el siguiente comando para instalar Easy RSA y OpenSSL:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>easy-rsa openssl <span class="nt">-y</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Esta utilidad incluye un archivo de ejemplo que nos ayudará a generar los certificados. Primero, copiaremos el archivo de ejemplo y luego editaremos los valores necesarios para personalizar la configuración:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo cp </span>vars.example vars
+pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo </span>nano vars
+pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">cat </span>vars
+set_var EASYRSA_REQ_COUNTRY     <span class="s2">"ES"</span>
+set_var EASYRSA_REQ_PROVINCE    <span class="s2">"Sevilla"</span>
+set_var EASYRSA_REQ_CITY        <span class="s2">"Dos Hermanas"</span>
+set_var EASYRSA_REQ_ORG         <span class="s2">"PabloMartin SL"</span>
+set_var EASYRSA_REQ_EMAIL       <span class="s2">"pmartinhidalgo19@gmail.com"</span>
+set_var EASYRSA_REQ_OU          <span class="s2">"Informatica"</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>A continuación, vamos a crear la estructura de directorios junto a los archivos necesarios para poder comenzar a trabajar con easyRSA:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa init-pki
+<span class="k">*</span> Notice:
+
+  init-pki <span class="nb">complete</span><span class="p">;</span> you may now create a CA or requests.
+
+  Your newly created PKI <span class="nb">dir </span>is:
+  <span class="k">*</span> /usr/share/easy-rsa/pki
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Seguidamente, construimos nuestra CA:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1130,35 +955,41 @@ vdb     254:16   0    2G  0 disk
 24
 25
 26
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span><span class="nb">sudo </span>fdisk /dev/vdb
+27
+28
+29
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa build-ca nopass
+<span class="k">*</span> Notice:
+Using Easy-RSA configuration from: /usr/share/easy-rsa/vars
 
-Welcome to fdisk <span class="o">(</span>util-linux 2.38.1<span class="o">)</span><span class="nb">.</span>
-Changes will remain <span class="k">in </span>memory only, <span class="k">until </span>you decide to write them.
-Be careful before using the write command.
+<span class="k">*</span> WARNING:
 
-The device contains <span class="s1">'ext4'</span> signature and it will be removed by a write command. See fdisk<span class="o">(</span>8<span class="o">)</span> man page and <span class="nt">--wipe</span> option <span class="k">for </span>more details.
+  Move your vars file to your PKI folder, where it is safe!
 
-Device does not contain a recognized partition table.
-Created a new DOS <span class="o">(</span>MBR<span class="o">)</span> disklabel with disk identifier 0x954ead4c.
+<span class="k">*</span> Notice:
+Using SSL: openssl OpenSSL 3.0.15 3 Sep 2024 <span class="o">(</span>Library: OpenSSL 3.0.15 3 Sep 2024<span class="o">)</span>
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: n
-Partition <span class="nb">type
-   </span>p   primary <span class="o">(</span>0 primary, 0 extended, 4 free<span class="o">)</span>
-   e   extended <span class="o">(</span>container <span class="k">for </span>logical partitions<span class="o">)</span>
-Select <span class="o">(</span>default p<span class="o">)</span>: p
-Partition number <span class="o">(</span>1-4, default 1<span class="o">)</span>: 1
-First sector <span class="o">(</span>2048-4194303, default 2048<span class="o">)</span>: 
-Last sector, +/-sectors or +/-size<span class="o">{</span>K,M,G,T,P<span class="o">}</span> <span class="o">(</span>2048-4194303, default 4194303<span class="o">)</span>: 
+Using configuration from /usr/share/easy-rsa/pki/eff500c6/temp.8849e576
+...+..............+...+.........+......+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>.....+..+...+...+....+......+.....+......+....+......+...+.....+..........+...+..+.+......+........+......+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>.+..+.............+..+.+......+.........+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+...+......+.+...+........+...+....+.....+......+.......+........+.+......+.........+.....+.+.....+.........+...+...+.........+...+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>...+....+......+........+....+........+.......+...+..+.+..+............+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>..+...+......+......+...+....+.....+...+.............+..+...+.+...+...+.....+.......+.....+.............+..............+...............+...............+.+..+.+......+.........+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<span class="nt">-----</span>
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter <span class="s1">'.'</span>, the field will be left blank.
+<span class="nt">-----</span>
+Common Name <span class="o">(</span>eg: your user, host, or server name<span class="o">)</span> <span class="o">[</span>Easy-RSA CA]:luffy.pablo.gonzalonazareno.org
 
-Created a new partition 1 of <span class="nb">type</span> <span class="s1">'Linux'</span> and of size 2 GiB.
+<span class="k">*</span> Notice:
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: w
-The partition table has been altered.
-Calling ioctl<span class="o">()</span> to re-read partition table.
-Syncing disks.
+CA creation <span class="nb">complete </span>and you may now import and sign cert requests.
+Your new CA certificate file <span class="k">for </span>publishing is at:
+/usr/share/easy-rsa/pki/ca.crt
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Volvemos a comprobar las particiones:</p>
+<p>Ahora vamos a generar la clave privada de todas las máquina, además, generaremos a la vez una solicitud de firma del certificado:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1170,17 +1001,87 @@ Syncing disks.
 6
 7
 8
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span>lsblk
-NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-vda     254:0    0   10G  0 disk 
-├─vda1  254:1    0  9.9G  0 part /
-├─vda14 254:14   0    3M  0 part 
-└─vda15 254:15   0  124M  0 part /boot/efi
-vdb     254:16   0    2G  0 disk 
-└─vdb1  254:17   0    2G  0 part
+9
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa gen-req zoro nopass
+<span class="nt">-----</span>
+Common Name <span class="o">(</span>eg: your user, host, or server name<span class="o">)</span> <span class="o">[</span>Easy-RSA CA]:zoro.pablo.gonzalonazareno.org
+
+<span class="k">*</span> Notice:
+
+CA creation <span class="nb">complete </span>and you may now import and sign cert requests.
+Your new CA certificate file <span class="k">for </span>publishing is at:
+/usr/share/easy-rsa/pki/ca.crt
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Formateamos la partición que acabamos de crear con un sistema ext4:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa gen-req nami nopass
+<span class="nt">-----</span>
+Common Name <span class="o">(</span>eg: your user, host, or server name<span class="o">)</span> <span class="o">[</span>Easy-RSA CA]:nami.pablo.gonzalonazareno.org
+
+<span class="k">*</span> Notice:
+
+CA creation <span class="nb">complete </span>and you may now import and sign cert requests.
+Your new CA certificate file <span class="k">for </span>publishing is at:
+/usr/share/easy-rsa/pki/ca.crt
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa gen-req sanji nopass
+<span class="nt">-----</span>
+Common Name <span class="o">(</span>eg: your user, host, or server name<span class="o">)</span> <span class="o">[</span>Easy-RSA CA]:sanji.pablo.gonzalonazareno.org
+
+<span class="k">*</span> Notice:
+
+CA creation <span class="nb">complete </span>and you may now import and sign cert requests.
+Your new CA certificate file <span class="k">for </span>publishing is at:
+/usr/share/easy-rsa/pki/ca.crt
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa gen-req luffy nopass
+<span class="nt">-----</span>
+Common Name <span class="o">(</span>eg: your user, host, or server name<span class="o">)</span> <span class="o">[</span>Easy-RSA CA]:luffy.pablo.gonzalonazareno.org
+
+<span class="k">*</span> Notice:
+
+CA creation <span class="nb">complete </span>and you may now import and sign cert requests.
+Your new CA certificate file <span class="k">for </span>publishing is at:
+/usr/share/easy-rsa/pki/ca.crt
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Una vez generadas las claves privadas y las solicitudes de firma de los certificados, procederemos a firmarlas. Para evitar repetir el proceso en cada máquina, mostraremos cómo firmar el certificado de Luffy, ya que los demás se firman de la misma manera.</p>
+
+<p>En primer lugar, ejecutaremos el siguiente comando en Luffy para firmar la solicitud de certificado:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1196,113 +1097,95 @@ vdb     254:16   0    2G  0 disk
 10
 11
 12
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span><span class="nb">sudo </span>mkfs.ext4 /dev/vdb1
-mke2fs 1.47.0 <span class="o">(</span>5-Feb-2023<span class="o">)</span>
-Discarding device blocks: <span class="k">done                            
-</span>Creating filesystem with 524032 4k blocks and 131072 inodes
-Filesystem UUID: b891fbd6-085d-4d5b-88c6-dc6093301465
-Superblock backups stored on blocks: 
-	32768, 98304, 163840, 229376, 294912
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre>pablo@luffy:/usr/share/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa sign-req server luffy
+<span class="k">*</span> Notice:
+Using Easy-RSA configuration from: /usr/share/easy-rsa/vars
 
-Allocating group tables: <span class="k">done                            
-</span>Writing inode tables: <span class="k">done                            
-</span>Creating journal <span class="o">(</span>8192 blocks<span class="o">)</span>: <span class="k">done
-</span>Writing superblocks and filesystem accounting information: <span class="k">done</span>
-</pre></td></tr></tbody></table></code></div></div>
+<span class="k">*</span> WARNING:
 
-<p>Luego creamos el punto de montaje de la particción y lo montamos en el directorio que hemos seleccionado:</p>
+  Move your vars file to your PKI folder, where it is safe!
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span><span class="nb">sudo mkdir</span> <span class="nt">-p</span> /mount
-debian@systemd-server:~<span class="nv">$ </span><span class="nb">sudo </span>mount /dev/vdb1 /mount
-</pre></td></tr></tbody></table></code></div></div>
+<span class="k">*</span> Notice:
+Using SSL: openssl OpenSSL 3.0.15 3 Sep 2024 <span class="o">(</span>Library: OpenSSL 3.0.15 3 Sep 2024<span class="o">)</span>
 
-<p>Volvemos a comprobar que la partición se ha montado correctamente en el directorio indicado:</p>
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span>lsblk
-NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-vda     254:0    0   10G  0 disk 
-├─vda1  254:1    0  9.9G  0 part /
-├─vda14 254:14   0    3M  0 part 
-└─vda15 254:15   0  124M  0 part /boot/efi
-vdb     254:16   0    2G  0 disk 
-└─vdb1  254:17   0    2G  0 part /mount
-</pre></td></tr></tbody></table></code></div></div>
+You are about to sign the following certificate.
+Please check over the details shown below <span class="k">for </span>accuracy. Note that this request
+has not been cryptographically verified. Please be sure it came from a trusted
+<span class="nb">source </span>or that you have verified the request checksum with the sender.
 
-<p>Creamos un fichero de prueba que usaremos para comprobar más tarde que el montaje ha funcionado correctamente:</p>
+Request subject, to be signed as a server certificate <span class="k">for </span>825 days:
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:/mount<span class="nv">$ </span><span class="nb">cat </span>kk.txt 
-Buenas tardes por la mañana
-debian@systemd-server:/mount<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
-total 20
-<span class="nt">-rw-r--r--</span> 1 root root    29 Jan  9 07:51 kk.txt
-drwx------ 2 root root 16384 Jan  9 07:48 lost+found
-</pre></td></tr></tbody></table></code></div></div>
+<span class="nv">subject</span><span class="o">=</span>
+    commonName                <span class="o">=</span> luffy.pablo.gonzalonazareno.org
 
-<p>Instalamos <strong>sshfs</strong> en ambas instancias:</p>
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>debian@systemd-server:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>sshfs
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>sshfs
-</pre></td></tr></tbody></table></code></div></div>
+Type the word <span class="s1">'yes'</span> to <span class="k">continue</span>, or any other input to abort.
+  Confirm request details: <span class="nb">yes
 
-<p>Importante, necesitaremos tener la clave pública de la máquina cliente en el fichero <code class="language-plaintext highlighter-rouge">authorized_keys</code> de la máquina servidor para que el montaje funcione correctamente.</p>
+</span>Using configuration from /usr/share/easy-rsa/pki/732b7266/temp.39f65a14
+Check that the request matches the signature
+Signature ok
+The Subject<span class="s1">'s Distinguished Name is as follows
+commonName            :ASN.1 12:'</span>luffy.pablo.gonzalonazareno.org<span class="s1">'
+Certificate is to be certified until Apr 27 07:27:31 2027 GMT (825 days)
 
-<p>Por último, montamos el sistema de ficheros creado en la máquina servidor en la máquina cliente, utilizando <strong>sshfs</strong> con las siguientes instrucciones:</p>
+Write out database with 1 new entries
+Database updated
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">mkdir </span>montaje
-debian@systemd-client:~<span class="nv">$ </span>sshfs debian@10.0.0.22:/mount /home/debian/montaje/ <span class="nt">-o</span> <span class="nv">IdentityFile</span><span class="o">=</span>/home/debian/.ssh/id_rsa
-The authenticity of host <span class="s1">'10.0.0.22 (10.0.0.22)'</span> can<span class="s1">'t be established.
-ED25519 key fingerprint is SHA256:jA8NMNDhdcLCYkll2HrP9UHnwsoIXcb/ZdbBlaNMvfo.
-This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-debian@systemd-client:~$ ls -l montaje/
-total 20
--rw-r--r-- 1 root root    29 Jan  9 07:51 kk.txt
-drwx------ 1 root root 16384 Jan  9 07:48 lost+found
-debian@systemd-client:~$ cat montaje/kk.txt 
-Buenas tardes por la mañana
+* Notice:
+Certificate created at: /usr/share/easy-rsa/pki/issued/luffy.crt
 </span></pre></td></tr></tbody></table></code></div></div>
 
-<p>Como vemos, el montaje ha funcionado a la perfección:</p>
+<p>Durante el proceso, EasyRSA nos pedirá que confirmemos la firma y que verifiquemos los datos de la solicitud. Aceptaremos escribiendo yes y luego se generará el certificado firmado correspondiente.</p>
+
+<p>Tras firmar el certificado de Luffy, repetiremos el mismo procedimiento para las demás máquinas, sustituyendo luffy por el nombre correspondiente de cada una. Esto asegurará que todas las máquinas tengan su certificado firmado correctamente.</p>
+
+<h3 id="mover-los-certificados-a-las-máquinas-correspondientes"><span class="me-2">Mover los certificados a las máquinas correspondientes</span><a href="#mover-los-certificados-a-las-máquinas-correspondientes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Ahora debemos transferir los certificados y claves privadas a las máquinas correspondientes utilizando el método para compartir que queramos, en mi caso, a través de un servidor python3 temporal. Para cada una de ellas, copiaremos el certificado firmado, ubicado en /usr/share/easy-rsa/pki/issued/, junto con su clave privada, que se encuentra en /usr/share/easy-rsa/pki/private/.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>root@luffy:/usr/share/easy-rsa/pki/issued# <span class="nb">ls</span> <span class="nt">-l</span>
+total 32
+<span class="nt">-rw-------</span> 1 root root 4821 Jan 22 07:27 luffy.crt
+<span class="nt">-rw-------</span> 1 root root 4815 Jan 22 07:28 nami.crt
+<span class="nt">-rw-------</span> 1 root root 4821 Jan 22 07:28 sanji.crt
+<span class="nt">-rw-------</span> 1 root root 4815 Jan 22 07:28 zoro.crt
+</pre></td></tr></tbody></table></code></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1313,114 +1196,16 @@ Buenas tardes por la mañana
 5
 6
 7
-8
-9
-10
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
-Filesystem               Size  Used Avail Use% Mounted on
-udev                     462M     0  462M   0% /dev
-tmpfs                     97M  512K   96M   1% /run
-/dev/vda1                9.7G  1.2G  8.1G  13% /
-tmpfs                    481M     0  481M   0% /dev/shm
-tmpfs                    5.0M     0  5.0M   0% /run/lock
-/dev/vda15               124M   12M  113M  10% /boot/efi
-tmpfs                     97M     0   97M   0% /run/user/1000
-debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /home/debian/montaje
-</pre></td></tr></tbody></table></code></div></div>
-
-<h2 id="ejercicio-2"><span class="me-2">Ejercicio 2</span><a href="#ejercicio-2" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<p>Para la realización del montaje automático usaremos fstab, donde tendremos que añadir la siguiente línea al fichero <code class="language-plaintext highlighter-rouge">/etc/fstab</code> de la máquina cliente:</p>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>sshfs#debian@10.0.0.22:/mount /mnt/sshfs fuse defaults,_netdev,identityfile<span class="o">=</span>/home/debian/.ssh/id_rsa,allow_other 0 0
-</pre></td></tr></tbody></table></code></div></div>
-
-<p>Esta configuración permite montar un sistema de archivos remoto a través de SSH en el directorio local <code class="language-plaintext highlighter-rouge">/mnt/sshfs</code>. Para ello, se utiliza un usuario específico, una dirección IP, y se accede a la carpeta remota empleando el sistema de archivos FUSE. Además, el proceso de autenticación se realiza mediante una clave privada ubicada en <code class="language-plaintext highlighter-rouge">/home/debian/.ssh/id_rsa</code>.</p>
-
-<p>En la máquina cliente, se crea previamente el punto de montaje especificado:</p>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo mkdir</span> <span class="nt">-p</span> /mnt/sshfs
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo chown </span>debian:debian /mnt/sshfs
-</pre></td></tr></tbody></table></code></div></div>
-
-<p>Tras realizar un reinicio, comprobamos que el montaje se ha realizado correctamente:</p>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
-Filesystem               Size  Used Avail Use% Mounted on
-udev                     462M     0  462M   0% /dev
-tmpfs                     97M  500K   96M   1% /run
-/dev/vda1                9.7G  1.2G  8.1G  13% /
-tmpfs                    481M     0  481M   0% /dev/shm
-tmpfs                    5.0M     0  5.0M   0% /run/lock
-/dev/vda15               124M   12M  113M  10% /boot/efi
-debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /mnt/sshfs
-tmpfs                     97M     0   97M   0% /run/user/1000
-</pre></td></tr></tbody></table></code></div></div>
-
-<p>Comprobamos que podemos ver el contenido del fichero anteriormente montado:</p>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /mnt/sshfs/
+</pre></td><td class="rouge-code"><pre>root@luffy:/usr/share/easy-rsa/pki/private# <span class="nb">ls</span> <span class="nt">-l</span>
 total 20
-<span class="nt">-rw-r--r--</span> 1 root root    29 Jan  9 07:51 kk.txt
-drwx------ 1 root root 16384 Jan  9 07:48 lost+found
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">cat</span> /mnt/sshfs/kk.txt 
-Buenas tardes por la mañana
+<span class="nt">-rw-------</span> 1 root root 1704 Jan 21 12:54 ca.key
+<span class="nt">-rw-------</span> 1 root root 1704 Jan 22 07:24 luffy.key
+<span class="nt">-rw-------</span> 1 root root 1704 Jan 21 13:04 nami.key
+<span class="nt">-rw-------</span> 1 root root 1708 Jan 21 13:05 sanji.key
+<span class="nt">-rw-------</span> 1 root root 1704 Jan 21 13:01 zoro.key
 </pre></td></tr></tbody></table></code></div></div>
 
-<h2 id="ejercicio-3"><span class="me-2">Ejercicio 3</span><a href="#ejercicio-3" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<p>En lugar de utilizar el archivo <code class="language-plaintext highlighter-rouge">/etc/fstab</code> para el montaje automático del sistema de archivos remoto, podemos emplear una unidad de systemd en la máquina cliente. Esto nos permitirá gestionar el montaje con systemd de forma eficiente, especificando los parámetros necesarios.</p>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">cat</span> /etc/systemd/system/home-debian-sshfs.mount
-<span class="o">[</span>Unit]
-<span class="nv">Description</span><span class="o">=</span>Montaje sistema de archivos remoto
-
-<span class="o">[</span>Mount]
-<span class="nv">What</span><span class="o">=</span>debian@10.0.0.22:/mount
-<span class="nv">Where</span><span class="o">=</span>/home/debian/sshfs
-<span class="nv">Type</span><span class="o">=</span>fuse.sshfs
-<span class="nv">Options</span><span class="o">=</span>_netdev,IdentityFile<span class="o">=</span>/home/debian/.ssh/id_rsa,allow_other,default_permissions,reconnect
-</pre></td></tr></tbody></table></code></div></div>
-
-<p>Hacemos un reinicio para que los cambios se ejecuten:</p>
+<p>Además, en el caso de los clientes, será necesario enviarles también el certificado de la Autoridad Certificadora (CA), almacenado en /usr/share/easy-rsa/pki/ca.crt.</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1440,25 +1225,27 @@ Buenas tardes por la mañana
 14
 15
 16
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>home-debian-sshfs.mount
-The unit files have no installation config <span class="o">(</span><span class="nv">WantedBy</span><span class="o">=</span>, <span class="nv">RequiredBy</span><span class="o">=</span>, <span class="nv">Also</span><span class="o">=</span>,
-<span class="nv">Alias</span><span class="o">=</span> settings <span class="k">in </span>the <span class="o">[</span>Install] section, and <span class="nv">DefaultInstance</span><span class="o">=</span> <span class="k">for </span>template
-units<span class="o">)</span><span class="nb">.</span> This means they are not meant to be enabled using systemctl.
- 
-Possible reasons <span class="k">for </span>having this kind of units are:
-• A unit may be statically enabled by being symlinked from another unit<span class="s1">'s
-  .wants/ or .requires/ directory.
-• A unit'</span>s purpose may be to act as a helper <span class="k">for </span>some other unit which has
-  a requirement dependency on it.
-• A unit may be started when needed via activation <span class="o">(</span>socket, path, timer,
-  D-Bus, udev, scripted systemctl call, ...<span class="o">)</span><span class="nb">.</span>
-• In <span class="k">case</span> of template units, the unit is meant to be enabled with some
-  instance name specified.
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl start home-debian-sshfs.mount
+17
+</pre></td><td class="rouge-code"><pre>root@luffy:/usr/share/easy-rsa/pki# <span class="nb">ls</span> <span class="nt">-l</span>
+total 76
+<span class="nt">-rw-------</span> 1 root root 1285 Jan 21 12:54 ca.crt
+drwx------ 2 root root 4096 Jan 22 07:28 certs_by_serial
+<span class="nt">-rw-------</span> 1 root root  374 Jan 22 07:28 index.txt
+<span class="nt">-rw-------</span> 1 root root   20 Jan 22 07:28 index.txt.attr
+<span class="nt">-rw-------</span> 1 root root   20 Jan 22 07:28 index.txt.attr.old
+<span class="nt">-rw-------</span> 1 root root  280 Jan 22 07:28 index.txt.old
+drwx------ 2 root root 4096 Jan 22 07:28 issued
+<span class="nt">-rw-------</span> 1 root root 4935 Jan 21 11:57 openssl-easyrsa.cnf
+drwx------ 2 root root 4096 Jan 22 07:25 private
+drwx------ 2 root root 4096 Jan 22 07:25 reqs
+drwx------ 5 root root 4096 Jan 21 12:54 revoked
+<span class="nt">-rw-------</span> 1 root root 4927 Jan 22 07:28 safessl-easyrsa.cnf
+<span class="nt">-rw-------</span> 1 root root   33 Jan 22 07:28 serial
+<span class="nt">-rw-------</span> 1 root root   33 Jan 22 07:28 serial.old
+<span class="nt">-rw-------</span> 1 root root 9425 Jan 21 11:57 vars.example
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Comprobamos que el montaje haya salido correctamente:</p>
+<p>Nos transferimos todos los archivos:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1467,24 +1254,12 @@ debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>sy
 3
 4
 5
-6
-7
-8
-9
-10
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
-Filesystem               Size  Used Avail Use% Mounted on
-udev                     462M     0  462M   0% /dev
-tmpfs                     97M  500K   96M   1% /run
-/dev/vda1                9.7G  1.2G  8.1G  13% /
-tmpfs                    481M     0  481M   0% /dev/shm
-tmpfs                    5.0M     0  5.0M   0% /run/lock
-/dev/vda15               124M   12M  113M  10% /boot/efi
-tmpfs                     97M     0   97M   0% /run/user/1000
-debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /home/debian/sshfs
+</pre></td><td class="rouge-code"><pre>root@luffy:/usr/share/easy-rsa/pki/issued# python3 <span class="nt">-m</span> http.server
+Serving HTTP on 0.0.0.0 port 8000 <span class="o">(</span>http://0.0.0.0:8000/<span class="o">)</span> ...
+172.16.0.200 - - <span class="o">[</span>22/Jan/2025 07:42:44] <span class="s2">"GET /zoro.crt HTTP/1.1"</span> 200 -
+192.168.0.3 - - <span class="o">[</span>22/Jan/2025 07:46:12] <span class="s2">"GET /sanji.crt HTTP/1.1"</span> 200 -
+192.168.0.2 - - <span class="o">[</span>22/Jan/2025 07:46:30] <span class="s2">"GET /nami.crt HTTP/1.1"</span> 200 -
 </pre></td></tr></tbody></table></code></div></div>
-
-<p>Además, podemos ver el contenido:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1493,18 +1268,135 @@ debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /home/debian/sshfs
 3
 4
 5
-6
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> sshfs/
+</pre></td><td class="rouge-code"><pre>root@luffy:/usr/share/easy-rsa/pki# python3 <span class="nt">-m</span> http.server
+Serving HTTP on 0.0.0.0 port 8000 <span class="o">(</span>http://0.0.0.0:8000/<span class="o">)</span> ...
+172.16.0.200 - - <span class="o">[</span>22/Jan/2025 07:49:54] <span class="s2">"GET /ca.crt HTTP/1.1"</span> 200 -
+192.168.0.3 - - <span class="o">[</span>22/Jan/2025 07:50:02] <span class="s2">"GET /ca.crt HTTP/1.1"</span> 200 -
+192.168.0.2 - - <span class="o">[</span>22/Jan/2025 07:50:04] <span class="s2">"GET /ca.crt HTTP/1.1"</span> 200 -
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>root@luffy:/usr/share/easy-rsa/pki/private# python3 <span class="nt">-m</span> http.server
+Serving HTTP on 0.0.0.0 port 8000 <span class="o">(</span>http://0.0.0.0:8000/<span class="o">)</span> ...
+172.16.0.200 - - <span class="o">[</span>22/Jan/2025 07:50:45] <span class="s2">"GET /zoro.key HTTP/1.1"</span> 200 -
+192.168.0.3 - - <span class="o">[</span>22/Jan/2025 07:50:55] <span class="s2">"GET /sanji.key HTTP/1.1"</span> 200 -
+192.168.0.2 - - <span class="o">[</span>22/Jan/2025 07:51:01] <span class="s2">"GET /nami.key HTTP/1.1"</span> 200 -
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>El comando para transferir los archivos desde el cliente es el siguiente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>wget http://&lt;IP_servidor&gt;:8000/ruta_al_archivo
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>El directorio <code class="language-plaintext highlighter-rouge">/etc/letsencrypt/live/</code> es utilizado por Let’s Encrypt para almacenar certificados generados mediante certbot, pero como en este caso estamos generando los certificados manualmente con EasyRSA, ese directorio no existe por defecto. Por lo tanto, debemos crearlo para posteriormente mover los archivos allí:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">sudo mkdir</span> <span class="nt">-p</span> /etc/letsencrypt/live/pablomh.es
+root@luffy:~# <span class="nb">sudo mv</span> /usr/share/easy-rsa/pki/issued/luffy.crt /etc/letsencrypt/live/pablomh.es/
+root@luffy:~# <span class="nb">sudo mv</span> /usr/share/easy-rsa/pki/private/luffy.key /etc/letsencrypt/live/pablomh.es/
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Además, debemos generar un fichero combined.pem solamente en luffy, para realizar esto debemos concatenar nuestro certificado con la clave privada en un solo archivo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">cat</span> /etc/letsencrypt/live/pablomh.es/luffy.crt /etc/letsencrypt/live/pablomh.es/luffy.key <span class="o">&gt;</span> /etc/letsencrypt/live/pablomh.es/combined.pem
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Cambiamos los permisos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">chown </span>root:systemd-journal-remote /etc/letsencrypt/live/pablomh.es/<span class="k">*</span>
+root@luffy:~# <span class="nb">chmod </span>640 /etc/letsencrypt/live/pablomh.es/luffy.crt
+root@luffy:~# <span class="nb">chmod </span>640 /etc/letsencrypt/live/pablomh.es/luffy.key
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Quedando luffy de la siguiente forma:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">ls</span> <span class="nt">-l</span> /etc/letsencrypt/live/pablomh.es/
 total 20
-<span class="nt">-rw-r--r--</span> 1 root root    29 Jan  9 07:51 kk.txt
-drwx------ 1 root root 16384 Jan  9 07:48 lost+found
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">cat </span>sshfs/kk.txt 
-Buenas tardes por la mañana
+<span class="nt">-rw-r--r--</span> 1 root systemd-journal-remote 6525 Jan 22 08:02 combined.pem
+<span class="nt">-rw-r-----</span> 1 root systemd-journal-remote 4821 Jan 22 07:27 luffy.crt
+<span class="nt">-rw-r-----</span> 1 root systemd-journal-remote 1704 Jan 22 07:24 luffy.key
 </pre></td></tr></tbody></table></code></div></div>
 
-<h2 id="ejercicio-4"><span class="me-2">Ejercicio 4</span><a href="#ejercicio-4" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>Ahora, en las demás máquinas realizamos lo requerido para que queden las máquinas de la siguiente forma:</p>
 
-<p>Vamos a configurar una unidad de automontaje adicional que trabajará en conjunto con la unidad <code class="language-plaintext highlighter-rouge">.mount</code> creada anteriormente. En esta nueva unidad de automontaje, definiremos la unidad de montaje previamente configurada, el punto de montaje que utilizaremos y un tiempo de inactividad (en segundos) tras el cual se desmontará automáticamente si no hay actividad. Esto permitirá que el sistema gestione el montaje de forma dinámica.</p>
+<p>Zoro:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /etc/letsencrypt/live/zoro.pablomh.es/
+total 16
+<span class="nt">-rw-r-----</span><span class="nb">.</span> 1 systemd-journal-upload systemd-journal-upload 1285 Jan 21 12:54 ca.crt
+<span class="nt">-rw-r-----</span><span class="nb">.</span> 1 systemd-journal-upload systemd-journal-upload 4815 Jan 22 07:28 zoro.crt
+<span class="nt">-rw-r-----</span><span class="nb">.</span> 1 systemd-journal-upload systemd-journal-upload 1704 Jan 21 13:01 zoro.key
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Sanji:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>pablo@sanji:~<span class="nv">$ </span><span class="nb">sudo ls</span> <span class="nt">-l</span> /etc/letsencrypt/live/sanji.pablomh.es/
+total 16
+<span class="nt">-rw-r-----</span> 1 systemd-journal-upload systemd-journal-upload 1285 Jan 21 12:54 ca.crt
+<span class="nt">-rw-r-----</span> 1 systemd-journal-upload systemd-journal-upload 4821 Jan 22 07:28 sanji.crt
+<span class="nt">-rw-r-----</span> 1 systemd-journal-upload systemd-journal-upload 1708 Jan 21 13:05 sanji.key
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Nami:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>pablo@nami:~<span class="nv">$ </span><span class="nb">sudo ls</span> <span class="nt">-l</span> /etc/letsencrypt/live/nami.pablomh.es/
+total 16
+<span class="nt">-rw-r-----</span> 1 systemd-journal-upload systemd-journal-upload 1285 Jan 21 12:54 ca.crt
+<span class="nt">-rw-r-----</span> 1 systemd-journal-upload systemd-journal-upload 4815 Jan 22 07:28 nami.crt
+<span class="nt">-rw-r-----</span> 1 systemd-journal-upload systemd-journal-upload 1704 Jan 21 13:04 nami.key
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Aunque he empleado el directorio destinado a los certificados de Let’s Encrypt, no ha sido posible utilizarlos debido a la falta de control sobre el dominio gonzalonazareno.org. Por esta razón, los certificados fueron generados manualmente con anterioridad. Es importante destacar que la ubicación donde se almacenen no es relevante, siempre y cuando se configuren con los permisos adecuados.</p>
+
+<h2 id="configuración-del-servidor"><span class="me-2">Configuración del servidor</span><a href="#configuración-del-servidor" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Ya solamente nos quedaría indicar la configuración del servicio, donde tendremos que cambiar las rutas correspondientes a nuestros ficheros:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1515,18 +1407,16 @@ Buenas tardes por la mañana
 5
 6
 7
-8
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">cat</span> /etc/systemd/system/home-debian-sshfs.automount
-<span class="o">[</span>Unit]
-<span class="nv">Description</span><span class="o">=</span>Montaje sistema de archivos remoto
-<span class="nv">Requires</span><span class="o">=</span>home-debian-sshfs.mount
-
-<span class="o">[</span>Automount]
-<span class="nv">Where</span><span class="o">=</span>/home/debian/sshfs
-<span class="nv">TimeoutIdleSec</span><span class="o">=</span>1000
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo cat</span> /etc/systemd/journal-remote.conf
+<span class="o">[</span>Remote]
+<span class="nv">Seal</span><span class="o">=</span><span class="nb">false
+</span><span class="nv">SplitMode</span><span class="o">=</span>host
+<span class="nv">ServerKeyFile</span><span class="o">=</span>/etc/letsencrypt/live/pablomh.es/luffy.key
+<span class="nv">ServerCertificateFile</span><span class="o">=</span>/etc/letsencrypt/live/pablomh.es/luffy.crt
+<span class="nv">TrustedCertificateFile</span><span class="o">=</span>/etc/letsencrypt/live/pablomh.es/combined.pem
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Reiniciamos los cambios e iniciamos la unidad que acabamos de crear.</p>
+<p>Una vez configurado, reiniciamos el servicio y comprobamos que se haya levantado:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1545,26 +1435,44 @@ Buenas tardes por la mañana
 13
 14
 15
-16
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>home-debian-sshfs.automount
-The unit files have no installation config <span class="o">(</span><span class="nv">WantedBy</span><span class="o">=</span>, <span class="nv">RequiredBy</span><span class="o">=</span>, <span class="nv">Also</span><span class="o">=</span>,
-<span class="nv">Alias</span><span class="o">=</span> settings <span class="k">in </span>the <span class="o">[</span>Install] section, and <span class="nv">DefaultInstance</span><span class="o">=</span> <span class="k">for </span>template
-units<span class="o">)</span><span class="nb">.</span> This means they are not meant to be enabled using systemctl.
- 
-Possible reasons <span class="k">for </span>having this kind of units are:
-• A unit may be statically enabled by being symlinked from another unit<span class="s1">'s
-  .wants/ or .requires/ directory.
-• A unit'</span>s purpose may be to act as a helper <span class="k">for </span>some other unit which has
-  a requirement dependency on it.
-• A unit may be started when needed via activation <span class="o">(</span>socket, path, timer,
-  D-Bus, udev, scripted systemctl call, ...<span class="o">)</span><span class="nb">.</span>
-• In <span class="k">case</span> of template units, the unit is meant to be enabled with some
-  instance name specified.
-debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl start home-debian-sshfs.automount
+</pre></td><td class="rouge-code"><pre>pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl restart systemd-journal-remote.service
+pablo@luffy:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl status systemd-journal-remote.service
+● systemd-journal-remote.service - Journal Remote Sink Service
+     Loaded: loaded <span class="o">(</span>/lib/systemd/system/systemd-journal-remote.service<span class="p">;</span> indirect<span class="p">;</span> preset: disabled<span class="o">)</span>
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Wed 2025-01-22 08:18:34 UTC<span class="p">;</span> 3s ago
+TriggeredBy: ● systemd-journal-remote.socket
+       Docs: man:systemd-journal-remote<span class="o">(</span>8<span class="o">)</span>
+             man:journal-remote.conf<span class="o">(</span>5<span class="o">)</span>
+   Main PID: 40106 <span class="o">(</span>systemd-journal<span class="o">)</span>
+     Status: <span class="s2">"Processing requests..."</span>
+      Tasks: 1 <span class="o">(</span>limit: 2314<span class="o">)</span>
+     Memory: 2.0M
+        CPU: 78ms
+     CGroup: /system.slice/systemd-journal-remote.service
+             └─40106 /lib/systemd/systemd-journal-remote <span class="nt">--listen-https</span><span class="o">=</span><span class="nt">-3</span> <span class="nt">--output</span><span class="o">=</span>/var/log/journal/remote/
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Comprobamos de nuevo el montaje:</p>
+<h2 id="configuración-del-cliente"><span class="me-2">Configuración del cliente</span><a href="#configuración-del-cliente" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Lo que se debe hacer es agregar los archivos necesarios para la configuración, incluyendo tu clave privada y el certificado que te corresponde, así como el certificado de la Autoridad Certificadora (CA) que utilizaste para generar esos archivos.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span><span class="nb">sudo cat</span> /etc/systemd/journal-upload.conf 
+<span class="o">[</span>Upload]
+<span class="nv">URL</span><span class="o">=</span>https://luffy.pablo.gonzalonazareno.org:19532
+<span class="nv">ServerKeyFile</span><span class="o">=</span>/etc/letsencrypt/live/zoro.pablomh.es/luffy.key
+<span class="nv">ServerCertificateFile</span><span class="o">=</span>/etc/letsencrypt/live/zoro.pablomh.es/luffy.crt
+<span class="nv">TrustedCertificateFile</span><span class="o">=</span>/etc/letsencrypt/live/zoro.pablomh.es/ca.crt
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Reiniciamos el servicio y comprobamos el estado:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1579,20 +1487,30 @@ debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>sy
 9
 10
 11
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
-Filesystem               Size  Used Avail Use% Mounted on
-udev                     462M     0  462M   0% /dev
-tmpfs                     97M  500K   96M   1% /run
-/dev/vda1                9.7G  1.2G  8.1G  13% /
-tmpfs                    481M     0  481M   0% /dev/shm
-tmpfs                    5.0M     0  5.0M   0% /run/lock
-/dev/vda15               124M   12M  113M  10% /boot/efi
-debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /mnt/sshfs
-tmpfs                     97M     0   97M   0% /run/user/1000
-debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /home/debian/sshfs
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span><span class="nb">sudo </span>systemctl restart systemd-journal-upload.service
+<span class="o">[</span>pablo@zoro ~]<span class="nv">$ </span><span class="nb">sudo </span>systemctl status systemd-journal-upload.service
+● systemd-journal-upload.service - Journal Remote Upload Service
+     Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/systemd-journal-upload.service<span class="p">;</span> enabled<span class="p">;</span> preset: disabled<span class="o">)</span>
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Wed 2025-01-22 09:44:31 UTC<span class="p">;</span> 3s ago
+       Docs: man:systemd-journal-upload<span class="o">(</span>8<span class="o">)</span>
+   Main PID: 2251 <span class="o">(</span>systemd-journal<span class="o">)</span>
+     Status: <span class="s2">"Processing input..."</span>
+      Tasks: 1 <span class="o">(</span>limit: 10890<span class="o">)</span>
+     Memory: 4.2M
+        CPU: 71ms
+     CGroup: /system.slice/systemd-journal-upload.service
+             └─2251 /usr/lib/systemd/systemd-journal-upload <span class="nt">--save-state</span>
+
+Jan 22 09:44:31 zoro systemd[1]: Started Journal Remote Upload Service.
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Y verificamos de nuevo que estén los ficheros:</p>
+<h2 id="comprobación-de-funcionamiento"><span class="me-2">Comprobación de funcionamiento</span><a href="#comprobación-de-funcionamiento" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Una vez que ambos servicios estén en funcionamiento, se almacenará en el servidor un archivo que contendrá los registros (logs) generados por el cliente.</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1600,10 +1518,25 @@ debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /home/debian/sshfs
 2
 3
 4
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> sshfs/
-total 20
-<span class="nt">-rw-r--r--</span> 1 root root    29 Jan  9 07:51 kk.txt
-drwx------ 1 root root 16384 Jan  9 07:48 lost+found
+5
+</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">sudo ls</span> <span class="nt">-la</span> /var/log/journal/remote/
+total 16396
+drwxr-xr-x  2 systemd-journal-remote systemd-journal-remote     4096 Jan 22 09:35 <span class="nb">.</span>
+drwxr-sr-x+ 4 root                   systemd-journal            4096 Jan 22 08:18 ..
+<span class="nt">-rw-r-----</span>  1 systemd-journal-remote systemd-journal-remote 16777216 Jan 22 09:39 remote-172.16.0.200.journal
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Podemos ver los logs de los diferentes servicios, por ejemplo realizaremos el filtro por httpd:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">sudo </span>journalctl <span class="nt">-u</span> httpd <span class="nt">--file</span><span class="o">=</span>/var/log/journal/remote/remote-172.16.0.200.journal
+Jan 22 09:42:27 zoro systemd[1]: Starting The Apache HTTP Server...
+Jan 22 09:42:27 zoro httpd[2021]: Server configured, listening on: port 80
+Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
 </pre></td></tr></tbody></table></code></div></div>
 
   </div>
@@ -1615,7 +1548,7 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <i class="far fa-folder-open fa-fw me-1"></i>
         
           <a href="/categories/sistemas/">Sistemas</a>,
-          <a href="/categories/systemd/">Systemd</a>
+          <a href="/categories/monitoreo-y-gesti%C3%B3n-de-logs/">Monitoreo y Gestión de Logs</a>
       </div>
     
 
@@ -1625,9 +1558,9 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/systemd/"
+            href="/tags/monitoreo-y-gesti%C3%B3n-de-logs/"
             class="post-tag no-text-decoration"
-          >Systemd</a>
+          >Monitoreo y Gestión de Logs</a>
         
       </div>
     
@@ -1663,21 +1596,21 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=systemd/sshfs%20-%20Blog%20personal&url=%2Fposts%2Fsystemd%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=Recolecci%C3%B3n%20centralizada%20de%20logs%20de%20sistema,%20mediante%20journald%20-%20Blog%20personal&url=%2Fposts%2Fjournald%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=systemd/sshfs%20-%20Blog%20personal&u=%2Fposts%2Fsystemd%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Recolecci%C3%B3n%20centralizada%20de%20logs%20de%20sistema,%20mediante%20journald%20-%20Blog%20personal&u=%2Fposts%2Fjournald%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=%2Fposts%2Fsystemd%2F&text=systemd/sshfs%20-%20Blog%20personal" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=%2Fposts%2Fjournald%2F&text=Recolecci%C3%B3n%20centralizada%20de%20logs%20de%20sistema,%20mediante%20journald%20-%20Blog%20personal" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -2198,31 +2131,31 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
 
@@ -2266,7 +2199,7 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         </article>
       
         <article class="col">
-          <a href="/posts/journald/" class="post-preview card h-100">
+          <a href="/posts/systemd/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -2278,16 +2211,16 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
 
 <time
   
-  data-ts="1737464400"
+  data-ts="1734629400"
   data-df="ll"
   
 >
-  Jan 21, 2025
+  Dec 19, 2024
 </time>
 
-              <h4 class="pt-0 my-2">Recolección centralizada de logs de sistema, mediante journald</h4>
+              <h4 class="pt-0 my-2">systemd/sshfs</h4>
               <div class="text-muted">
-                <p>En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistem...</p>
+                <p>Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando u...</p>
               </div>
             </div>
           </a>
@@ -2336,22 +2269,18 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
 
   
     <a
-      href="/posts/certificado/"
+      href="/posts/systemd-boot/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>Certificados digitales. HTTPS</p>
+      <p>Systemd-Boot</p>
     </a>
   
 
   
-    <a
-      href="/posts/systemd-boot/"
-      class="btn btn-outline-primary"
-      aria-label="Newer"
-    >
-      <p>Systemd-Boot</p>
-    </a>
+    <div class="btn btn-outline-primary disabled" aria-label="Newer">
+      <p>-</p>
+    </div>
   
 </nav>
 

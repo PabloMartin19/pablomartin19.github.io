@@ -3745,6 +3745,13 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/journald/">Recolección centralizada de logs de sistema, mediante journald</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/certificado/">Certificados digitales. HTTPS</a>
         </li>
       
@@ -3767,13 +3774,6 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
         
         <li class="text-truncate lh-lg">
           <a href="/posts/systemd-boot/">Systemd-Boot</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/systemd/">systemd/sshfs</a>
         </li>
       
     </ul>
@@ -3861,10 +3861,6 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
     
-      
-        
-        
-
   
     
     
@@ -3874,13 +3870,6 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -3903,23 +3892,9 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -3970,6 +3945,36 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -4017,6 +4022,62 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
     
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -4065,6 +4126,9 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/instalaci%C3%B3n/">Instalación</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/monitoreo-y-gesti%C3%B3n-de-logs/">Monitoreo y Gestión de Logs</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>
@@ -4160,6 +4224,18 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -4203,6 +4279,34 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
         </article>
       
         <article class="col">
+          <a href="/posts/journald/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1737464400"
+  data-df="ll"
+  
+>
+  Jan 21, 2025
+</time>
+
+              <h4 class="pt-0 my-2">Recolección centralizada de logs de sistema, mediante journald</h4>
+              <div class="text-muted">
+                <p>En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistem...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
           <a href="/posts/comandos-programacion/" class="post-preview card h-100">
             <div class="card-body">
               <!--
@@ -4225,34 +4329,6 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
               <h4 class="pt-0 my-2">Comandos para programación de tareas</h4>
               <div class="text-muted">
                 <p>Explora los comandos esenciales para programar tareas en Linux. Aprende a automatizar procesos y optimizar tu flujo de trabajo en el sistema operativo, asegurando que las tareas críticas se realice...</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/dual-boot/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1725278940"
-  data-df="ll"
-  
->
-  Sep  2, 2024
-</time>
-
-              <h4 class="pt-0 my-2">Creación de máquina virtual en VirtualBox con arranque dual</h4>
-              <div class="text-muted">
-                <p>Creación de una máquina virtual en VirtualBox con arranque dual que permita ejecutar dos sistemas operativos: Windows y Debian Bookworm.</p>
               </div>
             </div>
           </a>
@@ -4282,9 +4358,13 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="Newer">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/journald/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>Recolección centralizada de logs de sistema, mediante journald</p>
+    </a>
   
 </nav>
 
@@ -4419,10 +4499,6 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
     
-      
-        
-        
-
   
     
     
@@ -4432,13 +4508,6 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4461,23 +4530,9 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4528,6 +4583,36 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -4575,6 +4660,62 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
     
     
     
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -4623,6 +4764,9 @@ Skipping <span class="s2">"/boot/efi/EFI/BOOT/BOOTX64.EFI"</span>, since same bo
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/instalaci%C3%B3n/">Instalación</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/monitoreo-y-gesti%C3%B3n-de-logs/">Monitoreo y Gestión de Logs</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>

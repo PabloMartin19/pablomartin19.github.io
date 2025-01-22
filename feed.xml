@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-17T19:29:10+01:00</updated>
+  <updated>2025-01-22T10:46:17+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Recolección centralizada de logs de sistema, mediante journald</title>
+    <link href="/posts/journald/" rel="alternate" type="text/html" title="Recolección centralizada de logs de sistema, mediante journald" />
+    <published>2025-01-21T14:00:00+01:00</published>
+  
+    <updated>2025-01-21T14:00:00+01:00</updated>
+  
+    <id>/posts/journald/</id>
+    <content src="/posts/journald/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Sistemas" />
+    
+    <category term="Monitoreo y Gestión de Logs" />
+    
+  
+
+  <summary>En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegu...</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>En esta práctica trabajaremos con firmas electrónicas, integridad de ficheros y autenticación.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Cifrado asimétrico con gpg y openssl</title>
-    <link href="/posts/gpg-openssl/" rel="alternate" type="text/html" title="Cifrado asimétrico con gpg y openssl" />
-    <published>2024-12-12T21:15:00+01:00</published>
-  
-    <updated>2024-12-13T09:08:49+01:00</updated>
-  
-    <id>/posts/gpg-openssl/</id>
-    <content src="/posts/gpg-openssl/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Seguridad" />
-    
-    <category term="Criptografía" />
-    
-  
-
-  <summary>En esta práctica vamos a cifrar ficheros utilizando cifrado asimétrico utilizando el programa gpg.</summary>
 
   </entry>
 

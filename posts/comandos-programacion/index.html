@@ -2788,6 +2788,13 @@ trabajo y la eficiencia del sistema.</p>
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/journald/">Recolección centralizada de logs de sistema, mediante journald</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/certificado/">Certificados digitales. HTTPS</a>
         </li>
       
@@ -2810,13 +2817,6 @@ trabajo y la eficiencia del sistema.</p>
         
         <li class="text-truncate lh-lg">
           <a href="/posts/systemd-boot/">Systemd-Boot</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/systemd/">systemd/sshfs</a>
         </li>
       
     </ul>
@@ -2904,10 +2904,6 @@ trabajo y la eficiencia del sistema.</p>
     
     
     
-      
-        
-        
-
   
     
     
@@ -2917,13 +2913,6 @@ trabajo y la eficiencia del sistema.</p>
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2946,23 +2935,9 @@ trabajo y la eficiencia del sistema.</p>
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -3013,6 +2988,36 @@ trabajo y la eficiencia del sistema.</p>
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -3060,6 +3065,62 @@ trabajo y la eficiencia del sistema.</p>
     
     
     
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -3108,6 +3169,9 @@ trabajo y la eficiencia del sistema.</p>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/instalaci%C3%B3n/">Instalación</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/monitoreo-y-gesti%C3%B3n-de-logs/">Monitoreo y Gestión de Logs</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>
@@ -3203,6 +3267,18 @@ trabajo y la eficiencia del sistema.</p>
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -3216,6 +3292,34 @@ trabajo y la eficiencia del sistema.</p>
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">Further Reading</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/journald/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1737464400"
+  data-df="ll"
+  
+>
+  Jan 21, 2025
+</time>
+
+              <h4 class="pt-0 my-2">Recolección centralizada de logs de sistema, mediante journald</h4>
+              <div class="text-muted">
+                <p>En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistem...</p>
+              </div>
+            </div>
+          </a>
+        </article>
       
         <article class="col">
           <a href="/posts/systemd-boot/" class="post-preview card h-100">
@@ -3268,34 +3372,6 @@ trabajo y la eficiencia del sistema.</p>
               <h4 class="pt-0 my-2">systemd/sshfs</h4>
               <div class="text-muted">
                 <p>Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando u...</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/dual-boot/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1725278940"
-  data-df="ll"
-  
->
-  Sep  2, 2024
-</time>
-
-              <h4 class="pt-0 my-2">Creación de máquina virtual en VirtualBox con arranque dual</h4>
-              <div class="text-muted">
-                <p>Creación de una máquina virtual en VirtualBox con arranque dual que permita ejecutar dos sistemas operativos: Windows y Debian Bookworm.</p>
               </div>
             </div>
           </a>
@@ -3466,10 +3542,6 @@ trabajo y la eficiencia del sistema.</p>
     
     
     
-      
-        
-        
-
   
     
     
@@ -3479,13 +3551,6 @@ trabajo y la eficiencia del sistema.</p>
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -3508,23 +3573,9 @@ trabajo y la eficiencia del sistema.</p>
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -3575,6 +3626,36 @@ trabajo y la eficiencia del sistema.</p>
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -3622,6 +3703,62 @@ trabajo y la eficiencia del sistema.</p>
     
     
     
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -3670,6 +3807,9 @@ trabajo y la eficiencia del sistema.</p>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/instalaci%C3%B3n/">Instalación</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/monitoreo-y-gesti%C3%B3n-de-logs/">Monitoreo y Gestión de Logs</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>
