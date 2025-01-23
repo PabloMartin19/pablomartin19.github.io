@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-22T10:55:19+01:00</updated>
+  <updated>2025-01-23T13:03:59+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -20,11 +20,37 @@
 
   
   <entry>
+    <title>VPN de acceso remoto con OpenVPN y certificados x509</title>
+    <link href="/posts/acceso_remoto_openvpn/" rel="alternate" type="text/html" title="VPN de acceso remoto con OpenVPN y certificados x509" />
+    <published>2025-01-23T13:00:00+01:00</published>
+  
+    <updated>2025-01-23T13:00:00+01:00</updated>
+  
+    <id>/posts/acceso_remoto_openvpn/</id>
+    <content src="/posts/acceso_remoto_openvpn/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="VPN" />
+    
+  
+
+  <summary>....</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>Recolección centralizada de logs de sistema, mediante journald</title>
     <link href="/posts/journald/" rel="alternate" type="text/html" title="Recolección centralizada de logs de sistema, mediante journald" />
     <published>2025-01-21T14:00:00+01:00</published>
   
-    <updated>2025-01-21T14:00:00+01:00</updated>
+    <updated>2025-01-23T13:03:58+01:00</updated>
   
     <id>/posts/journald/</id>
     <content src="/posts/journald/" />
@@ -119,32 +145,6 @@
   
 
   <summary>En esta práctica vamos a trabajar con certificados digitales para autenticarnos, firmar documentos y securizar una página web con HTTPS. Primero, instalaremos un certificado digital de persona física en nuestro navegador y aprenderemos a hacer copias de seguridad. Luego, validaremos el certificado con Autofirma y la plataforma VALIDe. También utilizaremos nuestra firma digital para firmar y ver...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Integridad, firmas y autenticación</title>
-    <link href="/posts/integridad/" rel="alternate" type="text/html" title="Integridad, firmas y autenticación" />
-    <published>2024-12-19T18:30:00+01:00</published>
-  
-    <updated>2025-01-17T19:07:35+01:00</updated>
-  
-    <id>/posts/integridad/</id>
-    <content src="/posts/integridad/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Seguridad" />
-    
-    <category term="Criptografía" />
-    
-  
-
-  <summary>En esta práctica trabajaremos con firmas electrónicas, integridad de ficheros y autenticación.</summary>
 
   </entry>
 

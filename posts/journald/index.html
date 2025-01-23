@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-21T14:00:00+01:00","datePublished":"2025-01-21T14:00:00+01:00","description":"En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura.","headline":"Recolección centralizada de logs de sistema, mediante journald","image":"/assets/img/posts/journald/portada.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/journald/"},"url":"/posts/journald/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-23T13:03:58+01:00","datePublished":"2025-01-21T14:00:00+01:00","description":"En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura.","headline":"Recolección centralizada de logs de sistema, mediante journald","image":"/assets/img/posts/journald/portada.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/journald/"},"url":"/posts/journald/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -763,6 +763,29 @@
 
       <!-- lastmod date -->
       
+        <span>
+          Updated
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1737633838"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Jan 23, 2025
+</time>
+
+        </span>
+      
 
       
         
@@ -871,9 +894,9 @@ Created symlink /etc/systemd/system/multi-user.target.wants/systemd-journal-uplo
 
 <h2 id="generación-de-claves-y-certificados"><span class="me-2">Generación de claves y certificados</span><a href="#generación-de-claves-y-certificados" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Dado que utilizaremos el servicio con cifrado para asegurar que nuestros registros estén protegidos, procederemos a generar los certificados utilizando OpenSSL. Aunque podemos generar los certificados manualmente, existe una herramienta llamada Easy RSA que facilita este proceso de forma automatizada. Yo me encargaré de generar todos los certificados en Odin y luego los transferiré a las máquinas correspondientes.</p>
+<p>Dado que utilizaremos el servicio con cifrado para asegurar que nuestros registros estén protegidos, procederemos a generar los certificados utilizando OpenSSL. Aunque podemos generar los certificados manualmente, existe una herramienta llamada Easy RSA que facilita este proceso de forma automatizada. Yo me encargaré de generar todos los certificados en Luffy y luego los transferiré a las máquinas correspondientes.</p>
 
-<p>Para comenzar, en Odin ejecutaremos el siguiente comando para instalar Easy RSA y OpenSSL:</p>
+<p>Para comenzar, en Luffy ejecutaremos el siguiente comando para instalar Easy RSA y OpenSSL:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1672,6 +1695,13 @@ Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/acceso_remoto_openvpn/">VPN de acceso remoto con OpenVPN y certificados x509</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/certificado/">Certificados digitales. HTTPS</a>
         </li>
       
@@ -1687,13 +1717,6 @@ Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
         
         <li class="text-truncate lh-lg">
           <a href="/posts/openstack/">Escenario en OpenStack</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/systemd-boot/">Systemd-Boot</a>
         </li>
       
     </ul>
@@ -2020,6 +2043,74 @@ Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
         
         
 
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
 
 
   <section>
@@ -2052,6 +2143,9 @@ Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/vpn/">VPN</a>
       
     </div>
   </section>
@@ -2278,9 +2372,13 @@ Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="Newer">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/acceso_remoto_openvpn/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>VPN de acceso remoto con OpenVPN y certificados x509</p>
+    </a>
   
 </nav>
 
@@ -2654,6 +2752,74 @@ Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
         
         
 
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
 
 
   <section>
@@ -2686,6 +2852,9 @@ Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/vpn/">VPN</a>
       
     </div>
   </section>
