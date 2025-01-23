@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-23T13:03:58+01:00","datePublished":"2025-01-21T14:00:00+01:00","description":"En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura.","headline":"Recolección centralizada de logs de sistema, mediante journald","image":"/assets/img/posts/journald/portada.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/journald/"},"url":"/posts/journald/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-23T13:05:44+01:00","datePublished":"2025-01-21T14:00:00+01:00","description":"En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegurando que puedas realizar un monitoreo efectivo y mantener un control detallado de tu infraestructura.","headline":"Recolección centralizada de logs de sistema, mediante journald","image":"/assets/img/posts/journald/portada.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/journald/"},"url":"/posts/journald/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -775,7 +775,7 @@
 
 <time
   
-  data-ts="1737633838"
+  data-ts="1737633944"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -840,7 +840,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="2465 words"
+  title="2463 words"
 >
   <em>13 min</em> read</span>
 
@@ -1542,7 +1542,7 @@ Jan 22 09:44:31 zoro systemd[1]: Started Journal Remote Upload Service.
 3
 4
 5
-</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">sudo ls</span> <span class="nt">-la</span> /var/log/journal/remote/
+</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">ls</span> <span class="nt">-la</span> /var/log/journal/remote/
 total 16396
 drwxr-xr-x  2 systemd-journal-remote systemd-journal-remote     4096 Jan 22 09:35 <span class="nb">.</span>
 drwxr-sr-x+ 4 root                   systemd-journal            4096 Jan 22 08:18 ..
@@ -1556,7 +1556,7 @@ drwxr-sr-x+ 4 root                   systemd-journal            4096 Jan 22 08:1
 2
 3
 4
-</pre></td><td class="rouge-code"><pre>root@luffy:~# <span class="nb">sudo </span>journalctl <span class="nt">-u</span> httpd <span class="nt">--file</span><span class="o">=</span>/var/log/journal/remote/remote-172.16.0.200.journal
+</pre></td><td class="rouge-code"><pre>root@luffy:~# journalctl <span class="nt">-u</span> httpd <span class="nt">--file</span><span class="o">=</span>/var/log/journal/remote/remote-172.16.0.200.journal
 Jan 22 09:42:27 zoro systemd[1]: Starting The Apache HTTP Server...
 Jan 22 09:42:27 zoro httpd[2021]: Server configured, listening on: port 80
 Jan 22 09:42:27 zoro systemd[1]: Started The Apache HTTP Server.
