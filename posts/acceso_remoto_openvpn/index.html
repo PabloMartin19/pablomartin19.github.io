@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-23T13:00:00+01:00","datePublished":"2025-01-23T13:00:00+01:00","description":"….","headline":"VPN de acceso remoto con OpenVPN y certificados x509","image":"/assets/img/posts/vpn/portada1.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/acceso_remoto_openvpn/"},"url":"/posts/acceso_remoto_openvpn/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-24T11:25:31+01:00","datePublished":"2025-01-23T13:00:00+01:00","description":"….","headline":"VPN de acceso remoto con OpenVPN y certificados x509","image":"/assets/img/posts/vpn/portada1.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/acceso_remoto_openvpn/"},"url":"/posts/acceso_remoto_openvpn/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -601,6 +601,69 @@
     <!-- combine -->
     
   
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
 
   
 
@@ -618,6 +681,49 @@
   
   
 
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
   
 
   
@@ -677,6 +783,29 @@
 
       <!-- lastmod date -->
       
+        <span>
+          Updated
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1737714331"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Jan 24, 2025
+</time>
+
+        </span>
+      
 
       
         
@@ -731,9 +860,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="0 words"
+  title="2919 words"
 >
-  <em>1 min</em> read</span>
+  <em>16 min</em> read</span>
 
         </div>
       </div>
@@ -741,7 +870,844 @@
   </header>
 
   <div class="content">
-    
+    <p>Configura una conexión VPN de acceso remoto entre dos equipos del cloud:</p>
+
+<ul>
+  <li>Uno de los dos equipos (el que actuará como servidor) estará conectado a dos redes
+    <ul>
+      <li>Para la autenticación de los extremos se usarán obligatoriamente certificados digitales, que se generarán utilizando openssl y se almacenarán en el directorio /etc/openvpn, junto con  los parámetros Diffie-Helman y el certificado de la propia Autoridad de Certificación.</li>
+      <li>Se utilizarán direcciones de la red 10.99.99.0/24 para las direcciones virtuales de la VPN. La dirección 10.99.99.1 se asignará al servidor VPN.</li>
+      <li>Los ficheros de configuración del servidor y del cliente se crearán en el directorio /etc/openvpn de cada máquina, y se llamarán servidor.conf y cliente.conf respectivamente.</li>
+      <li>Tras el establecimiento de la VPN, la máquina cliente debe ser capaz de acceder a una máquina que esté en la otra red a la que está conectado el servidor.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="escenario"><span class="me-2">Escenario</span><a href="#escenario" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Montaremos el pequeño escenario en GNS3 con tres máquinas Debian 12 y una nube NAT que nos proporcionará Internet para instalaciones necesarias:</p>
+
+<ul>
+  <li>
+    <p><strong>Servidor</strong>: contará con tres interfaces, <code class="language-plaintext highlighter-rouge">ens4</code> que conectará con <strong>Cliente1</strong> en la red 192.168.1.0/24, la interfaz <code class="language-plaintext highlighter-rouge">ens5</code> que conectará con <strong>Cliente2</strong> en la red 192.168.2.0/24 y la interfaz <code class="language-plaintext highlighter-rouge">ens6</code> que estará conectada a la nube NAT.</p>
+  </li>
+  <li>
+    <p><strong>Cliente1</strong>: conectado a la red 192.168.1.0/24 a través de la interfaz <code class="language-plaintext highlighter-rouge">ens4</code>.</p>
+  </li>
+  <li>
+    <p><strong>Cliente2</strong>: conectado a la red 192.168.2.0/24 a través de la interfaz <code class="language-plaintext highlighter-rouge">ens4</code>.</p>
+  </li>
+  <li>
+    <p><strong>NAT</strong>: conectada al <strong>Servidor</strong>.</p>
+  </li>
+</ul>
+
+<p>Quedando de la siguiente forma:</p>
+
+<p><a href="/assets/img/posts/vpn/image1.png" class="popup img-link  shimmer"><img src="/assets/img/posts/vpn/image1.png" alt="image" loading="lazy"></a></p>
+
+<h2 id="configuración-del-servidor"><span class="me-2">Configuración del servidor</span><a href="#configuración-del-servidor" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Para configurar el servidor OpenVPN, lo primero que debemos hacer es asegurarnos de que las interfaces de red están activas para tener conexión a Internet. Esto es fundamental, ya que necesitaremos instalar el paquete <strong>openvpn</strong> en nuestro sistema. Para ello, ejecutamos los siguientes comandos en la terminal:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">sudo </span>apt update
+debian@servidor:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>openvpn <span class="nt">-y</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Una vez instalado OpenVPN, es necesario habilitar el reenvío de paquetes en el sistema para permitir que el tráfico fluya correctamente a través de la VPN. Esto se hace modificando el archivo de configuración del kernel <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>. Para aplicar el cambio inmediatamente, ejecutamos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">sudo </span>sysctl <span class="nt">-p</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este comando verificará y aplicará la configuración, asegurando que el tráfico IP pueda ser reenviado entre las interfaces de red. La salida del comando debería incluir la siguiente línea:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>net.ipv4.ip_forward <span class="o">=</span> 1
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Ahora procederemos a copiar los archivos de configuración de easy-rsa desde su ubicación predeterminada en <code class="language-plaintext highlighter-rouge">/usr/share/easy-rsa</code> al directorio de configuración de OpenVPN en <code class="language-plaintext highlighter-rouge">/etc/openvpn</code>. Este paso es importante porque nos aseguramos de que futuras actualizaciones del paquete no sobrescriban nuestros archivos personalizados:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-r</span> /usr/share/easy-rsa /etc/openvpn
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Podemos verificar que la copia se ha realizado correctamente listando el contenido del directorio <code class="language-plaintext highlighter-rouge">/etc/openvpn</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /etc/openvpn/
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Lo que nos devolverá algo similar a:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="code-header">
+        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="s">total </span><span class="m">16</span>
+<span class="s">drwxr-xr-x 2 root root 4096 Nov 11  2023 client</span>
+<span class="s">drwxr-xr-x 3 root root 4096 Jan 23 18:28 easy-rsa</span>
+<span class="s">drwxr-xr-x 2 root root 4096 Nov 11  2023 server</span>
+<span class="s">-rwxr-xr-x 1 root root 1468 Nov 11  2023 update-resolv-conf</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>A partir de este momento, trabajaremos dentro del directorio <code class="language-plaintext highlighter-rouge">/etc/openvpn/easy-rsa</code>, ya que este será el entorno donde generaremos los certificados y claves necesarios para nuestra infraestructura de clave pública (PKI).</p>
+
+<p>EasyRSA es una herramienta de línea de comandos diseñada para simplificar la creación y gestión de una PKI (Infraestructura de Clave Pública) utilizada en OpenVPN. También nos permite generar parámetros de <strong>Diffie-Hellman</strong>, que son esenciales para establecer un canal seguro de comunicación en OpenVPN.</p>
+
+<p>El siguiente paso en la configuración será inicializar la infraestructura PKI dentro del directorio de trabajo. Para ello, ejecutamos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">cd</span> /etc/openvpn/easy-rsa/
+debian@servidor:/etc/openvpn/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa init-pki
+<span class="k">*</span> Notice:
+
+  init-pki <span class="nb">complete</span><span class="p">;</span> you may now create a CA or requests.
+
+  Your newly created PKI <span class="nb">dir </span>is:
+  <span class="k">*</span> /etc/openvpn/easy-rsa/pki
+
+<span class="k">*</span> Notice:
+  IMPORTANT: Easy-RSA <span class="s1">'vars'</span> file has now been moved to your PKI above.
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este comando creará la estructura de archivos y directorios necesaria para la gestión de certificados en OpenVPN.</p>
+
+<p>El siguiente paso en la configuración de OpenVPN es la creación de una Autoridad Certificadora (CA, por sus siglas en inglés). La CA es responsable de firmar los certificados de los clientes y del servidor, asegurando la autenticidad de las conexiones dentro de la VPN.</p>
+
+<p>Para iniciar este proceso, ejecutamos el siguiente comando dentro del directorio <code class="language-plaintext highlighter-rouge">/etc/openvpn/easy-rsa</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre>debian@servidor:/etc/openvpn/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa build-ca
+<span class="k">*</span> Notice:
+Using Easy-RSA configuration from: /etc/openvpn/easy-rsa/pki/vars
+
+<span class="k">*</span> Notice:
+Using SSL: openssl OpenSSL 3.0.15 3 Sep 2024 <span class="o">(</span>Library: OpenSSL 3.0.15 3 Sep 2024<span class="o">)</span>
+
+
+Enter New CA Key Passphrase: 
+Re-Enter New CA Key Passphrase: 
+Using configuration from /etc/openvpn/easy-rsa/pki/563317df/temp.f856c430
+...+..+......+.+.........+.....+..........+..+....+...............+..............+......+....+.................+..........+...+.........+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>.....+.............+..+....+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>....+.....+...+...+....+..................+.....+.......+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+...+.+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>.+.........+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>...+..........+.....+.+.....+.........+.+.....+.+......+.....+.......+.....+...+..........+..............+....+...........+..........+...+........+...+......+...+......+......+.+...+..+.......+..+.........+...............+......+....+..+....+...+...........+.......+...+..+.........+...+...............+.+..+.........+.+.....+.............+..............+.+......+...+..+....+..+...+.+.....................+.........+.....+.+..+.+.....+.......+..............+......+...+................+.....+......+...+..........+..+.......+...+...+..............+...+...+............+....+...+..+.............+.....+...+..................+............+.......+...........+.......+..+...............+...+....+......+...+..............+.+......+........+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+<span class="nt">-----</span>
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter <span class="s1">'.'</span>, the field will be left blank.
+<span class="nt">-----</span>
+Common Name <span class="o">(</span>eg: your user, host, or server name<span class="o">)</span> <span class="o">[</span>Easy-RSA CA]:pavlo
+
+<span class="k">*</span> Notice:
+
+CA creation <span class="nb">complete </span>and you may now import and sign cert requests.
+Your new CA certificate file <span class="k">for </span>publishing is at:
+/etc/openvpn/easy-rsa/pki/ca.crt
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Durante el proceso de generación de la Autoridad Certificadora (CA), se nos pedirá establecer una frase de paso para proteger la clave privada. Esta contraseña será requerida cada vez que firmemos certificados nuevos. Como resultado del comando, se han generado dos archivos importantes:</p>
+
+<ul>
+  <li>
+    <p><strong>El certificado de la CA</strong>, ubicado en <code class="language-plaintext highlighter-rouge">/etc/openvpn/easy-rsa/pki/ca.crt</code>, el cual será compartido con los clientes y el servidor OpenVPN para validar la autenticidad de los certificados.</p>
+  </li>
+  <li>
+    <p><strong>La clave privada de la CA</strong>, almacenada en <code class="language-plaintext highlighter-rouge">/etc/openvpn/easy-rsa/pki/private/ca.key</code>, que debe mantenerse segura y no compartirse, ya que con ella se firman los certificados dentro de la infraestructura VPN.</p>
+  </li>
+</ul>
+
+<p>El siguiente paso en la configuración será la generación de los <strong>parámetros Diffie-Hellman (DH)</strong>, que OpenVPN utilizará en el proceso de establecimiento de sesión segura entre los nodos de la VPN.</p>
+
+<p>El intercambio de claves Diffie-Hellman es un protocolo criptográfico que permite a dos partes comunicarse de manera segura sobre un canal no confiable, acordando una clave de cifrado común sin necesidad de enviarla explícitamente. Esto proporciona una capa adicional de seguridad en el cifrado de la conexión VPN.</p>
+
+<p>Para generar el certificado y la clave del servidor OpenVPN, utilizamos el siguiente comando dentro del directorio de trabajo de EasyRSA:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td><td class="rouge-code"><pre>debian@servidor:/etc/openvpn/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa build-server-full server nopass
+<span class="k">*</span> Notice:
+Using Easy-RSA configuration from: /etc/openvpn/easy-rsa/pki/vars
+
+<span class="k">*</span> Notice:
+Using SSL: openssl OpenSSL 3.0.15 3 Sep 2024 <span class="o">(</span>Library: OpenSSL 3.0.15 3 Sep 2024<span class="o">)</span>
+
+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>..........+.+.....+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>..+..........+.....+.......+......+..............+......+....+...+...+...........+....+.........+........+...+....+..+......+.........+....+..+....+.....+...+...+....+...+.....+...+...+......+...+.......+.........+.....+.+...+.....+...+.......+...........+............+.............+......+...............+.....+...+.............+..+...+...+.+.....+.+.........+...+.................+....+..+.......+...........+.......+..+.+..+...+....+..................+..+...+....+......+..+..........+......+.....+......+...+.......+...+.....+.+.........+...+..+..........+.................+.+.......................+............+.......+...+...+...........+....+.....+.......+..+............+.........+.+...........+...+....+............+.....+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+........+...+.+......+............+.....+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>.+...+...+.........+....+.....+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<span class="k">*</span>.......+.....+.......+.....+...+.......+........+....+..+...............+..........+...+..+....+......+......+..............+....+.....+.+........+...+....+.....+...+...+...+....+...........................+...+..+...+......+.+...+......+.....+.......+..+...............+.+.....+.+...+..+.+..+...+.............+.................+....+...............+...+.....+.+..+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<span class="nt">-----</span>
+<span class="k">*</span> Notice:
+
+Keypair and certificate request completed. Your files are:
+req: /etc/openvpn/easy-rsa/pki/reqs/server.req
+key: /etc/openvpn/easy-rsa/pki/private/server.key
+
+
+You are about to sign the following certificate.
+Please check over the details shown below <span class="k">for </span>accuracy. Note that this request
+has not been cryptographically verified. Please be sure it came from a trusted
+<span class="nb">source </span>or that you have verified the request checksum with the sender.
+
+Request subject, to be signed as a server certificate <span class="k">for </span>825 days:
+
+<span class="nv">subject</span><span class="o">=</span>
+    commonName                <span class="o">=</span> server
+
+
+Type the word <span class="s1">'yes'</span> to <span class="k">continue</span>, or any other input to abort.
+  Confirm request details: <span class="nb">yes
+
+</span>Using configuration from /etc/openvpn/easy-rsa/pki/086ccb9e/temp.95232f12
+Enter pass phrase <span class="k">for</span> /etc/openvpn/easy-rsa/pki/private/ca.key:
+Check that the request matches the signature
+Signature ok
+The Subject<span class="s1">'s Distinguished Name is as follows
+commonName            :ASN.1 12:'</span>server<span class="s1">'
+Certificate is to be certified until Apr 28 18:52:24 2027 GMT (825 days)
+
+Write out database with 1 new entries
+Database updated
+
+* Notice:
+Certificate created at: /etc/openvpn/easy-rsa/pki/issued/server.crt
+</span></pre></td></tr></tbody></table></code></div></div>
+
+<p>Este comando realiza dos acciones principales:</p>
+
+<ol>
+  <li>
+    <p>Genera la clave privada del servidor, que se almacena en:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> /etc/openvpn/easy-rsa/pki/private/server.key
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <p>Esta clave debe mantenerse segura, ya que se utilizará para cifrar las comunicaciones del servidor VPN.</p>
+  </li>
+  <li>
+    <p>Crea y firma el certificado del servidor, que se guarda en:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> /etc/openvpn/easy-rsa/pki/issued/server.crt
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <p>Este certificado será utilizado por el servidor OpenVPN para autenticarse ante los clientes VPN.</p>
+  </li>
+</ol>
+
+<p>Como hemos ejecutado el comando con la opción nopass, el certificado no requiere una frase de paso para su uso, lo que facilita la automatización del arranque del servidor VPN sin intervención manual.</p>
+
+<p>Una vez generado el certificado del servidor, el siguiente paso es la creación de los parámetros Diffie-Hellman (DH), esenciales para el cifrado seguro durante el proceso de establecimiento de sesión. Esto se hace con el siguiente comando:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre>debian@servidor:/etc/openvpn/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa gen-dh
+<span class="k">*</span> Notice:
+Using Easy-RSA configuration from: /etc/openvpn/easy-rsa/pki/vars
+
+<span class="k">*</span> Notice:
+Using SSL: openssl OpenSSL 3.0.15 3 Sep 2024 <span class="o">(</span>Library: OpenSSL 3.0.15 3 Sep 2024<span class="o">)</span>
+
+Generating DH parameters, 2048 bit long safe prime
+.......+...................................................................................................................................+.............................................................+...............................................................................................................................................................................................................................................................+.............+...................................+.......................................................+...............................................................................................................................................................................................................................................................................................................................................................................................................................+....................................................................................+.......................................................................................................+..........................................................................................................................................................+.............................................................................+...........................................................+...............................................................................+.............................................................................................................................................................................................................+...................................................................................................................................+...................................................................................+...........................+................................................................................................................+...........................................................................++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>++<span class="k">*</span>
+
+<span class="k">*</span> Notice:
+
+DH parameters of size 2048 created at /etc/openvpn/easy-rsa/pki/dh.pem
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este proceso puede tardar varios minutos, ya que se generan números primos grandes que serán utilizados en el protocolo de intercambio de claves. Una vez completado, los parámetros DH se guardan en:</p>
+
+<div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/etc/openvpn/easy-rsa/pki/dh.pem
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para que un cliente pueda autenticarse en la VPN, necesita un certificado y una clave privada, que deben ser generados en el 
+servidor OpenVPN utilizando Easy-RSA. Esto se realiza con el siguiente comando:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>debian@servidor:/etc/openvpn/easy-rsa<span class="nv">$ </span><span class="nb">sudo</span> ./easyrsa build-client-full cliente1 nopass
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Aquí, <code class="language-plaintext highlighter-rouge">cliente1</code> es el nombre del cliente y la opción <code class="language-plaintext highlighter-rouge">nopass</code> indica que la clave privada del cliente no tendrá contraseña.</p>
+
+<p>Una vez generados, los archivos necesarios para la autenticación del cliente son:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ca.crt</code>: Certificado de la Autoridad Certificadora (CA), que permite verificar la autenticidad de los certificados emitidos.</li>
+  <li><code class="language-plaintext highlighter-rouge">cliente1.crt</code>: Certificado específico del cliente.</li>
+  <li><code class="language-plaintext highlighter-rouge">cliente1.key</code>: Clave privada del cliente.</li>
+</ul>
+
+<p>Ahora, copiamos los ficheros necesarios a una carpeta temporal que nos servirá para transferir a la máquina <strong>Cliente1</strong>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>root@servidor:~# <span class="nb">cp</span> /etc/openvpn/easy-rsa/pki/ca.crt /home/debian/cliente1/
+root@servidor:~# <span class="nb">cp</span> /etc/openvpn/easy-rsa/pki/issued/cliente1.crt /home/debian/cliente1/
+root@servidor:~# <span class="nb">cp</span> /etc/openvpn/easy-rsa/pki/private/cliente1.key /home/debian/cliente1/
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Cambiamos los permisos para que el usuario debian pueda acceder a ellos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> debian:debian cliente1/
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Y verificamos que los archivos han sido copiados correctamente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> cliente1/
+total 16
+<span class="nt">-rw-------</span> 1 debian debian 1180 Jan 23 19:22 ca.crt
+<span class="nt">-rw-------</span> 1 debian debian 4471 Jan 23 19:23 cliente1.crt
+<span class="nt">-rw-------</span> 1 debian debian 1704 Jan 23 19:23 cliente1.key
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para transferir estos archivos al cliente, usaremos scp (Secure Copy Protocol), copiándolos a la IP 192.168.1.2:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">cd </span>cliente1/
+debian@servidor:~/cliente1<span class="nv">$ </span>scp <span class="k">*</span> debian@192.168.1.2:/home/debian
+The authenticity of host <span class="s1">'192.168.1.2 (192.168.1.2)'</span> can<span class="s1">'t be established.
+ED25519 key fingerprint is SHA256:Gojcktfl97qAXF9KaBhKTK93gIYeN/574t8Ph9Zl2D0.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '</span>192.168.1.2<span class="s1">' (ED25519) to the list of known hosts.
+debian@192.168.1.2'</span>s password: 
+ca.crt                                        100% 1180   486.0KB/s   00:00    
+cliente1.crt                                  100% 4471     2.7MB/s   00:00    
+cliente1.key                                  100% 1704   763.9KB/s   00:00 
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>El servidor OpenVPN está configurado en <code class="language-plaintext highlighter-rouge">/etc/openvpn/server/servidor.conf</code> con los siguientes parámetros clave:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">sudo cat</span> /etc/openvpn/server/servidor.conf
+port 1194
+proto udp
+dev tun
+
+ca /etc/openvpn/easy-rsa/pki/ca.crt
+cert /etc/openvpn/easy-rsa/pki/issued/server.crt
+key /etc/openvpn/easy-rsa/pki/private/server.key
+dh /etc/openvpn/easy-rsa/pki/dh.pem
+
+topology subnet
+
+
+server 10.99.99.0 255.255.255.0
+ifconfig-pool-persist /var/log/openvpn/ipp.txt
+
+push <span class="s2">"route 192.168.2.0 255.255.255.0"</span>
+
+keepalive 10 120
+cipher AES-256-CBC
+persist-key
+persist-tun
+status /var/log/openvpn/openvpn-status.log
+verb 3
+explicit-exit-notify 1
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Donde:</p>
+
+<ul>
+  <li><strong>Puertos y protocolo</strong>: OpenVPN escucha en el puerto <code class="language-plaintext highlighter-rouge">1194</code> utilizando <code class="language-plaintext highlighter-rouge">UDP</code>.</li>
+  <li><strong>Configuración de certificados</strong>: Se especifican el certificado de la CA, el certificado del servidor y su clave privada.</li>
+  <li><strong>Topología de red</strong>: Se usa <code class="language-plaintext highlighter-rouge">topology subnet</code>, lo que permite asignar direcciones IP individuales dentro de la subred VPN.</li>
+  <li><strong>Direcciones IP de la VPN</strong>: Se define la subred <code class="language-plaintext highlighter-rouge">10.99.99.0/24</code> con <code class="language-plaintext highlighter-rouge">ifconfig-pool-persist</code> para asignar direcciones IP fijas a clientes recurrentes.</li>
+  <li><strong>Enrutamiento</strong>: Se usa <code class="language-plaintext highlighter-rouge">push "route 192.168.2.0 255.255.255.0"</code> para permitir a los clientes acceder a la red <code class="language-plaintext highlighter-rouge">192.168.2.0/24</code>.</li>
+  <li><strong>Seguridad</strong>: Se especifica el cifrado <code class="language-plaintext highlighter-rouge">AES-256-CBC</code> y parámetros como <code class="language-plaintext highlighter-rouge">persist-key</code> y <code class="language-plaintext highlighter-rouge">persist-tun</code> para mantener la sesión en caso de reinicios.</li>
+  <li><strong>Registro y verbosidad</strong>: Se habilita el registro de estado en <code class="language-plaintext highlighter-rouge">/var/log/openvpn/openvpn-status.log</code> y <code class="language-plaintext highlighter-rouge">verb 3</code> para obtener información de depuración.</li>
+</ul>
+
+<p>Ahora, habilitamos el servicio OpenVPN para poner en marcha el túnel:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> openvpn-server@servidor
+Created symlink /etc/systemd/system/multi-user.target.wants/openvpn-server@servidor.service → /lib/systemd/system/openvpn-server@.service.
+debian@servidor:~<span class="nv">$ </span><span class="o">[</span> 8384.381168] tun: Universal TUN/TAP device driver, 1.6
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Verificamos su estado y vemos que está funcionando correctamente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl status openvpn-server@servidor
+● openvpn-server@servidor.service - OpenVPN service <span class="k">for </span>servidor
+     Loaded: loaded <span class="o">(</span>/lib/systemd/system/openvpn-server@.service<span class="p">;</span> enabled<span class="p">;</span> pres&gt;
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Thu 2025-01-23 20:44:51 UTC<span class="p">;</span> 1min 53s ago
+       Docs: man:openvpn<span class="o">(</span>8<span class="o">)</span>
+             https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+             https://community.openvpn.net/openvpn/wiki/HOWTO
+   Main PID: 1024 <span class="o">(</span>openvpn<span class="o">)</span>
+     Status: <span class="s2">"Initialization Sequence Completed"</span>
+      Tasks: 1 <span class="o">(</span>limit: 2348<span class="o">)</span>
+     Memory: 1.7M
+        CPU: 35ms
+     CGroup: /system.slice/system-openvpn<span class="se">\x</span>2dserver.slice/openvpn-server@servid&gt;
+             └─1024 /usr/sbin/openvpn <span class="nt">--status</span> /run/openvpn-server/status-servi&gt;
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Si mostramos las interfaces con sus respectivos direccionamientos nos damos cuenta que la interfaz de túnel <code class="language-plaintext highlighter-rouge">tun0</code> se crea correctamente con la dirección 10.99.99.1, confirmando que OpenVPN está activo.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="rouge-code"><pre>debian@servidor:~<span class="nv">$ </span>ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    <span class="nb">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: ens4: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    <span class="nb">link</span>/ether 0c:fe:ae:66:00:00 brd ff:ff:ff:ff:ff:ff
+    altname enp0s4
+    inet 192.168.1.1/24 brd 192.168.1.255 scope global ens4
+       valid_lft forever preferred_lft forever
+    inet6 fe80::efe:aeff:fe66:0/64 scope <span class="nb">link 
+       </span>valid_lft forever preferred_lft forever
+3: ens5: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    <span class="nb">link</span>/ether 0c:fe:ae:66:00:01 brd ff:ff:ff:ff:ff:ff
+    altname enp0s5
+    inet 192.168.2.1/24 brd 192.168.2.255 scope global ens5
+       valid_lft forever preferred_lft forever
+    inet6 fe80::efe:aeff:fe66:1/64 scope <span class="nb">link 
+       </span>valid_lft forever preferred_lft forever
+4: ens6: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    <span class="nb">link</span>/ether 0c:fe:ae:66:00:02 brd ff:ff:ff:ff:ff:ff
+    altname enp0s6
+    inet 192.168.122.222/24 brd 192.168.122.255 scope global dynamic ens6
+       valid_lft 2320sec preferred_lft 2320sec
+    inet6 fe80::efe:aeff:fe66:2/64 scope <span class="nb">link 
+       </span>valid_lft forever preferred_lft forever
+5: tun0: &lt;POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
+    <span class="nb">link</span>/none 
+    inet 10.99.99.1/24 scope global tun0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::774f:979b:9e65:1c85/64 scope <span class="nb">link </span>stable-privacy 
+       valid_lft forever preferred_lft forever
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="configuración-del-cliente1"><span class="me-2">Configuración del Cliente1</span><a href="#configuración-del-cliente1" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>En la máquina cliente Cliente1, instalamos OpenVPN:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>openvpn <span class="nt">-y</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Los archivos de certificado y clave los movemos a <code class="language-plaintext highlighter-rouge">/etc/openvpn/client/</code> y le cambiamos los permisos a root:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>debian@cliente1:~<span class="nv">$ </span><span class="nb">sudo mv </span>cliente/<span class="k">*</span> /etc/openvpn/client/
+debian@cliente1:~<span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> root:root /etc/openvpn/client/
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Verificamos que tengan los permisos correctos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>debian@cliente1:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /etc/openvpn/client/
+total 16
+<span class="nt">-rw-------</span> 1 root root 1180 Jan 23 20:37 ca.crt
+<span class="nt">-rw-------</span> 1 root root 4471 Jan 23 20:37 cliente1.crt
+<span class="nt">-rw-------</span> 1 root root 1704 Jan 23 20:37 cliente1.key
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Y pasamos a la configuración del cliente, el cual se encuentra en <code class="language-plaintext highlighter-rouge">/etc/openvpn/client/client.conf</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre>debian@cliente1:~<span class="nv">$ </span><span class="nb">sudo cat</span> /etc/openvpn/client/client.conf
+client
+dev tun
+proto udp
+
+remote 192.168.1.1 1194
+resolv-retry infinite
+nobind
+
+persist-key
+persist-tun
+
+ca /etc/openvpn/client/ca.crt
+cert /etc/openvpn/client/cliente1.crt
+key /etc/openvpn/client/cliente1.key
+
+remote-cert-tls server
+cipher AES-256-CBC
+verb 3
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Donde:</p>
+
+<ul>
+  <li><strong>Modo cliente</strong>: client</li>
+  <li><strong>Interfaz virtual</strong>: dev tun</li>
+  <li><strong>Protocolo y puerto</strong>: proto udp en el puerto 1194</li>
+  <li><strong>Dirección del servidor</strong>: remote 192.168.1.1 1194</li>
+  <li><strong>Persistencia</strong>: persist-key y persist-tun para mantener la sesión</li>
+  <li><strong>Seguridad</strong>: Se especifican los archivos ca.crt, cliente1.crt y cliente1.key, además del cifrado AES-256-CBC.</li>
+  <li><strong>Verbosidad</strong>: verb 3 para registros detallados.</li>
+</ul>
+
+<p>Conectamos el cliente a la VPN y verificamos su estado:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>debian@cliente1:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> openvpn-client@client
+debian@cliente1:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl status openvpn-client@client
+● openvpn-client@client.service - OpenVPN tunnel <span class="k">for </span>client
+     Loaded: loaded <span class="o">(</span>/lib/systemd/system/openvpn-client@.service<span class="p">;</span> enabled<span class="p">;</span> pres
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Thu 2025-01-23 21:41:41 UTC<span class="p">;</span> 1min 25s ago
+       Docs: man:openvpn<span class="o">(</span>8<span class="o">)</span>
+             https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+             https://community.openvpn.net/openvpn/wiki/HOWTO
+   Main PID: 713 <span class="o">(</span>openvpn<span class="o">)</span>
+     Status: <span class="s2">"Initialization Sequence Completed"</span>
+      Tasks: 1 <span class="o">(</span>limit: 2349<span class="o">)</span>
+     Memory: 1.9M
+        CPU: 39ms
+     CGroup: /system.slice/system-openvpn<span class="se">\x</span>2dclient.slice/openvpn-client@client
+             └─713 /usr/sbin/openvpn <span class="nt">--suppress-timestamps</span> <span class="nt">--nobind</span> <span class="nt">--config</span> cl
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Y si la conexión es exitosa, la interfaz <code class="language-plaintext highlighter-rouge">tun0</code> aparecerá con la IP 10.99.99.2, lo que indica que el cliente está dentro de la red VPN:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre>debian@cliente1:~<span class="nv">$ </span>ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    <span class="nb">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: ens4: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    <span class="nb">link</span>/ether 0c:3a:24:e0:00:00 brd ff:ff:ff:ff:ff:ff
+    altname enp0s4
+    inet 192.168.1.2/24 brd 192.168.1.255 scope global ens4
+       valid_lft forever preferred_lft forever
+    inet6 fe80::e3a:24ff:fee0:0/64 scope <span class="nb">link 
+       </span>valid_lft forever preferred_lft forever
+3: tun0: &lt;POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
+    <span class="nb">link</span>/none 
+    inet 10.99.99.2/24 scope global tun0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::d9f3:6eaa:7b14:2952/64 scope <span class="nb">link </span>stable-privacy 
+       valid_lft forever preferred_lft forever
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para comprobar que el cliente puede alcanzar la red remota 192.168.2.0/24 a través del servidor VPN, se usa traceroute:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>debian@cliente1:~<span class="nv">$ </span>traceroute 192.168.2.2
+traceroute to 192.168.2.2 <span class="o">(</span>192.168.2.2<span class="o">)</span>, 30 hops max, 60 byte packets
+ 1  10.99.99.1 <span class="o">(</span>10.99.99.1<span class="o">)</span>  1.910 ms  1.824 ms  1.814 ms
+ 2  192.168.2.2 <span class="o">(</span>192.168.2.2<span class="o">)</span>  2.734 ms  2.755 ms  2.755 ms
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Si el tráfico sigue el camino esperado a través de la VPN, significa que la configuración ha sido exitosa.</p>
 
   </div>
 
@@ -869,14 +1835,14 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/journald/">Recolección centralizada de logs de sistema, mediante journald</a>
+          <a href="/posts/acceso_remoto_openvpn/">VPN de acceso remoto con OpenVPN y certificados x509</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/acceso_remoto_openvpn/">VPN de acceso remoto con OpenVPN y certificados x509</a>
+          <a href="/posts/journald/">Recolección centralizada de logs de sistema, mediante journald</a>
         </li>
       
         
@@ -1339,6 +2305,11 @@
               
 
 
+
+  <section id="toc-wrapper" class="d-none ps-0 pe-4">
+    <h2 class="panel-heading ps-3 mb-2">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
 
 
             
@@ -2151,9 +3122,16 @@
 
   
 
+  
+    
+
+    
+
+  
 
 
-  <script src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.29.0/dist/tocbot.min.js"></script>
 
 
 
