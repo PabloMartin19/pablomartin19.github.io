@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-24T11:25:32+01:00</updated>
+  <updated>2025-01-24T11:49:40+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/acceso_remoto_openvpn/" rel="alternate" type="text/html" title="VPN de acceso remoto con OpenVPN y certificados x509" />
     <published>2025-01-23T13:00:00+01:00</published>
   
-    <updated>2025-01-24T11:25:31+01:00</updated>
+    <updated>2025-01-24T11:49:39+01:00</updated>
   
     <id>/posts/acceso_remoto_openvpn/</id>
     <content src="/posts/acceso_remoto_openvpn/" />
