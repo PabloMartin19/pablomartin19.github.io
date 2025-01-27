@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-24T11:55:42+01:00</updated>
+  <updated>2025-01-27T09:00:49+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>VPN sitio a sitio con OpenVPN y certificados x509</title>
+    <link href="/posts/site_to_site_openvpn/" rel="alternate" type="text/html" title="VPN sitio a sitio con OpenVPN y certificados x509" />
+    <published>2025-01-26T18:00:00+01:00</published>
+  
+    <updated>2025-01-26T18:00:00+01:00</updated>
+  
+    <id>/posts/site_to_site_openvpn/</id>
+    <content src="/posts/site_to_site_openvpn/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="VPN" />
+    
+  
+
+  <summary>....</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Certificados digitales. HTTPS</title>
-    <link href="/posts/certificado/" rel="alternate" type="text/html" title="Certificados digitales. HTTPS" />
-    <published>2024-12-19T18:30:00+01:00</published>
-  
-    <updated>2025-01-17T19:29:09+01:00</updated>
-  
-    <id>/posts/certificado/</id>
-    <content src="/posts/certificado/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Seguridad" />
-    
-    <category term="Criptografía" />
-    
-  
-
-  <summary>En esta práctica vamos a trabajar con certificados digitales para autenticarnos, firmar documentos y securizar una página web con HTTPS. Primero, instalaremos un certificado digital de persona física en nuestro navegador y aprenderemos a hacer copias de seguridad. Luego, validaremos el certificado con Autofirma y la plataforma VALIDe. También utilizaremos nuestra firma digital para firmar y ver...</summary>
 
   </entry>
 
