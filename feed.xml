@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-27T09:02:07+01:00</updated>
+  <updated>2025-01-27T09:04:27+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/site_to_site_openvpn/" rel="alternate" type="text/html" title="VPN sitio a sitio con OpenVPN y certificados x509" />
     <published>2025-01-26T18:00:00+01:00</published>
   
-    <updated>2025-01-27T09:02:06+01:00</updated>
+    <updated>2025-01-27T09:04:26+01:00</updated>
   
     <id>/posts/site_to_site_openvpn/</id>
     <content src="/posts/site_to_site_openvpn/" />
