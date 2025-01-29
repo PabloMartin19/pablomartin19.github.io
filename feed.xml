@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-27T09:06:00+01:00</updated>
+  <updated>2025-01-29T19:00:06+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>VPN de acceso remoto con WireGuard</title>
+    <link href="/posts/acceso_remoto_wireguard/" rel="alternate" type="text/html" title="VPN de acceso remoto con WireGuard" />
+    <published>2025-01-27T21:00:00+01:00</published>
+  
+    <updated>2025-01-27T21:00:00+01:00</updated>
+  
+    <id>/posts/acceso_remoto_wireguard/</id>
+    <content src="/posts/acceso_remoto_wireguard/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="VPN" />
+    
+  
+
+  <summary>...</summary>
+
+  </entry>
 
   
   <entry>
@@ -50,7 +76,7 @@
     <link href="/posts/acceso_remoto_openvpn/" rel="alternate" type="text/html" title="VPN de acceso remoto con OpenVPN y certificados x509" />
     <published>2025-01-23T13:00:00+01:00</published>
   
-    <updated>2025-01-24T11:55:41+01:00</updated>
+    <updated>2025-01-29T19:00:05+01:00</updated>
   
     <id>/posts/acceso_remoto_openvpn/</id>
     <content src="/posts/acceso_remoto_openvpn/" />
@@ -66,7 +92,7 @@
     
   
 
-  <summary>Las VPNs son esenciales para garantizar conexiones seguras a redes privadas a través de Internet. En este artículo exploramos cómo configurar una VPN de acceso remoto con OpenVPN en un entorno de simulación con GNS3. Utilizaremos certificados x509 generados con OpenSSL para autenticar clientes y establecer túneles cifrados, permitiendo el acceso seguro a recursos internos desde cualquier ubicac...</summary>
+  <summary>En este artículo exploraremos cómo configurar una VPN de acceso remoto utilizando WireGuard, una solución moderna y eficiente. Los clientes que se conectarán a la VPN estarán en sistemas operativos Linux, Android y Windows, permitiendo así el acceso seguro a los recursos internos desde diversas plataformas y ubicaciones.</summary>
 
   </entry>
 
@@ -119,32 +145,6 @@
   
 
   <summary>En este post aprenderemos a instalar Debian 13 Trixie con systemd-boot en donde nos familiarizaremos con el sistema. Además, haremos un cambio de gestor de arranque iniciando por grub y finalmente acabando con systemd-boot.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>systemd/sshfs</title>
-    <link href="/posts/systemd/" rel="alternate" type="text/html" title="systemd/sshfs" />
-    <published>2024-12-19T18:30:00+01:00</published>
-  
-    <updated>2025-01-15T13:31:01+01:00</updated>
-  
-    <id>/posts/systemd/</id>
-    <content src="/posts/systemd/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Sistemas" />
-    
-    <category term="Systemd" />
-    
-  
-
-  <summary>Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.</summary>
 
   </entry>
 

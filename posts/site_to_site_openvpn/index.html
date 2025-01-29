@@ -2046,14 +2046,21 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/site_to_site_openvpn/">VPN sitio a sitio con OpenVPN y certificados x509</a>
+          <a href="/posts/acceso_remoto_openvpn/">VPN de acceso remoto con OpenVPN y certificados x509</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/acceso_remoto_openvpn/">VPN de acceso remoto con OpenVPN y certificados x509</a>
+          <a href="/posts/acceso_remoto_wireguard/">VPN de acceso remoto con WireGuard</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/site_to_site_openvpn/">VPN sitio a sitio con OpenVPN y certificados x509</a>
         </li>
       
         
@@ -2068,13 +2075,6 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
         
         <li class="text-truncate lh-lg">
           <a href="/posts/certificado/">Certificados digitales. HTTPS</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/integridad/">Integridad, firmas y autenticación</a>
         </li>
       
     </ul>
@@ -2152,6 +2152,18 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -2200,18 +2212,6 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2467,10 +2467,10 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
         <a class="post-tag btn btn-outline-primary" href="/tags/criptograf%C3%ADa/">Criptografía</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/systemd/">Systemd</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/vpn/">VPN</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/vpn/">VPN</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/systemd/">Systemd</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/aplicaciones/">Aplicaciones</a>
@@ -2596,6 +2596,18 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2609,6 +2621,34 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">Further Reading</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/acceso_remoto_wireguard/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738008000"
+  data-df="ll"
+  
+>
+  Jan 27, 2025
+</time>
+
+              <h4 class="pt-0 my-2">VPN de acceso remoto con WireGuard</h4>
+              <div class="text-muted">
+                <p>...</p>
+              </div>
+            </div>
+          </a>
+        </article>
       
         <article class="col">
           <a href="/posts/acceso_remoto_openvpn/" class="post-preview card h-100">
@@ -2632,7 +2672,7 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
 
               <h4 class="pt-0 my-2">VPN de acceso remoto con OpenVPN y certificados x509</h4>
               <div class="text-muted">
-                <p>Las VPNs son esenciales para garantizar conexiones seguras a redes privadas a través de Internet. En este artículo exploramos cómo configurar una VPN de acceso remoto con OpenVPN en un entorno de s...</p>
+                <p>En este artículo exploraremos cómo configurar una VPN de acceso remoto utilizando WireGuard, una solución moderna y eficiente. Los clientes que se conectarán a la VPN estarán en sistemas operativos...</p>
               </div>
             </div>
           </a>
@@ -2666,34 +2706,6 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
           </a>
         </article>
       
-        <article class="col">
-          <a href="/posts/integridad/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1734629400"
-  data-df="ll"
-  
->
-  Dec 19, 2024
-</time>
-
-              <h4 class="pt-0 my-2">Integridad, firmas y autenticación</h4>
-              <div class="text-muted">
-                <p>En esta práctica trabajaremos con firmas electrónicas, integridad de ficheros y autenticación.</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
     </nav>
   </aside>
   <!-- #related-posts -->
@@ -2718,9 +2730,13 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="Newer">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/acceso_remoto_wireguard/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>VPN de acceso remoto con WireGuard</p>
+    </a>
   
 </nav>
 
@@ -2845,6 +2861,18 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -2893,18 +2921,6 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -3160,10 +3176,10 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
         <a class="post-tag btn btn-outline-primary" href="/tags/criptograf%C3%ADa/">Criptografía</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/systemd/">Systemd</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/vpn/">VPN</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/vpn/">VPN</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/systemd/">Systemd</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/aplicaciones/">Aplicaciones</a>
