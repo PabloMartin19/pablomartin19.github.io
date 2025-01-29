@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-29T19:00:06+01:00</updated>
+  <updated>2025-01-29T19:02:09+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>VPN de acceso remoto con OpenVPN y certificados x509</title>
+    <link href="/posts/acceso_remoto_openvpn/" rel="alternate" type="text/html" title="VPN de acceso remoto con OpenVPN y certificados x509" />
+    <published>2025-01-29T13:00:00+01:00</published>
+  
+    <updated>2025-01-29T19:02:09+01:00</updated>
+  
+    <id>/posts/acceso_remoto_openvpn/</id>
+    <content src="/posts/acceso_remoto_openvpn/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="VPN" />
+    
+  
+
+  <summary>En este artículo exploraremos cómo configurar una VPN de acceso remoto utilizando WireGuard, una solución moderna y eficiente. Los clientes que se conectarán a la VPN estarán en sistemas operativos Linux, Android y Windows, permitiendo así el acceso seguro a los recursos internos desde diversas plataformas y ubicaciones.</summary>
+
+  </entry>
 
   
   <entry>
@@ -67,32 +93,6 @@
   
 
   <summary>En esta práctica configuraremos una VPN con OpenVPN en GNS3, implementando tanto una VPN de acceso remoto como una VPN sitio a sitio. Usaremos autenticación con certificados x509 generados con OpenSSL y configuraremos el enrutamiento para permitir la comunicación entre redes a través del túnel VPN. Este ejercicio es útil para comprender el funcionamiento de las VPNs y mejorar la seguridad en re...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>VPN de acceso remoto con OpenVPN y certificados x509</title>
-    <link href="/posts/acceso_remoto_openvpn/" rel="alternate" type="text/html" title="VPN de acceso remoto con OpenVPN y certificados x509" />
-    <published>2025-01-23T13:00:00+01:00</published>
-  
-    <updated>2025-01-29T19:00:05+01:00</updated>
-  
-    <id>/posts/acceso_remoto_openvpn/</id>
-    <content src="/posts/acceso_remoto_openvpn/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Seguridad" />
-    
-    <category term="VPN" />
-    
-  
-
-  <summary>En este artículo exploraremos cómo configurar una VPN de acceso remoto utilizando WireGuard, una solución moderna y eficiente. Los clientes que se conectarán a la VPN estarán en sistemas operativos Linux, Android y Windows, permitiendo así el acceso seguro a los recursos internos desde diversas plataformas y ubicaciones.</summary>
 
   </entry>
 
