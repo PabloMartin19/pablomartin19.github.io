@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-29T20:33:41+01:00</updated>
+  <updated>2025-01-29T20:37:29+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>VPN sitio a sitio con WireGuard</title>
+    <link href="/posts/site_to_site_wireguard/" rel="alternate" type="text/html" title="VPN sitio a sitio con WireGuard" />
+    <published>2025-01-29T20:00:00+01:00</published>
+  
+    <updated>2025-01-29T20:37:28+01:00</updated>
+  
+    <id>/posts/site_to_site_wireguard/</id>
+    <content src="/posts/site_to_site_wireguard/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Seguridad" />
+    
+    <category term="VPN" />
+    
+  
+
+  <summary>En esta práctica implementamos una solución VPN utilizando WireGuard para establecer una conexión segura y eficiente entre dos redes distintas. La configuración permite la comunicación bidireccional entre un cliente en una red local y otro en una red remota, a través de sus respectivos servidores que actúan como gateways. La implementación demuestra la simplicidad y eficacia de WireGuard y una ...</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegu...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Systemd-Boot</title>
-    <link href="/posts/systemd-boot/" rel="alternate" type="text/html" title="Systemd-Boot" />
-    <published>2025-01-14T14:30:00+01:00</published>
-  
-    <updated>2025-01-17T08:26:59+01:00</updated>
-  
-    <id>/posts/systemd-boot/</id>
-    <content src="/posts/systemd-boot/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Sistemas" />
-    
-    <category term="Systemd" />
-    
-  
-
-  <summary>En este post aprenderemos a instalar Debian 13 Trixie con systemd-boot en donde nos familiarizaremos con el sistema. Además, haremos un cambio de gestor de arranque iniciando por grub y finalmente acabando con systemd-boot.</summary>
 
   </entry>
 
