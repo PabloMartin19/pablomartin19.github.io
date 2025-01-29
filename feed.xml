@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-29T20:38:25+01:00</updated>
+  <updated>2025-01-29T20:39:28+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/site_to_site_wireguard/" rel="alternate" type="text/html" title="VPN sitio a sitio con WireGuard" />
     <published>2025-01-29T20:00:00+01:00</published>
   
-    <updated>2025-01-29T20:38:24+01:00</updated>
+    <updated>2025-01-29T20:39:27+01:00</updated>
   
     <id>/posts/site_to_site_wireguard/</id>
     <content src="/posts/site_to_site_wireguard/" />
