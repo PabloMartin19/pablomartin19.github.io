@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-27T09:04:26+01:00","datePublished":"2025-01-26T18:00:00+01:00","description":"En esta práctica configuraremos una VPN con OpenVPN en GNS3, implementando tanto una VPN de acceso remoto como una VPN sitio a sitio. Usaremos autenticación con certificados x509 generados con OpenSSL y configuraremos el enrutamiento para permitir la comunicación entre redes a través del túnel VPN. Este ejercicio es útil para comprender el funcionamiento de las VPNs y mejorar la seguridad en redes.","headline":"VPN sitio a sitio con OpenVPN y certificados x509","image":"/assets/img/posts/vpn/portada1.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/site_to_site_openvpn/"},"url":"/posts/site_to_site_openvpn/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-29T20:33:40+01:00","datePublished":"2025-01-26T18:00:00+01:00","description":"En esta práctica configuraremos una VPN con OpenVPN en GNS3, implementando tanto una VPN de acceso remoto como una VPN sitio a sitio. Usaremos autenticación con certificados x509 generados con OpenSSL y configuraremos el enrutamiento para permitir la comunicación entre redes a través del túnel VPN. Este ejercicio es útil para comprender el funcionamiento de las VPNs y mejorar la seguridad en redes.","headline":"VPN sitio a sitio con OpenVPN y certificados x509","image":"/assets/img/posts/vpn/portada1.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/site_to_site_openvpn/"},"url":"/posts/site_to_site_openvpn/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1058,13 +1058,13 @@
 
 <time
   
-  data-ts="1737965066"
+  data-ts="1738179220"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jan 27, 2025
+  Jan 29, 2025
 </time>
 
         </span>
@@ -1180,7 +1180,7 @@
 </pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>openvpn easy-rsa <span class="nt">-y</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Una vez instalado estos dos paquetes en las máquinas que nos permitirán realizar la conexión VPN, tendremos que activar el bit de forwarding que nos permitirá dejar pasar los paquete a través de las máquinas (tanto la máquina ServidorCasa como la máquina ServidorInsti) para así permitir la conexión entre los dos clientes.</p>
+<p>Una vez instalado estos dos paquetes en las máquinas que nos permitirán realizar la conexión VPN, tendremos que activar el bit de forwarding que nos permitirá dejar pasar los paquetes a través de las máquinas (tanto la máquina ServidorCasa como la máquina ServidorInsti) para así permitir la conexión entre los dos clientes.</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -2046,6 +2046,13 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/site_to_site_openvpn/">VPN sitio a sitio con OpenVPN y certificados x509</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/acceso_remoto_openvpn/">VPN de acceso remoto con OpenVPN y certificados x509</a>
         </li>
       
@@ -2054,13 +2061,6 @@ debian@ServidorInsti:~<span class="nv">$ </span><span class="o">[</span> 7208.57
         
         <li class="text-truncate lh-lg">
           <a href="/posts/acceso_remoto_wireguard/">VPN de acceso remoto con WireGuard</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/site_to_site_openvpn/">VPN sitio a sitio con OpenVPN y certificados x509</a>
         </li>
       
         
