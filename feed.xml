@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-29T20:43:46+01:00</updated>
+  <updated>2025-02-07T09:31:26+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Configuración/activación de SELinux</title>
+    <link href="/posts/selinux/" rel="alternate" type="text/html" title="Configuración/activación de SELinux" />
+    <published>2025-01-29T20:00:00+01:00</published>
+  
+    <updated>2025-01-29T20:00:00+01:00</updated>
+  
+    <id>/posts/selinux/</id>
+    <content src="/posts/selinux/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Sistemas" />
+    
+    <category term="SELinux" />
+    
+  
+
+  <summary>....</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>Las VPNs son esenciales para garantizar conexiones seguras a redes privadas a través de Internet. En este artículo exploramos cómo configurar una VPN de acceso remoto con OpenVPN en un entorno de simulación con GNS3. Utilizaremos certificados x509 generados con OpenSSL para autenticar clientes y establecer túneles cifrados, permitiendo el acceso seguro a recursos internos desde cualquier ubicac...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Recolección centralizada de logs de sistema, mediante journald</title>
-    <link href="/posts/journald/" rel="alternate" type="text/html" title="Recolección centralizada de logs de sistema, mediante journald" />
-    <published>2025-01-21T14:00:00+01:00</published>
-  
-    <updated>2025-01-23T13:05:44+01:00</updated>
-  
-    <id>/posts/journald/</id>
-    <content src="/posts/journald/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Sistemas" />
-    
-    <category term="Monitoreo y Gestión de Logs" />
-    
-  
-
-  <summary>En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistemas y servicios, mejorando la visibilidad y facilitando la administración y análisis de los registros. A través de esta práctica, aprenderás a configurar y gestionar los logs de manera eficiente, asegu...</summary>
 
   </entry>
 

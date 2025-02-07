@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-01-15T13:31:01+01:00","datePublished":"2024-12-19T18:30:00+01:00","description":"Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.","headline":"systemd/sshfs","image":"/assets/img/posts/systemd/systemd.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/systemd/"},"url":"/posts/systemd/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-02-07T09:31:25+01:00","datePublished":"2024-12-19T18:30:00+01:00","description":"Configuramos dos instancias en OpenStack para compartir un sistema de archivos remoto mediante SSHFS. Montamos el sistema manualmente en la máquina cliente y luego automatizamos el proceso usando un archivo /etc/fstab y unidades .mount y .automount de systemd, permitiendo montaje dinámico y desmontaje automático tras inactividad.","headline":"systemd/sshfs","image":"/assets/img/posts/systemd/systemd.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/systemd/"},"url":"/posts/systemd/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -880,13 +880,13 @@
 
 <time
   
-  data-ts="1736944261"
+  data-ts="1738917085"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jan 15, 2025
+  Feb  7, 2025
 </time>
 
         </span>
@@ -945,9 +945,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="2101 words"
+  title="2371 words"
 >
-  <em>11 min</em> read</span>
+  <em>13 min</em> read</span>
 
         </div>
       </div>
@@ -1516,17 +1516,36 @@ Buenas tardes por la mañana
 6
 7
 8
+9
+10
 </pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">cat</span> /etc/systemd/system/home-debian-sshfs.automount
 <span class="o">[</span>Unit]
-<span class="nv">Description</span><span class="o">=</span>Montaje sistema de archivos remoto
-<span class="nv">Requires</span><span class="o">=</span>home-debian-sshfs.mount
+<span class="nv">Description</span><span class="o">=</span>Automontaje del sistema de archivos remoto
 
 <span class="o">[</span>Automount]
 <span class="nv">Where</span><span class="o">=</span>/home/debian/sshfs
-<span class="nv">TimeoutIdleSec</span><span class="o">=</span>1000
+<span class="nv">TimeoutIdleSec</span><span class="o">=</span>10
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Reiniciamos los cambios e iniciamos la unidad que acabamos de crear.</p>
+<p>Antes de reiniciar y activar el servicio del <code class="language-plaintext highlighter-rouge">.automont</code>, debemos deshabilitar y parar el servicio anterior de <code class="language-plaintext highlighter-rouge">.mount</code>.
+Esto se debe a que de lo contrario, el nuevo servicio no podrá automontar el directorio, pues este ya estaría creado.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl disable home-debian-sshfs.mount
+debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl stop home-debian-sshfs.mount
+Warning: Stopping home-debian-sshfs.mount, but it can still be activated by:
+  home-debian-sshfs.automount
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Ahora sí, reiniciamos los cambios e iniciamos la unidad que acabamos de crear.</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1564,7 +1583,33 @@ Possible reasons <span class="k">for </span>having this kind of units are:
 debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl start home-debian-sshfs.automount
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Comprobamos de nuevo el montaje:</p>
+<p>Para realizar las comprobaciones debemos ver que si estamos en /home, no debemos tener el directorio montado:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
+Filesystem                Size  Used Avail Use% Mounted on
+udev                      462M     0  462M   0% /dev
+tmpfs                      97M  500K   96M   1% /run
+/dev/vda1                 9.7G  1.7G  7.7G  18% /
+tmpfs                     481M     0  481M   0% /dev/shm
+tmpfs                     5.0M     0  5.0M   0% /run/lock
+/dev/vda15                124M   12M  113M  10% /boot/efi
+debian@10.0.0.151:/mount  2.0G   28K  1.9G   1% /mnt/sshfs
+tmpfs                      97M     0   97M   0% /run/user/1000
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>En cambio, si accedemos al directorio <code class="language-plaintext highlighter-rouge">/sshfs</code> notará la actividad y lo montará:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1579,20 +1624,34 @@ debian@systemd-client:~<span class="nv">$ </span><span class="nb">sudo </span>sy
 9
 10
 11
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
-Filesystem               Size  Used Avail Use% Mounted on
-udev                     462M     0  462M   0% /dev
-tmpfs                     97M  500K   96M   1% /run
-/dev/vda1                9.7G  1.2G  8.1G  13% /
-tmpfs                    481M     0  481M   0% /dev/shm
-tmpfs                    5.0M     0  5.0M   0% /run/lock
-/dev/vda15               124M   12M  113M  10% /boot/efi
-debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /mnt/sshfs
-tmpfs                     97M     0   97M   0% /run/user/1000
-debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /home/debian/sshfs
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">cd </span>sshfs/
+debian@systemd-client:~/sshfs<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+total 20
+<span class="nt">-rw-r--r--</span> 1 root root    29 Feb  6 12:02 kk.txt
+drwx------ 1 root root 16384 Feb  6 12:01 lost+found
+debian@systemd-client:~/sshfs<span class="nv">$ </span><span class="nb">cat </span>kk.txt 
+Buenas tardes por la mañana
+debian@systemd-client:~/sshfs<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
+Filesystem                Size  Used Avail Use% Mounted on
+udev                      462M     0  462M   0% /dev
+tmpfs                      97M  500K   96M   1% /run
+/dev/vda1                 9.7G  1.7G  7.7G  18% /
+tmpfs                     481M     0  481M   0% /dev/shm
+tmpfs                     5.0M     0  5.0M   0% /run/lock
+/dev/vda15                124M   12M  113M  10% /boot/efi
+debian@10.0.0.151:/mount  2.0G   28K  1.9G   1% /mnt/sshfs
+tmpfs                      97M     0   97M   0% /run/user/1000
+debian@10.0.0.151:/mount  2.0G   28K  1.9G   1% /home/debian/sshfs
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Y verificamos de nuevo que estén los ficheros:</p>
+<p>Y al igual que lo monta cuando estamos en el directorio especificado, si nos volvemos a mover al directorio <code class="language-plaintext highlighter-rouge">/home</code> y esperamos 10 segundos, nos daremos cuenta de que se ha vuelto a desmontar:</p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -1600,10 +1659,22 @@ debian@10.0.0.22:/mount  2.0G   28K  1.9G   1% /home/debian/sshfs
 2
 3
 4
-</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> sshfs/
-total 20
-<span class="nt">-rw-r--r--</span> 1 root root    29 Jan  9 07:51 kk.txt
-drwx------ 1 root root 16384 Jan  9 07:48 lost+found
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>debian@systemd-client:~<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
+Filesystem                Size  Used Avail Use% Mounted on
+udev                      462M     0  462M   0% /dev
+tmpfs                      97M  500K   96M   1% /run
+/dev/vda1                 9.7G  1.7G  7.7G  18% /
+tmpfs                     481M     0  481M   0% /dev/shm
+tmpfs                     5.0M     0  5.0M   0% /run/lock
+/dev/vda15                124M   12M  113M  10% /boot/efi
+debian@10.0.0.151:/mount  2.0G   28K  1.9G   1% /mnt/sshfs
+tmpfs                      97M     0   97M   0% /run/user/1000
 </pre></td></tr></tbody></table></code></div></div>
 
   </div>
@@ -1732,6 +1803,13 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/systemd/">systemd/sshfs</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/site_to_site_wireguard/">VPN sitio a sitio con WireGuard</a>
         </li>
       
@@ -1746,21 +1824,14 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/selinux/">Configuración/activación de SELinux</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/acceso_remoto_openvpn/">VPN de acceso remoto con OpenVPN y certificados x509</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/acceso_remoto_wireguard/">VPN de acceso remoto con WireGuard</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/journald/">Recolección centralizada de logs de sistema, mediante journald</a>
         </li>
       
     </ul>
@@ -1834,30 +1905,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1892,6 +1939,40 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1920,29 +2001,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         
         
 
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1979,13 +2037,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
@@ -2002,67 +2053,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
     
   
     
@@ -2119,6 +2109,15 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2131,6 +2130,83 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2175,7 +2251,7 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <a class="post-tag btn btn-outline-primary" href="/tags/monitoreo-y-gesti%C3%B3n-de-logs/">Monitoreo y Gestión de Logs</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/selinux/">SELinux</a>
       
     </div>
   </section>
@@ -2280,6 +2356,18 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2323,6 +2411,34 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         </article>
       
         <article class="col">
+          <a href="/posts/selinux/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738177200"
+  data-df="ll"
+  
+>
+  Jan 29, 2025
+</time>
+
+              <h4 class="pt-0 my-2">Configuración/activación de SELinux</h4>
+              <div class="text-muted">
+                <p>....</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
           <a href="/posts/journald/" class="post-preview card h-100">
             <div class="card-body">
               <!--
@@ -2345,34 +2461,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
               <h4 class="pt-0 my-2">Recolección centralizada de logs de sistema, mediante journald</h4>
               <div class="text-muted">
                 <p>En este artículo se presenta cómo implementar un sistema de recolección centralizada de logs en un entorno Openstack utilizando systemd-journal-remote. El objetivo es centralizar los logs de sistem...</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/comandos-programacion/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1725300000"
-  data-df="ll"
-  
->
-  Sep  2, 2024
-</time>
-
-              <h4 class="pt-0 my-2">Comandos para programación de tareas</h4>
-              <div class="text-muted">
-                <p>Explora los comandos esenciales para programar tareas en Linux. Aprende a automatizar procesos y optimizar tu flujo de trabajo en el sistema operativo, asegurando que las tareas críticas se realice...</p>
               </div>
             </div>
           </a>
@@ -2529,30 +2617,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2587,6 +2651,40 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -2615,29 +2713,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         
         
 
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2674,13 +2749,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
@@ -2697,67 +2765,6 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
     
   
     
@@ -2814,6 +2821,15 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2826,6 +2842,83 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
     
     
     
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2870,7 +2963,7 @@ drwx------ 1 root root 16384 Jan  9 07:48 lost+found
         <a class="post-tag btn btn-outline-primary" href="/tags/monitoreo-y-gesti%C3%B3n-de-logs/">Monitoreo y Gestión de Logs</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/virtualizaci%C3%B3n/">Virtualización</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/selinux/">SELinux</a>
       
     </div>
   </section>
