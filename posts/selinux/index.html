@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-02-07T10:16:00+01:00","datePublished":"2025-01-29T20:00:00+01:00","description":"….","headline":"Configuración/activación de SELinux","image":"/assets/img/SeLinux-Configuracion-MAC.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/selinux/"},"url":"/posts/selinux/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-02-08T13:32:24+01:00","datePublished":"2025-01-29T20:00:00+01:00","description":"….","headline":"Configuración/activación de SELinux","image":"/assets/img/SeLinux-Configuracion-MAC.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/selinux/"},"url":"/posts/selinux/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -729,6 +729,61 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -797,13 +852,13 @@
 
 <time
   
-  data-ts="1738919760"
+  data-ts="1739017944"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Feb  7, 2025
+  Feb  8, 2025
 </time>
 
         </span>
@@ -862,9 +917,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1762 words"
+  title="2533 words"
 >
-  <em>9 min</em> read</span>
+  <em>14 min</em> read</span>
 
         </div>
       </div>
@@ -914,9 +969,255 @@ Max kernel policy version:      33
 <span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>dnf <span class="nb">install </span>samba samba-common samba-client nfs-utils <span class="nt">-y</span>
 </pre></td></tr></tbody></table></code></div></div>
 
+<p>Para la instalación de <code class="language-plaintext highlighter-rouge">sshfs</code> debemos disponer del repositorio EPEL, por lo que primero hay que instalarlo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>dnf <span class="nb">install</span> <span class="nt">-y</span> epel-release
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Una vez habilitado el repositorio, ya podemos instalar <code class="language-plaintext highlighter-rouge">SSHFS</code> con:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>dnf <span class="nb">install</span> <span class="nt">-y</span> fuse fuse-sshfs
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>IMPORTANTE: en OpenStack debemos asignar a las máquina un sabor <code class="language-plaintext highlighter-rouge">m1.medium</code> como mínimo, pues de lo contrario la máquina se quedará pillada y tendremos que destruirla.</p>
+
 <h2 id="sshfs"><span class="me-2">SSHFS</span><a href="#sshfs" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>kk</p>
+<h3 id="configuración-del-servidor-ssh"><span class="me-2">Configuración del servidor SSH</span><a href="#configuración-del-servidor-ssh" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Primero, necesitamos asegurarnos de que nuestro servidor SSH esté configurado correctamente para permitir conexiones desde el cliente. En nuestro caso, decidimos cambiar el puerto predeterminado de SSH (22) al puerto 2222 por razones de seguridad. Para ello, editamos el archivo de configuración de SSH en <code class="language-plaintext highlighter-rouge">/etc/ssh/sshd_config</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>Port 2222
+PermitRootLogin yes
+PubkeyAuthentication yes
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Estas líneas indican que:</p>
+
+<ul>
+  <li>
+    <p>SSH escuchará en el puerto 2222.</p>
+  </li>
+  <li>
+    <p>Permitiremos el inicio de sesión como root.</p>
+  </li>
+  <li>
+    <p>Habilitaremos la autenticación mediante claves públicas.</p>
+  </li>
+</ul>
+
+<p>Después de realizar estos cambios, reiniciamos el servicio SSH para que los cambios surtan efecto:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>systemctl restart sshd
+<span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>systemctl status sshd
+● sshd.service - OpenSSH server daemon
+     Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/sshd.service<span class="p">;</span> enabled<span class="p">;</span> preset: enabled<span class="o">)</span>
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Sat 2025-02-08 12:01:35 UTC<span class="p">;</span> 5min ago
+       Docs: man:sshd<span class="o">(</span>8<span class="o">)</span>
+             man:sshd_config<span class="o">(</span>5<span class="o">)</span>
+   Main PID: 14817 <span class="o">(</span>sshd<span class="o">)</span>
+      Tasks: 1 <span class="o">(</span>limit: 10890<span class="o">)</span>
+     Memory: 3.4M
+        CPU: 151ms
+     CGroup: /system.slice/sshd.service
+             └─14817 <span class="s2">"sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>También necesitamos asegurarnos de que el firewall permita conexiones en el puerto 2222:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--add-port</span><span class="o">=</span>2222/tcp
+success
+<span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--reload</span>
+success
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Además, utilizamos <code class="language-plaintext highlighter-rouge">semanage</code> para agregar el puerto 2222 al contexto de seguridad de SSH:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>semanage port <span class="nt">-a</span> <span class="nt">-t</span> ssh_port_t <span class="nt">-p</span> tcp 2222
+<span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>semanage port <span class="nt">-l</span> | <span class="nb">grep </span>ssh
+ssh_port_t                     tcp      2222, 22
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="configuración-de-selinux-para-sshfs"><span class="me-2">Configuración de SELinux para SSHFS</span><a href="#configuración-de-selinux-para-sshfs" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>En nuestro servidor, SELinux estaba habilitado, por lo que necesitamos ajustar algunas políticas para permitir el uso de SSHFS. Utilizamos los siguientes comandos para habilitar las opciones necesarias:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>setsebool <span class="nt">-P</span> use_fusefs_home_dirs on
+<span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo </span>setsebool <span class="nt">-P</span> virt_use_fusefs on
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para verificar que los cambios se aplicaron correctamente, ejecutamos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span>getsebool <span class="nt">-a</span> | <span class="nb">grep </span>fuse
+ftpd_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+glance_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+httpd_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+logrotate_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+mailman_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+rpcd_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+samba_share_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+sanlock_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+use_fusefs_home_dirs <span class="nt">--</span><span class="o">&gt;</span> on
+virt_sandbox_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> off
+virt_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> on
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Y confirmamos que use_fusefs_home_dirs y virt_use_fusefs están habilitados.</p>
+
+<h3 id="configuración-de-claves-ssh"><span class="me-2">Configuración de claves SSH</span><a href="#configuración-de-claves-ssh" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Para facilitar la conexión sin necesidad de introducir contraseñas cada vez, configuramos la autenticación mediante claves SSH. Añadimos la clave pública del cliente al archivo <code class="language-plaintext highlighter-rouge">authorized_keys</code> del usuario root en el servidor:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo cat</span> /root/.ssh/authorized_keys
+no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command<span class="o">=</span><span class="s2">"echo 'Please login as the user </span><span class="se">\"</span><span class="s2">rocky</span><span class="se">\"</span><span class="s2"> rather than the user </span><span class="se">\"</span><span class="s2">root</span><span class="se">\"</span><span class="s2">.';echo;sleep 10;exit 142"</span> ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQClFcnIhYd1oaEpvGi/f4psQc4+DaAZvSNIxVRRJHtRoJui8wbJybi3Om8yTOflgEcmBaUrJLkfmzmWqVq1j6MpESq72p7J2hdq2lXnvzdt3huYv5evFwyd0p/r72RfpVZzr3ILi/BS//SJqfVKlDEVbZRaOE5MU2XuElmFFY4EO7NiiZAkbatVqUOT8H/nrfXcad0mjZVxroVqHhsHV+06rxiB0xifG0xZv204Qj4zRura8uqZlEVAAwU+NO/SIGdRwpLY7n7xbQGe1DbjHgPUeVPjJX6HpMK41a43eGj4XYdYtZBLugaU8Mq1y6Kl3tE6cvYkQ9WFTYTLLNy3bvNRZpP2p6qAy5qn03ZLFICiXBNXPmrl5+KVrKaSipNaPHkmInvczbYJjXpfyVBsfEabt+0Y1629M+eEKkkl+iZmVr2ySDSS1gHxMC7zlJRaUhG27o26agpNPYPHH3mVXVjqdGg0ryH0YHZk1V8+Gt1Z9hZ7UYWE1UX8DCgFfecqdX0<span class="o">=</span> pavlo@debian
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwTo+Y3zoaYeUIZu5qcDG8HPyTWszbRc6Hx25+Zm9r1YhmMA/amVLUjldhC5N48/7vryBDpVqV+NaAKjXrYqUJjym2SJxDJlUU1etrtAJ4f8aLtCOzF2HZihv/szRFl/x72F0sb+NHQJsMISERJJ4uWJlsw10O1vo2E8+6JKYMgKTbzVrgun1MyAgXQTY73+wYkbhhgXtF9s3+L1p8HffsaaSSXOgcJRL2RxoZ/2yciVpk5Jo2fsy+z+aXjKglQqZmOUkbamcQ14Hr6Ol+JfY8H0qQNVMJCG3ZgWuoe2sqDoDd17QMoNg/vklmScgS3k/iTvgRD2zMZbUqNXHFQXbzbRUUP87OUJvuVx2vRzV3XsbSP8ZAP+bM91tIZHnZ0G8p32UM75EnrSbog+ZcYT/2SUoXgNENI4X8YcNNts73OKWEU04sNbxayJIBKcMoqa/NJifn2kSIOKyNFqoaT6wH9Tlyg3tixE/ngRSH5WN7REWw3bF8gVkYxNY3Rus9iDs<span class="o">=</span> rocky@cliente-rocky.novalocal
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este archivo contiene las claves públicas de los clientes que pueden conectarse al servidor. En nuestro caso, añadimos la clave del usuario <strong><code class="language-plaintext highlighter-rouge">rocky</code></strong> desde el cliente.</p>
+
+<h3 id="creación-del-directorio-compartido"><span class="me-2">Creación del directorio compartido</span><a href="#creación-del-directorio-compartido" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>En el servidor, creamos un directorio que queremos compartir con el cliente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo mkdir </span>compartir
+<span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo chown </span>rocky:rocky compartir/
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Dentro de este directorio, colocamos un archivo de prueba para verificar que todo funciona correctamente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@rocky ~]<span class="nv">$ </span><span class="nb">sudo cat </span>compartir/kk.txt 
+Buenas tardes por la mañana
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="montaje-del-directorio-remoto-en-el-cliente"><span class="me-2">Montaje del directorio remoto en el cliente</span><a href="#montaje-del-directorio-remoto-en-el-cliente" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Ahora, desde el cliente, procedemos a montar el directorio remoto utilizando SSHFS. Primero, creamos un directorio donde montaremos el directorio remoto:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@cliente-rocky ~]<span class="nv">$ </span><span class="nb">mkdir </span>montaje
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Luego, utilizamos el comando <code class="language-plaintext highlighter-rouge">sshfs</code> para montar el directorio remoto:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@cliente-rocky ~]<span class="nv">$ </span>sshfs <span class="nt">-p</span> 2222 root@10.0.0.25:/home/rocky/compartir montaje/
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este comando indica que queremos montar el directorio <code class="language-plaintext highlighter-rouge">/home/rocky/compartir</code> del servidor <code class="language-plaintext highlighter-rouge">10.0.0.25</code> en el directorio <code class="language-plaintext highlighter-rouge">montaje</code> de nuestro cliente, utilizando el puerto 2222.</p>
+
+<p>Para verificar que el montaje se realizó correctamente, ejecutamos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@cliente-rocky ~]<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
+Filesystem                            Size  Used Avail Use% Mounted on
+devtmpfs                              4.0M     0  4.0M   0% /dev
+tmpfs                                 888M     0  888M   0% /dev/shm
+tmpfs                                 355M  532K  355M   1% /run
+/dev/vda4                              19G  1.2G   18G   7% /
+/dev/vda3                             936M  257M  680M  28% /boot
+/dev/vda2                             100M  7.0M   93M   8% /boot/efi
+tmpfs                                 178M     0  178M   0% /run/user/1000
+root@10.0.0.25:/home/rocky/compartir   19G  1.2G   18G   7% /home/rocky/montaje
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Y confirmamos que el sistema de archivos remoto aparece en la lista de sistemas de archivos montados.</p>
+
+<p>Finalmente, accedemos al archivo de prueba que creamos en el servidor:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>rocky@cliente-rocky ~]<span class="nv">$ </span><span class="nb">ls
+</span>montaje
+<span class="o">[</span>rocky@cliente-rocky ~]<span class="nv">$ </span><span class="nb">cat </span>montaje/kk.txt 
+Buenas tardes por la mañana
+</pre></td></tr></tbody></table></code></div></div>
 
 <h2 id="samba"><span class="me-2">SAMBA</span><a href="#samba" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
