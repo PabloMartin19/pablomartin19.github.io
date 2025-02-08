@@ -33,8 +33,8 @@
 <meta property="og:title" content="Configuración/activación de SELinux" />
 <meta name="author" content="Pablo Martín Hidalgo" />
 <meta property="og:locale" content="es" />
-<meta name="description" content="…." />
-<meta property="og:description" content="…." />
+<meta name="description" content="En un entorno basado en Rocky Linux con SELinux en modo enforcing, garantizar el correcto funcionamiento de servicios como SSHFS, Samba y NFS requiere una configuración precisa y segura de las políticas de SELinux. Además, habilitamos el inicio de sesión remoto como root y cambiamos el puerto SSH a uno no estándar para mejorar la seguridad. Realizamos pruebas exhaustivas para asegurar que los servicios funcionan sin problemas y que el acceso remoto es seguro y eficiente." />
+<meta property="og:description" content="En un entorno basado en Rocky Linux con SELinux en modo enforcing, garantizar el correcto funcionamiento de servicios como SSHFS, Samba y NFS requiere una configuración precisa y segura de las políticas de SELinux. Además, habilitamos el inicio de sesión remoto como root y cambiamos el puerto SSH a uno no estándar para mejorar la seguridad. Realizamos pruebas exhaustivas para asegurar que los servicios funcionan sin problemas y que el acceso remoto es seguro y eficiente." />
 <link rel="canonical" href="/posts/selinux/" />
 <meta property="og:url" content="/posts/selinux/" />
 <meta property="og:site_name" content="Blog personal" />
@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-02-08T13:32:24+01:00","datePublished":"2025-01-29T20:00:00+01:00","description":"….","headline":"Configuración/activación de SELinux","image":"/assets/img/SeLinux-Configuracion-MAC.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/selinux/"},"url":"/posts/selinux/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-02-08T13:39:06+01:00","datePublished":"2025-01-29T20:00:00+01:00","description":"En un entorno basado en Rocky Linux con SELinux en modo enforcing, garantizar el correcto funcionamiento de servicios como SSHFS, Samba y NFS requiere una configuración precisa y segura de las políticas de SELinux. Además, habilitamos el inicio de sesión remoto como root y cambiamos el puerto SSH a uno no estándar para mejorar la seguridad. Realizamos pruebas exhaustivas para asegurar que los servicios funcionan sin problemas y que el acceso remoto es seguro y eficiente.","headline":"Configuración/activación de SELinux","image":"/assets/img/SeLinux-Configuracion-MAC.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/selinux/"},"url":"/posts/selinux/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -810,7 +810,7 @@
   <header>
     <h1 data-toc-skip>Configuración/activación de SELinux</h1>
     
-      <p class="post-desc fw-light mb-4">....</p>
+      <p class="post-desc fw-light mb-4">En un entorno basado en Rocky Linux con SELinux en modo enforcing, garantizar el correcto funcionamiento de servicios como SSHFS, Samba y NFS requiere una configuración precisa y segura de las políticas de SELinux. Además, habilitamos el inicio de sesión remoto como root y cambiamos el puerto SSH a uno no estándar para mejorar la seguridad. Realizamos pruebas exhaustivas para asegurar que los servicios funcionan sin problemas y que el acceso remoto es seguro y eficiente.</p>
     
 
     <div class="post-meta text-muted">
@@ -852,7 +852,7 @@
 
 <time
   
-  data-ts="1739017944"
+  data-ts="1739018346"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -1117,7 +1117,7 @@ virt_sandbox_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> of
 virt_use_fusefs <span class="nt">--</span><span class="o">&gt;</span> on
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Y confirmamos que use_fusefs_home_dirs y virt_use_fusefs están habilitados.</p>
+<p>Y confirmamos que <code class="language-plaintext highlighter-rouge">use_fusefs_home_dirs</code> y <code class="language-plaintext highlighter-rouge">virt_use_fusefs</code> están habilitados.</p>
 
 <h3 id="configuración-de-claves-ssh"><span class="me-2">Configuración de claves SSH</span><a href="#configuración-de-claves-ssh" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 

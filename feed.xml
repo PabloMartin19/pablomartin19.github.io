@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-08T13:32:26+01:00</updated>
+  <updated>2025-02-08T13:39:07+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/selinux/" rel="alternate" type="text/html" title="Configuración/activación de SELinux" />
     <published>2025-01-29T20:00:00+01:00</published>
   
-    <updated>2025-02-08T13:32:24+01:00</updated>
+    <updated>2025-02-08T13:39:06+01:00</updated>
   
     <id>/posts/selinux/</id>
     <content src="/posts/selinux/" />
@@ -40,7 +40,7 @@
     
   
 
-  <summary>....</summary>
+  <summary>En un entorno basado en Rocky Linux con SELinux en modo enforcing, garantizar el correcto funcionamiento de servicios como SSHFS, Samba y NFS requiere una configuración precisa y segura de las políticas de SELinux. Además, habilitamos el inicio de sesión remoto como root y cambiamos el puerto SSH a uno no estándar para mejorar la seguridad. Realizamos pruebas exhaustivas para asegurar que los s...</summary>
 
   </entry>
 
