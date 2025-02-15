@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-14T09:15:30+01:00</updated>
+  <updated>2025-02-15T18:09:40+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/forense/" rel="alternate" type="text/html" title="Informática forense" />
     <published>2025-01-29T20:00:00+01:00</published>
   
-    <updated>2025-02-14T09:15:29+01:00</updated>
+    <updated>2025-02-15T18:09:39+01:00</updated>
   
     <id>/posts/forense/</id>
     <content src="/posts/forense/" />
