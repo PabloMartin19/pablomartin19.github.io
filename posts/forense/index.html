@@ -33,8 +33,8 @@
 <meta property="og:title" content="Informática forense" />
 <meta name="author" content="Pablo Martín Hidalgo" />
 <meta property="og:locale" content="es" />
-<meta name="description" content="…" />
-<meta property="og:description" content="…" />
+<meta name="description" content="En esta práctica realizaremos un análisis forense sobre un disco volcado en Windows 10 y Debian 12. La finalidad de esto es encontrar distintas pruebas sobre lo que estaba ocurriendo en ese momento en el disco, además de mucha información necesaria para recoger evidencias." />
+<meta property="og:description" content="En esta práctica realizaremos un análisis forense sobre un disco volcado en Windows 10 y Debian 12. La finalidad de esto es encontrar distintas pruebas sobre lo que estaba ocurriendo en ese momento en el disco, además de mucha información necesaria para recoger evidencias." />
 <link rel="canonical" href="/posts/forense/" />
 <meta property="og:url" content="/posts/forense/" />
 <meta property="og:site_name" content="Blog personal" />
@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-02-15T18:09:39+01:00","datePublished":"2025-01-29T20:00:00+01:00","description":"…","headline":"Informática forense","image":"/assets/img/posts/forense/portada.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/forense/"},"url":"/posts/forense/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-02-17T20:56:03+01:00","datePublished":"2025-01-29T20:00:00+01:00","description":"En esta práctica realizaremos un análisis forense sobre un disco volcado en Windows 10 y Debian 12. La finalidad de esto es encontrar distintas pruebas sobre lo que estaba ocurriendo en ese momento en el disco, además de mucha información necesaria para recoger evidencias.","headline":"Informática forense","image":"/assets/img/posts/forense/portada.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/forense/"},"url":"/posts/forense/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -4579,7 +4579,7 @@
   <header>
     <h1 data-toc-skip>Informática forense</h1>
     
-      <p class="post-desc fw-light mb-4">...</p>
+      <p class="post-desc fw-light mb-4">En esta práctica realizaremos un análisis forense sobre un disco volcado en Windows 10 y Debian 12. La finalidad de esto es encontrar distintas pruebas sobre lo que estaba ocurriendo en ese momento en el disco, además de mucha información necesaria para recoger evidencias.</p>
     
 
     <div class="post-meta text-muted">
@@ -4621,13 +4621,13 @@
 
 <time
   
-  data-ts="1739639379"
+  data-ts="1739822163"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Feb 15, 2025
+  Feb 17, 2025
 </time>
 
         </span>
@@ -5579,10 +5579,10 @@ de77108bcc533bfc9125cc54d60927cd2d687d5e1f8f316713ca35b9f3a5fb67  /mnt/nuevo/dis
 <p>No he sido capaz de realizar el volcado correctamente con Volatility, pues no lo reconocía. Además, tampoco he conseguido que Autopsy me funciones correctamente en Debian. Por lo tanto, no me queda otra que hacer las comprobaciones a través de la terminal.</p>
 
 <ol>
-  <li>Procesos en ejecución.</li>
-</ol>
+  <li>
+    <p>Procesos en ejecución.</p>
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -5790,219 +5790,218 @@ de77108bcc533bfc9125cc54d60927cd2d687d5e1f8f316713ca35b9f3a5fb67  /mnt/nuevo/dis
 204
 205
 206
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span>ps <span class="nt">-aux</span>
-USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root           1  1.7  0.6 168172 12536 ?        Ss   08:57   0:00 /sbin/init
-root           2  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kthreadd]
-root           3  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>rcu_gp]
-root           4  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>rcu_par_gp]
-root           5  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>slub_flushwq]
-root           6  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>netns]
-root           7  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:0-events]
-root           8  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/0:0H-events_highpri]
-root           9  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:0-events_unbound]
-root          10  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>mm_percpu_wq]
-root          11  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_tasks_kthread]
-root          12  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_tasks_rude_kthread]
-root          13  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_tasks_trace_kthread]
-root          14  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>ksoftirqd/0]
-root          15  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_preempt]
-root          16  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>migration/0]
-root          17  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:1-events]
-root          18  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>cpuhp/0]
-root          19  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>cpuhp/1]
-root          20  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>migration/1]
-root          21  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>ksoftirqd/1]
-root          22  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:0-events]
-root          23  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/1:0H-kblockd]
-root          25  0.6  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:1-events_unbound]
-root          26  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kdevtmpfs]
-root          27  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>inet_frag_wq]
-root          28  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kauditd]
-root          29  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>khungtaskd]
-root          30  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>oom_reaper]
-root          31  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:2-events_unbound]
-root          32  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>writeback]
-root          33  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kcompactd0]
-root          34  0.0  0.0      0     0 ?        SN   08:57   0:00 <span class="o">[</span>ksmd]
-root          35  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:1-events_power_efficient]
-root          36  0.0  0.0      0     0 ?        SN   08:57   0:00 <span class="o">[</span>khugepaged]
-root          37  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kintegrityd]
-root          38  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kblockd]
-root          39  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>blkcg_punt_bio]
-root          40  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>tpm_dev_wq]
-root          41  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>edac-poller]
-root          42  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>devfreq_wq]
-root          43  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/1:1H-kblockd]
-root          44  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kswapd0]
-root          50  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kthrotld]
-root          52  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/24-aerdrv]
-root          53  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/25-aerdrv]
-root          54  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/26-aerdrv]
-root          55  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/27-aerdrv]
-root          56  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/28-aerdrv]
-root          57  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/29-aerdrv]
-root          58  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/30-aerdrv]
-root          59  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/31-aerdrv]
-root          60  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/32-aerdrv]
-root          61  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/33-aerdrv]
-root          62  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/34-aerdrv]
-root          63  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/35-aerdrv]
-root          64  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/36-aerdrv]
-root          65  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/37-aerdrv]
-root          66  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>acpi_thermal_pm]
-root          67  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:2-cgroup_destroy]
-root          68  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>mld]
-root          69  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>ipv6_addrconf]
-root          74  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kstrp]
-root          79  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>zswap-shrink]
-root          80  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/u5:0]
-root         140  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/0:1H-kblockd]
-root         143  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>ata_sff]
-root         145  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_0]
-root         147  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_0]
-root         148  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_1]
-root         149  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_1]
-root         150  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_2]
-root         151  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_2]
-root         152  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_3]
-root         153  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_3]
-root         154  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_4]
-root         155  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_5]
-root         156  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:2-events]
-root         157  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_5]
-root         158  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_4]
-root         159  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_6]
-root         160  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_6]
-root         161  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:3-flush-254:0]
-root         162  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:4-events_unbound]
-root         163  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:5-flush-254:0]
-root         164  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:6-events_unbound]
-root         165  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:7-scsi_tmf_0]
-root         166  0.1  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:3-rcu_gp]
-root         168  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:4-cgroup_destroy]
-root         169  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/1:2H-kblockd]
-root         208  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>jbd2/vda1-8]
-root         209  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>ext4-rsv-conver]
-root         223  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>hwrng]
-root         251  0.3  0.8  41540 16272 ?        Ss   08:57   0:00 /lib/systemd/systemd-journald
-root         280  0.1  0.3  28232  7348 ?        Ss   08:57   0:00 /lib/systemd/systemd-udevd
-systemd+     297  0.0  0.3  90252  6952 ?        Ssl  08:57   0:00 /lib/systemd/systemd-timesyncd
-root         337  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:3-events]
-root         348  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>watchdogd]
-root         351  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>cryptd]
-root         473  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:4-events]
-root         518  0.0  0.4 237640  9932 ?        Ssl  08:57   0:00 /usr/libexec/accounts-daemon
-avahi        520  0.0  0.1   8288  3980 ?        Ss   08:57   0:00 avahi-daemon: running <span class="o">[</span>forense.local]
-root         521  0.0  0.0   6608  1200 ?        Ss   08:57   0:00 /usr/sbin/cron <span class="nt">-f</span>
-message+     522  0.3  0.3  10608  6156 ?        Ss   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--system</span> <span class="nt">--address</span><span class="o">=</span>systemd: <span class="nt">--nofork</span> <span class="nt">--nopidfile</span> <span class="nt">--systemd-activation</span> <span class="nt">--syslog-only</span>
-root         524  0.0  0.2 230020  4420 ?        SLsl 08:57   0:00 /usr/libexec/low-memory-monitor
-polkitd      526  0.2  0.4 310756  9752 ?        Ssl  08:57   0:00 /usr/lib/polkit-1/polkitd <span class="nt">--no-debug</span>
-root         527  0.0  0.4 237268  9060 ?        Ssl  08:57   0:00 /usr/libexec/power-profiles-daemon
-root         528  0.0  0.0  80236  1880 ?        Ssl  08:57   0:00 /usr/sbin/qemu-ga
-root         529  0.0  0.4 233400  8792 ?        Ssl  08:57   0:00 /usr/libexec/switcheroo-control
-root         530  0.0  0.2 651308  5032 ?        Ssl  08:57   0:00 /usr/sbin/nscd
-root         531  0.1  0.3  17352  7904 ?        Ss   08:57   0:00 /lib/systemd/systemd-logind
-root         532  0.1  0.7 395040 14692 ?        Ssl  08:57   0:00 /usr/libexec/udisks2/udisksd
-avahi        533  0.0  0.0   8100   364 ?        S    08:57   0:00 avahi-daemon: <span class="nb">chroot </span>helper
-root         563  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>psimon]
-root         565  0.1  1.0 259328 20572 ?        Ssl  08:57   0:00 /usr/sbin/NetworkManager <span class="nt">--no-daemon</span>
-root         578  0.0  0.2  16532  5916 ?        Ss   08:57   0:00 /sbin/wpa_supplicant <span class="nt">-u</span> <span class="nt">-s</span> <span class="nt">-O</span> <span class="nv">DIR</span><span class="o">=</span>/run/wpa_supplicant <span class="nv">GROUP</span><span class="o">=</span>netdev
-root         580  0.0  0.6 317332 12216 ?        Ssl  08:57   0:00 /usr/sbin/ModemManager
-root         595  0.0  0.4  27080  8772 ?        Ss   08:57   0:00 /usr/sbin/cupsd <span class="nt">-l</span>
-lp           612  0.0  0.2  16592  5292 ?        S    08:57   0:00 /usr/lib/cups/notifier/dbus dbus://
-root         618  0.0  0.4  15648  8880 ?        Ss   08:57   0:00 sshd: /usr/sbin/sshd <span class="nt">-D</span> <span class="o">[</span>listener] 0 of 10-100 startups
-root         646  0.0  0.6 240808 13388 ?        Ssl  08:57   0:00 /usr/sbin/gdm3
-root         664  0.0  0.7 176520 14836 ?        Ssl  08:57   0:00 /usr/sbin/cups-browsed
-root         667  0.0  0.5 165576 10580 ?        Sl   08:57   0:00 gdm-session-worker <span class="o">[</span>pam/gdm-launch-environment]
-root         670  0.0  1.4 221352 28876 ?        Ss   08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
-Debian-+     675  0.1  0.5  19520 11180 ?        Ss   08:57   0:00 /lib/systemd/systemd <span class="nt">--user</span>
-Debian-+     676  0.0  0.1 103844  3284 ?        S    08:57   0:00 <span class="o">(</span>sd-pam<span class="o">)</span>
-www-data     677  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
-www-data     678  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
-www-data     679  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
-www-data     680  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
-www-data     681  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
-Debian-+     696  0.0  0.5  44784 11756 ?        S&lt;sl 08:57   0:00 /usr/bin/pipewire
-Debian-+     698  0.1  0.9 257744 18860 ?        S&lt;sl 08:57   0:00 /usr/bin/wireplumber
-Debian-+     699  0.0  0.4 159464  8132 tty1     Ssl+ 08:57   0:00 /usr/libexec/gdm-wayland-session dbus-run-session <span class="nt">--</span> gnome-session <span class="nt">--autostart</span> /usr/share/gdm/greeter/autostart
-Debian-+     700  0.0  0.4  27388  9204 ?        S&lt;sl 08:57   0:00 /usr/bin/pipewire-pulse
-Debian-+     702  0.0  0.2   8460  4404 ?        Ss   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--session</span> <span class="nt">--address</span><span class="o">=</span>systemd: <span class="nt">--nofork</span> <span class="nt">--nopidfile</span> <span class="nt">--systemd-activation</span> <span class="nt">--syslog-only</span>
-Debian-+     704  0.0  0.0   6260  1512 tty1     S+   08:57   0:00 dbus-run-session <span class="nt">--</span> gnome-session <span class="nt">--autostart</span> /usr/share/gdm/greeter/autostart
-rtkit        705  0.0  0.0  22912  1536 ?        SNsl 08:57   0:00 /usr/libexec/rtkit-daemon
-Debian-+     706  0.1  0.2   8784  4724 tty1     S+   08:57   0:00 dbus-daemon <span class="nt">--nofork</span> <span class="nt">--print-address</span> 4 <span class="nt">--session</span>
-Debian-+     708  0.1  1.0 791064 20288 tty1     Sl+  08:57   0:00 /usr/libexec/gnome-session-binary <span class="nt">--autostart</span> /usr/share/gdm/greeter/autostart
-Debian-+     713  0.0  0.4 237720  9904 ?        Ssl  08:57   0:00 /usr/libexec/gvfsd
-Debian-+     720  0.0  0.3 380372  6504 ?        Sl   08:57   0:00 /usr/libexec/gvfsd-fuse /run/user/112/gvfs <span class="nt">-f</span>
-Debian-+     746  2.4 10.6 3684276 214624 tty1   Sl+  08:57   0:00 /usr/bin/gnome-shell
-Debian-+     763  0.5  1.4 629672 28832 ?        SNsl 08:57   0:00 /usr/libexec/tracker-miner-fs-3
-Debian-+     769  0.0  0.3 311420  7712 tty1     Sl+  08:57   0:00 /usr/libexec/at-spi-bus-launcher
-Debian-+     774  0.0  0.2   8200  4084 tty1     S+   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--config-file</span><span class="o">=</span>/usr/share/defaults/at-spi2/accessibility.conf <span class="nt">--nofork</span> <span class="nt">--print-address</span> 11 <span class="nt">--address</span><span class="o">=</span>unix:path<span class="o">=</span>/run/user/112/
-Debian-+     775  0.0  0.6 352120 13988 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-udisks2-volume-monitor
-Debian-+     783  0.0  0.5 312632 10176 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-afc-volume-monitor
-Debian-+     788  0.0  0.4 234492  8772 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-gphoto2-volume-monitor
-Debian-+     792  0.0  0.4 233536  8528 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-mtp-volume-monitor
-Debian-+     796  0.1  3.2 229120 65868 tty1     S+   08:57   0:00 /usr/bin/Xwayland :1024 <span class="nt">-rootless</span> <span class="nt">-noreset</span> <span class="nt">-accessx</span> <span class="nt">-core</span> <span class="nt">-auth</span> /run/user/112/.mutter-Xwaylandauth.BJFG12 <span class="nt">-listenfd</span> 4 <span class="nt">-listenfd</span> 5 <span class="nt">-displayfd</span> 6 -
-Debian-+     797  0.0  0.4 233728  8360 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-goa-volume-monitor
-Debian-+     801  0.1  2.1 672264 42588 ?        Sl   08:57   0:00 /usr/libexec/goa-daemon
-Debian-+     809  0.0  0.6 386620 13208 ?        Sl   08:57   0:00 /usr/libexec/goa-identity-service
-root         816  0.0  0.4 233880  8836 ?        Ssl  08:57   0:00 /usr/libexec/upowerd
-Debian-+     829  0.0  0.3 237000  7760 tty1     Sl+  08:57   0:00 /usr/libexec/xdg-permission-store
-geoclue      845  0.0  0.5 244848 12052 ?        Ssl  08:57   0:00 /usr/libexec/geoclue
-root         846  0.0  1.1 297952 22924 ?        Ssl  08:57   0:00 /usr/libexec/packagekitd
-Debian-+     853  0.0  1.3 2453060 26980 tty1    Sl+  08:57   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
-Debian-+     854  0.0  0.4 164320  9212 tty1     Sl+  08:57   0:00 /usr/libexec/at-spi2-registryd <span class="nt">--use-gnome-session</span>
-colord       855  0.1  0.8 242688 17764 ?        Ssl  08:57   0:00 /usr/libexec/colord
-Debian-+     860  0.0  0.6 463836 13168 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-sharing
-Debian-+     866  0.1  1.3 413520 27256 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-wacom
-Debian-+     875  0.1  1.2 340748 25664 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-color
-Debian-+     877  0.1  1.3 339096 26912 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-keyboard
-Debian-+     879  0.0  0.6 247660 13512 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-print-notifications
-Debian-+     881  0.0  0.5 454996 10592 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-rfkill
-Debian-+     885  0.0  0.6 312420 12192 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-smartcard
-Debian-+     887  0.0  0.6 355812 13988 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-datetime
-Debian-+     894  0.1  1.4 521828 29832 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-media-keys
-Debian-+     901  0.0  0.4 233412  8304 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-screensaver-proxy
-Debian-+     905  0.0  0.5 319940 11916 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-sound
-Debian-+     914  0.0  0.4 307928  8956 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-a11y-settings
-Debian-+     917  0.0  0.4 383220  9656 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-housekeeping
-Debian-+     925  0.1  1.4 451296 28624 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-power
-Debian-+    1019  0.0  0.8 342144 17684 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-printer
-root        1042  0.0  0.5 242732 10624 ?        Ssl  08:57   0:00 /usr/libexec/realmd
-Debian-+    1053  0.0  0.6 312956 12384 tty1     Sl   08:57   0:00 ibus-daemon <span class="nt">--panel</span> disable <span class="nt">-r</span> <span class="nt">--xim</span>
-Debian-+    1058  0.0  1.3 2453056 27196 tty1    Sl+  08:57   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.ScreenSaver
-Debian-+    1069  0.0  0.4 234488  9252 tty1     Sl   08:57   0:00 /usr/libexec/ibus-dconf
-Debian-+    1070  1.9  1.6 344492 32496 tty1     Sl   08:57   0:00 /usr/libexec/ibus-extension-gtk3
-Debian-+    1078  0.1  3.7 397600 74820 tty1     Sl   08:57   0:00 /usr/libexec/ibus-x11 <span class="nt">--kill-daemon</span>
-Debian-+    1083  0.0  0.4 234432  9536 tty1     Sl+  08:57   0:00 /usr/libexec/ibus-portal
-Debian-+    1096  0.0  0.3 160628  7148 tty1     Sl   08:57   0:00 /usr/libexec/ibus-engine-simple
-root        1100  0.2  0.5  18424 10960 ?        Ss   08:57   0:00 sshd: pablo <span class="o">[</span>priv]
-pablo       1107  0.2  0.5  19528 11176 ?        Ss   08:57   0:00 /lib/systemd/systemd <span class="nt">--user</span>
-pablo       1109  0.0  0.1 104172  3524 ?        S    08:57   0:00 <span class="o">(</span>sd-pam<span class="o">)</span>
-pablo       1128  0.0  0.5  44692 11868 ?        Ssl  08:57   0:00 /usr/bin/pipewire
-pablo       1130  0.1  0.9 257736 19236 ?        Ssl  08:57   0:00 /usr/bin/wireplumber
-pablo       1136  0.0  0.4  26908  8760 ?        Ssl  08:57   0:00 /usr/bin/pipewire-pulse
-pablo       1143  0.0  0.3  18684  6636 ?        S    08:57   0:00 sshd: pablo@pts/0
-pablo       1144  0.0  0.2   8464  4384 ?        Ss   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--session</span> <span class="nt">--address</span><span class="o">=</span>systemd: <span class="nt">--nofork</span> <span class="nt">--nopidfile</span> <span class="nt">--systemd-activation</span> <span class="nt">--syslog-only</span>
-pablo       1150  0.0  0.4 237716  9904 ?        Ssl  08:57   0:00 /usr/libexec/gvfsd
-pablo       1162  0.0  0.3 380372  6612 ?        Sl   08:57   0:00 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs <span class="nt">-f</span>
-pablo       1173  0.0  0.2   8444  4984 pts/0    Ss   08:57   0:00 <span class="nt">-bash</span>
-pablo       1178  0.6  3.8 634044 78296 ?        SNsl 08:57   0:00 /usr/libexec/tracker-miner-fs-3
-pablo       1183  0.0  0.6 352128 13872 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-udisks2-volume-monitor
-pablo       1188  0.0  0.5 312632 10192 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-afc-volume-monitor
-pablo       1193  0.0  0.4 234488  8776 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-gphoto2-volume-monitor
-pablo       1197  0.0  0.4 233532  8664 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-mtp-volume-monitor
-pablo       1201  0.0  0.4 233728  8648 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-goa-volume-monitor
-pablo       1205  0.0  2.1 598536 42432 ?        Sl   08:57   0:00 /usr/libexec/goa-daemon
-pablo       1212  0.0  0.5 312888 10976 ?        Sl   08:57   0:00 /usr/libexec/goa-identity-service
-pablo       1234  200  0.2  11348  4416 pts/0    R+   08:58   0:00 ps <span class="nt">-aux</span>
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span>ps <span class="nt">-aux</span>
+ USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+ root           1  1.7  0.6 168172 12536 ?        Ss   08:57   0:00 /sbin/init
+ root           2  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kthreadd]
+ root           3  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>rcu_gp]
+ root           4  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>rcu_par_gp]
+ root           5  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>slub_flushwq]
+ root           6  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>netns]
+ root           7  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:0-events]
+ root           8  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/0:0H-events_highpri]
+ root           9  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:0-events_unbound]
+ root          10  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>mm_percpu_wq]
+ root          11  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_tasks_kthread]
+ root          12  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_tasks_rude_kthread]
+ root          13  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_tasks_trace_kthread]
+ root          14  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>ksoftirqd/0]
+ root          15  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>rcu_preempt]
+ root          16  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>migration/0]
+ root          17  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:1-events]
+ root          18  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>cpuhp/0]
+ root          19  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>cpuhp/1]
+ root          20  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>migration/1]
+ root          21  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>ksoftirqd/1]
+ root          22  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:0-events]
+ root          23  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/1:0H-kblockd]
+ root          25  0.6  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:1-events_unbound]
+ root          26  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kdevtmpfs]
+ root          27  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>inet_frag_wq]
+ root          28  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kauditd]
+ root          29  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>khungtaskd]
+ root          30  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>oom_reaper]
+ root          31  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:2-events_unbound]
+ root          32  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>writeback]
+ root          33  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kcompactd0]
+ root          34  0.0  0.0      0     0 ?        SN   08:57   0:00 <span class="o">[</span>ksmd]
+ root          35  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:1-events_power_efficient]
+ root          36  0.0  0.0      0     0 ?        SN   08:57   0:00 <span class="o">[</span>khugepaged]
+ root          37  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kintegrityd]
+ root          38  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kblockd]
+ root          39  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>blkcg_punt_bio]
+ root          40  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>tpm_dev_wq]
+ root          41  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>edac-poller]
+ root          42  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>devfreq_wq]
+ root          43  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/1:1H-kblockd]
+ root          44  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>kswapd0]
+ root          50  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kthrotld]
+ root          52  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/24-aerdrv]
+ root          53  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/25-aerdrv]
+ root          54  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/26-aerdrv]
+ root          55  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/27-aerdrv]
+ root          56  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/28-aerdrv]
+ root          57  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/29-aerdrv]
+ root          58  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/30-aerdrv]
+ root          59  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/31-aerdrv]
+ root          60  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/32-aerdrv]
+ root          61  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/33-aerdrv]
+ root          62  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/34-aerdrv]
+ root          63  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/35-aerdrv]
+ root          64  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/36-aerdrv]
+ root          65  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>irq/37-aerdrv]
+ root          66  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>acpi_thermal_pm]
+ root          67  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:2-cgroup_destroy]
+ root          68  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>mld]
+ root          69  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>ipv6_addrconf]
+ root          74  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kstrp]
+ root          79  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>zswap-shrink]
+ root          80  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/u5:0]
+ root         140  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/0:1H-kblockd]
+ root         143  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>ata_sff]
+ root         145  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_0]
+ root         147  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_0]
+ root         148  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_1]
+ root         149  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_1]
+ root         150  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_2]
+ root         151  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_2]
+ root         152  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_3]
+ root         153  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_3]
+ root         154  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_4]
+ root         155  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_5]
+ root         156  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:2-events]
+ root         157  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_5]
+ root         158  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_4]
+ root         159  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>scsi_eh_6]
+ root         160  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>scsi_tmf_6]
+ root         161  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:3-flush-254:0]
+ root         162  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:4-events_unbound]
+ root         163  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:5-flush-254:0]
+ root         164  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:6-events_unbound]
+ root         165  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/u4:7-scsi_tmf_0]
+ root         166  0.1  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:3-rcu_gp]
+ root         168  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/0:4-cgroup_destroy]
+ root         169  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>kworker/1:2H-kblockd]
+ root         208  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>jbd2/vda1-8]
+ root         209  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>ext4-rsv-conver]
+ root         223  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>hwrng]
+ root         251  0.3  0.8  41540 16272 ?        Ss   08:57   0:00 /lib/systemd/systemd-journald
+ root         280  0.1  0.3  28232  7348 ?        Ss   08:57   0:00 /lib/systemd/systemd-udevd
+ systemd+     297  0.0  0.3  90252  6952 ?        Ssl  08:57   0:00 /lib/systemd/systemd-timesyncd
+ root         337  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:3-events]
+ root         348  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>watchdogd]
+ root         351  0.0  0.0      0     0 ?        I&lt;   08:57   0:00 <span class="o">[</span>cryptd]
+ root         473  0.0  0.0      0     0 ?        I    08:57   0:00 <span class="o">[</span>kworker/1:4-events]
+ root         518  0.0  0.4 237640  9932 ?        Ssl  08:57   0:00 /usr/libexec/accounts-daemon
+ avahi        520  0.0  0.1   8288  3980 ?        Ss   08:57   0:00 avahi-daemon: running <span class="o">[</span>forense.local]
+ root         521  0.0  0.0   6608  1200 ?        Ss   08:57   0:00 /usr/sbin/cron <span class="nt">-f</span>
+ message+     522  0.3  0.3  10608  6156 ?        Ss   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--system</span> <span class="nt">--address</span><span class="o">=</span>systemd: <span class="nt">--nofork</span> <span class="nt">--nopidfile</span> <span class="nt">--systemd-activation</span> <span class="nt">--syslog-only</span>
+ root         524  0.0  0.2 230020  4420 ?        SLsl 08:57   0:00 /usr/libexec/low-memory-monitor
+ polkitd      526  0.2  0.4 310756  9752 ?        Ssl  08:57   0:00 /usr/lib/polkit-1/polkitd <span class="nt">--no-debug</span>
+ root         527  0.0  0.4 237268  9060 ?        Ssl  08:57   0:00 /usr/libexec/power-profiles-daemon
+ root         528  0.0  0.0  80236  1880 ?        Ssl  08:57   0:00 /usr/sbin/qemu-ga
+ root         529  0.0  0.4 233400  8792 ?        Ssl  08:57   0:00 /usr/libexec/switcheroo-control
+ root         530  0.0  0.2 651308  5032 ?        Ssl  08:57   0:00 /usr/sbin/nscd
+ root         531  0.1  0.3  17352  7904 ?        Ss   08:57   0:00 /lib/systemd/systemd-logind
+ root         532  0.1  0.7 395040 14692 ?        Ssl  08:57   0:00 /usr/libexec/udisks2/udisksd
+ avahi        533  0.0  0.0   8100   364 ?        S    08:57   0:00 avahi-daemon: <span class="nb">chroot </span>helper
+ root         563  0.0  0.0      0     0 ?        S    08:57   0:00 <span class="o">[</span>psimon]
+ root         565  0.1  1.0 259328 20572 ?        Ssl  08:57   0:00 /usr/sbin/NetworkManager <span class="nt">--no-daemon</span>
+ root         578  0.0  0.2  16532  5916 ?        Ss   08:57   0:00 /sbin/wpa_supplicant <span class="nt">-u</span> <span class="nt">-s</span> <span class="nt">-O</span> <span class="nv">DIR</span><span class="o">=</span>/run/wpa_supplicant <span class="nv">GROUP</span><span class="o">=</span>netdev
+ root         580  0.0  0.6 317332 12216 ?        Ssl  08:57   0:00 /usr/sbin/ModemManager
+ root         595  0.0  0.4  27080  8772 ?        Ss   08:57   0:00 /usr/sbin/cupsd <span class="nt">-l</span>
+ lp           612  0.0  0.2  16592  5292 ?        S    08:57   0:00 /usr/lib/cups/notifier/dbus dbus://
+ root         618  0.0  0.4  15648  8880 ?        Ss   08:57   0:00 sshd: /usr/sbin/sshd <span class="nt">-D</span> <span class="o">[</span>listener] 0 of 10-100 startups
+ root         646  0.0  0.6 240808 13388 ?        Ssl  08:57   0:00 /usr/sbin/gdm3
+ root         664  0.0  0.7 176520 14836 ?        Ssl  08:57   0:00 /usr/sbin/cups-browsed
+ root         667  0.0  0.5 165576 10580 ?        Sl   08:57   0:00 gdm-session-worker <span class="o">[</span>pam/gdm-launch-environment]
+ root         670  0.0  1.4 221352 28876 ?        Ss   08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
+ Debian-+     675  0.1  0.5  19520 11180 ?        Ss   08:57   0:00 /lib/systemd/systemd <span class="nt">--user</span>
+ Debian-+     676  0.0  0.1 103844  3284 ?        S    08:57   0:00 <span class="o">(</span>sd-pam<span class="o">)</span>
+ www-data     677  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
+ www-data     678  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
+ www-data     679  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
+ www-data     680  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
+ www-data     681  0.0  0.5 221384 10828 ?        S    08:57   0:00 /usr/sbin/apache2 <span class="nt">-k</span> start
+ Debian-+     696  0.0  0.5  44784 11756 ?        S&lt;sl 08:57   0:00 /usr/bin/pipewire
+ Debian-+     698  0.1  0.9 257744 18860 ?        S&lt;sl 08:57   0:00 /usr/bin/wireplumber
+ Debian-+     699  0.0  0.4 159464  8132 tty1     Ssl+ 08:57   0:00 /usr/libexec/gdm-wayland-session dbus-run-session <span class="nt">--</span> gnome-session <span class="nt">--autostart</span> /usr/share/gdm/greeter/autostart
+ Debian-+     700  0.0  0.4  27388  9204 ?        S&lt;sl 08:57   0:00 /usr/bin/pipewire-pulse
+ Debian-+     702  0.0  0.2   8460  4404 ?        Ss   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--session</span> <span class="nt">--address</span><span class="o">=</span>systemd: <span class="nt">--nofork</span> <span class="nt">--nopidfile</span> <span class="nt">--systemd-activation</span> <span class="nt">--syslog-only</span>
+ Debian-+     704  0.0  0.0   6260  1512 tty1     S+   08:57   0:00 dbus-run-session <span class="nt">--</span> gnome-session <span class="nt">--autostart</span> /usr/share/gdm/greeter/autostart
+ rtkit        705  0.0  0.0  22912  1536 ?        SNsl 08:57   0:00 /usr/libexec/rtkit-daemon
+ Debian-+     706  0.1  0.2   8784  4724 tty1     S+   08:57   0:00 dbus-daemon <span class="nt">--nofork</span> <span class="nt">--print-address</span> 4 <span class="nt">--session</span>
+ Debian-+     708  0.1  1.0 791064 20288 tty1     Sl+  08:57   0:00 /usr/libexec/gnome-session-binary <span class="nt">--autostart</span> /usr/share/gdm/greeter/autostart
+ Debian-+     713  0.0  0.4 237720  9904 ?        Ssl  08:57   0:00 /usr/libexec/gvfsd
+ Debian-+     720  0.0  0.3 380372  6504 ?        Sl   08:57   0:00 /usr/libexec/gvfsd-fuse /run/user/112/gvfs <span class="nt">-f</span>
+ Debian-+     746  2.4 10.6 3684276 214624 tty1   Sl+  08:57   0:00 /usr/bin/gnome-shell
+ Debian-+     763  0.5  1.4 629672 28832 ?        SNsl 08:57   0:00 /usr/libexec/tracker-miner-fs-3
+ Debian-+     769  0.0  0.3 311420  7712 tty1     Sl+  08:57   0:00 /usr/libexec/at-spi-bus-launcher
+ Debian-+     774  0.0  0.2   8200  4084 tty1     S+   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--config-file</span><span class="o">=</span>/usr/share/defaults/at-spi2/accessibility.conf <span class="nt">--nofork</span> <span class="nt">--print-address</span> 11 <span class="nt">--address</span><span class="o">=</span>unix:path<span class="o">=</span>/run/user/112/
+ Debian-+     775  0.0  0.6 352120 13988 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-udisks2-volume-monitor
+ Debian-+     783  0.0  0.5 312632 10176 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-afc-volume-monitor
+ Debian-+     788  0.0  0.4 234492  8772 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-gphoto2-volume-monitor
+ Debian-+     792  0.0  0.4 233536  8528 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-mtp-volume-monitor
+ Debian-+     796  0.1  3.2 229120 65868 tty1     S+   08:57   0:00 /usr/bin/Xwayland :1024 <span class="nt">-rootless</span> <span class="nt">-noreset</span> <span class="nt">-accessx</span> <span class="nt">-core</span> <span class="nt">-auth</span> /run/user/112/.mutter-Xwaylandauth.BJFG12 <span class="nt">-listenfd</span> 4 <span class="nt">-listenfd</span> 5 <span class="nt">-displayfd</span> 6 -
+ Debian-+     797  0.0  0.4 233728  8360 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-goa-volume-monitor
+ Debian-+     801  0.1  2.1 672264 42588 ?        Sl   08:57   0:00 /usr/libexec/goa-daemon
+ Debian-+     809  0.0  0.6 386620 13208 ?        Sl   08:57   0:00 /usr/libexec/goa-identity-service
+ root         816  0.0  0.4 233880  8836 ?        Ssl  08:57   0:00 /usr/libexec/upowerd
+ Debian-+     829  0.0  0.3 237000  7760 tty1     Sl+  08:57   0:00 /usr/libexec/xdg-permission-store
+ geoclue      845  0.0  0.5 244848 12052 ?        Ssl  08:57   0:00 /usr/libexec/geoclue
+ root         846  0.0  1.1 297952 22924 ?        Ssl  08:57   0:00 /usr/libexec/packagekitd
+ Debian-+     853  0.0  1.3 2453060 26980 tty1    Sl+  08:57   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+ Debian-+     854  0.0  0.4 164320  9212 tty1     Sl+  08:57   0:00 /usr/libexec/at-spi2-registryd <span class="nt">--use-gnome-session</span>
+ colord       855  0.1  0.8 242688 17764 ?        Ssl  08:57   0:00 /usr/libexec/colord
+ Debian-+     860  0.0  0.6 463836 13168 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-sharing
+ Debian-+     866  0.1  1.3 413520 27256 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-wacom
+ Debian-+     875  0.1  1.2 340748 25664 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-color
+ Debian-+     877  0.1  1.3 339096 26912 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-keyboard
+ Debian-+     879  0.0  0.6 247660 13512 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-print-notifications
+ Debian-+     881  0.0  0.5 454996 10592 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-rfkill
+ Debian-+     885  0.0  0.6 312420 12192 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-smartcard
+ Debian-+     887  0.0  0.6 355812 13988 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-datetime
+ Debian-+     894  0.1  1.4 521828 29832 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-media-keys
+ Debian-+     901  0.0  0.4 233412  8304 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-screensaver-proxy
+ Debian-+     905  0.0  0.5 319940 11916 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-sound
+ Debian-+     914  0.0  0.4 307928  8956 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-a11y-settings
+ Debian-+     917  0.0  0.4 383220  9656 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-housekeeping
+ Debian-+     925  0.1  1.4 451296 28624 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-power
+ Debian-+    1019  0.0  0.8 342144 17684 tty1     Sl+  08:57   0:00 /usr/libexec/gsd-printer
+ root        1042  0.0  0.5 242732 10624 ?        Ssl  08:57   0:00 /usr/libexec/realmd
+ Debian-+    1053  0.0  0.6 312956 12384 tty1     Sl   08:57   0:00 ibus-daemon <span class="nt">--panel</span> disable <span class="nt">-r</span> <span class="nt">--xim</span>
+ Debian-+    1058  0.0  1.3 2453056 27196 tty1    Sl+  08:57   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.ScreenSaver
+ Debian-+    1069  0.0  0.4 234488  9252 tty1     Sl   08:57   0:00 /usr/libexec/ibus-dconf
+ Debian-+    1070  1.9  1.6 344492 32496 tty1     Sl   08:57   0:00 /usr/libexec/ibus-extension-gtk3
+ Debian-+    1078  0.1  3.7 397600 74820 tty1     Sl   08:57   0:00 /usr/libexec/ibus-x11 <span class="nt">--kill-daemon</span>
+ Debian-+    1083  0.0  0.4 234432  9536 tty1     Sl+  08:57   0:00 /usr/libexec/ibus-portal
+ Debian-+    1096  0.0  0.3 160628  7148 tty1     Sl   08:57   0:00 /usr/libexec/ibus-engine-simple
+ root        1100  0.2  0.5  18424 10960 ?        Ss   08:57   0:00 sshd: pablo <span class="o">[</span>priv]
+ pablo       1107  0.2  0.5  19528 11176 ?        Ss   08:57   0:00 /lib/systemd/systemd <span class="nt">--user</span>
+ pablo       1109  0.0  0.1 104172  3524 ?        S    08:57   0:00 <span class="o">(</span>sd-pam<span class="o">)</span>
+ pablo       1128  0.0  0.5  44692 11868 ?        Ssl  08:57   0:00 /usr/bin/pipewire
+ pablo       1130  0.1  0.9 257736 19236 ?        Ssl  08:57   0:00 /usr/bin/wireplumber
+ pablo       1136  0.0  0.4  26908  8760 ?        Ssl  08:57   0:00 /usr/bin/pipewire-pulse
+ pablo       1143  0.0  0.3  18684  6636 ?        S    08:57   0:00 sshd: pablo@pts/0
+ pablo       1144  0.0  0.2   8464  4384 ?        Ss   08:57   0:00 /usr/bin/dbus-daemon <span class="nt">--session</span> <span class="nt">--address</span><span class="o">=</span>systemd: <span class="nt">--nofork</span> <span class="nt">--nopidfile</span> <span class="nt">--systemd-activation</span> <span class="nt">--syslog-only</span>
+ pablo       1150  0.0  0.4 237716  9904 ?        Ssl  08:57   0:00 /usr/libexec/gvfsd
+ pablo       1162  0.0  0.3 380372  6612 ?        Sl   08:57   0:00 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs <span class="nt">-f</span>
+ pablo       1173  0.0  0.2   8444  4984 pts/0    Ss   08:57   0:00 <span class="nt">-bash</span>
+ pablo       1178  0.6  3.8 634044 78296 ?        SNsl 08:57   0:00 /usr/libexec/tracker-miner-fs-3
+ pablo       1183  0.0  0.6 352128 13872 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-udisks2-volume-monitor
+ pablo       1188  0.0  0.5 312632 10192 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-afc-volume-monitor
+ pablo       1193  0.0  0.4 234488  8776 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-gphoto2-volume-monitor
+ pablo       1197  0.0  0.4 233532  8664 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-mtp-volume-monitor
+ pablo       1201  0.0  0.4 233728  8648 ?        Ssl  08:57   0:00 /usr/libexec/gvfs-goa-volume-monitor
+ pablo       1205  0.0  2.1 598536 42432 ?        Sl   08:57   0:00 /usr/libexec/goa-daemon
+ pablo       1212  0.0  0.5 312888 10976 ?        Sl   08:57   0:00 /usr/libexec/goa-identity-service
+ pablo       1234  200  0.2  11348  4416 pts/0    R+   08:58   0:00 ps <span class="nt">-aux</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Servicios en ejecución.</p>
 
-<ol>
-  <li>Servicios en ejecución.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6060,69 +6059,68 @@ pablo       1234  200  0.2  11348  4416 pts/0    R+   08:58   0:00 ps <span clas
 54
 55
 56
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span>systemctl list-units <span class="nt">--type</span><span class="o">=</span>service
-  UNIT                               LOAD   ACTIVE SUB     DESCRIPTION                                   
-  accounts-daemon.service            loaded active running Accounts Service
-  alsa-restore.service               loaded active exited  Save/Restore Sound Card State
-  apache2.service                    loaded active running The Apache HTTP Server
-  apparmor.service                   loaded active exited  Load AppArmor profiles
-  avahi-daemon.service               loaded active running Avahi mDNS/DNS-SD Stack
-  colord.service                     loaded active running Manage, Install and Generate Color Profiles
-  console-setup.service              loaded active exited  Set console font and keymap
-  cron.service                       loaded active running Regular background program processing daemon
-  cups-browsed.service               loaded active running Make remote CUPS printers available locally
-  cups.service                       loaded active running CUPS Scheduler
-  dbus.service                       loaded active running D-Bus System Message Bus
-  gdm.service                        loaded active running GNOME Display Manager
-  ifupdown-pre.service               loaded active exited  Helper to synchronize boot up <span class="k">for </span>ifupdown
-  keyboard-setup.service             loaded active exited  Set the console keyboard layout
-  kmod-static-nodes.service          loaded active exited  Create List of Static Device Nodes
-  low-memory-monitor.service         loaded active running Low Memory Monitor
-  ModemManager.service               loaded active running Modem Manager
-  networking.service                 loaded active exited  Raise network interfaces
-  NetworkManager-wait-online.service loaded active exited  Network Manager Wait Online
-  NetworkManager.service             loaded active running Network Manager
-  nscd.service                       loaded active running Name Service Cache Daemon
-  packagekit.service                 loaded active running PackageKit Daemon
-  plymouth-quit-wait.service         loaded active exited  Hold <span class="k">until </span>boot process finishes up
-  plymouth-read-write.service        loaded active exited  Tell Plymouth To Write Out Runtime Data
-  plymouth-start.service             loaded active exited  Show Plymouth Boot Screen
-  polkit.service                     loaded active running Authorization Manager
-  power-profiles-daemon.service      loaded active running Power Profiles daemon
-  qemu-guest-agent.service           loaded active running QEMU Guest Agent
-  rtkit-daemon.service               loaded active running RealtimeKit Scheduling Policy Service
-  ssh.service                        loaded active running OpenBSD Secure Shell server
-  switcheroo-control.service         loaded active running Switcheroo Control Proxy service
-  systemd-binfmt.service             loaded active exited  Set Up Additional Binary Formats
-  systemd-journal-flush.service      loaded active exited  Flush Journal to Persistent Storage
-  systemd-journald.service           loaded active running Journal Service
-  systemd-logind.service             loaded active running User Login Management
-  systemd-modules-load.service       loaded active exited  Load Kernel Modules
-  systemd-random-seed.service        loaded active exited  Load/Save Random Seed
-  systemd-remount-fs.service         loaded active exited  Remount Root and Kernel File Systems
-  systemd-sysctl.service             loaded active exited  Apply Kernel Variables
-  systemd-sysusers.service           loaded active exited  Create System Users
-  systemd-timesyncd.service          loaded active running Network Time Synchronization
-  systemd-tmpfiles-setup-dev.service loaded active exited  Create Static Device Nodes <span class="k">in</span> /dev
-  systemd-tmpfiles-setup.service     loaded active exited  Create System Files and Directories
-  systemd-udev-trigger.service       loaded active exited  Coldplug All udev Devices
-  systemd-udevd.service              loaded active running Rule-based Manager <span class="k">for </span>Device Events and Files
-  systemd-update-utmp.service        loaded active exited  Record System Boot/Shutdown <span class="k">in </span>UTMP
-  systemd-user-sessions.service      loaded active exited  Permit User Sessions
-  udisks2.service                    loaded active running Disk Manager
-  upower.service                     loaded active running Daemon <span class="k">for </span>power management
-  user-runtime-dir@1000.service      loaded active exited  User Runtime Directory /run/user/1000
-  user-runtime-dir@112.service       loaded active exited  User Runtime Directory /run/user/112
-  user@1000.service                  loaded active running User Manager <span class="k">for </span>UID 1000
-  user@112.service                   loaded active running User Manager <span class="k">for </span>UID 112
-  wpa_supplicant.service             loaded active running WPA supplicant
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span>systemctl list-units <span class="nt">--type</span><span class="o">=</span>service
+ UNIT                               LOAD   ACTIVE SUB     DESCRIPTION                                   
+ accounts-daemon.service            loaded active running Accounts Service
+ alsa-restore.service               loaded active exited  Save/Restore Sound Card State
+ apache2.service                    loaded active running The Apache HTTP Server
+ apparmor.service                   loaded active exited  Load AppArmor profiles
+ avahi-daemon.service               loaded active running Avahi mDNS/DNS-SD Stack
+ colord.service                     loaded active running Manage, Install and Generate Color Profiles
+ console-setup.service              loaded active exited  Set console font and keymap
+ cron.service                       loaded active running Regular background program processing daemon
+ cups-browsed.service               loaded active running Make remote CUPS printers available locally
+ cups.service                       loaded active running CUPS Scheduler
+ dbus.service                       loaded active running D-Bus System Message Bus
+ gdm.service                        loaded active running GNOME Display Manager
+ ifupdown-pre.service               loaded active exited  Helper to synchronize boot up <span class="k">for </span>ifupdown
+ keyboard-setup.service             loaded active exited  Set the console keyboard layout
+ kmod-static-nodes.service          loaded active exited  Create List of Static Device Nodes
+ low-memory-monitor.service         loaded active running Low Memory Monitor
+ ModemManager.service               loaded active running Modem Manager
+ networking.service                 loaded active exited  Raise network interfaces
+ NetworkManager-wait-online.service loaded active exited  Network Manager Wait Online
+ NetworkManager.service             loaded active running Network Manager
+ nscd.service                       loaded active running Name Service Cache Daemon
+ packagekit.service                 loaded active running PackageKit Daemon
+ plymouth-quit-wait.service         loaded active exited  Hold <span class="k">until </span>boot process finishes up
+ plymouth-read-write.service        loaded active exited  Tell Plymouth To Write Out Runtime Data
+ plymouth-start.service             loaded active exited  Show Plymouth Boot Screen
+ polkit.service                     loaded active running Authorization Manager
+ power-profiles-daemon.service      loaded active running Power Profiles daemon
+ qemu-guest-agent.service           loaded active running QEMU Guest Agent
+ rtkit-daemon.service               loaded active running RealtimeKit Scheduling Policy Service
+ ssh.service                        loaded active running OpenBSD Secure Shell server
+ switcheroo-control.service         loaded active running Switcheroo Control Proxy service
+ systemd-binfmt.service             loaded active exited  Set Up Additional Binary Formats
+ systemd-journal-flush.service      loaded active exited  Flush Journal to Persistent Storage
+ systemd-journald.service           loaded active running Journal Service
+ systemd-logind.service             loaded active running User Login Management
+ systemd-modules-load.service       loaded active exited  Load Kernel Modules
+ systemd-random-seed.service        loaded active exited  Load/Save Random Seed
+ systemd-remount-fs.service         loaded active exited  Remount Root and Kernel File Systems
+ systemd-sysctl.service             loaded active exited  Apply Kernel Variables
+ systemd-sysusers.service           loaded active exited  Create System Users
+ systemd-timesyncd.service          loaded active running Network Time Synchronization
+ systemd-tmpfiles-setup-dev.service loaded active exited  Create Static Device Nodes <span class="k">in</span> /dev
+ systemd-tmpfiles-setup.service     loaded active exited  Create System Files and Directories
+ systemd-udev-trigger.service       loaded active exited  Coldplug All udev Devices
+ systemd-udevd.service              loaded active running Rule-based Manager <span class="k">for </span>Device Events and Files
+ systemd-update-utmp.service        loaded active exited  Record System Boot/Shutdown <span class="k">in </span>UTMP
+ systemd-user-sessions.service      loaded active exited  Permit User Sessions
+ udisks2.service                    loaded active running Disk Manager
+ upower.service                     loaded active running Daemon <span class="k">for </span>power management
+ user-runtime-dir@1000.service      loaded active exited  User Runtime Directory /run/user/1000
+ user-runtime-dir@112.service       loaded active exited  User Runtime Directory /run/user/112
+ user@1000.service                  loaded active running User Manager <span class="k">for </span>UID 1000
+ user@112.service                   loaded active running User Manager <span class="k">for </span>UID 112
+ wpa_supplicant.service             loaded active running WPA supplicant
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Puertos abiertos.</p>
 
-<ol>
-  <li>Puertos abiertos.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6136,25 +6134,24 @@ pablo       1234  200  0.2  11348  4416 pts/0    R+   08:58   0:00 ps <span clas
 10
 11
 12
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span><span class="nb">sudo </span>netstat <span class="nt">-tulpn</span>
-Active Internet connections <span class="o">(</span>only servers<span class="o">)</span>
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
-tcp        0      0 127.0.0.1:631           0.0.0.0:<span class="k">*</span>               LISTEN      595/cupsd           
-tcp        0      0 0.0.0.0:22              0.0.0.0:<span class="k">*</span>               LISTEN      618/sshd: /usr/sbin 
-tcp6       0      0 :::80                   :::<span class="k">*</span>                    LISTEN      670/apache2         
-tcp6       0      0 :::22                   :::<span class="k">*</span>                    LISTEN      618/sshd: /usr/sbin 
-tcp6       0      0 ::1:631                 :::<span class="k">*</span>                    LISTEN      595/cupsd           
-udp        0      0 0.0.0.0:5353            0.0.0.0:<span class="k">*</span>                           520/avahi-daemon: r 
-udp        0      0 0.0.0.0:46385           0.0.0.0:<span class="k">*</span>                           520/avahi-daemon: r 
-udp6       0      0 :::5353                 :::<span class="k">*</span>                                520/avahi-daemon: r 
-udp6       0      0 :::58253                :::<span class="k">*</span>                                520/avahi-daemon: r
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span><span class="nb">sudo </span>netstat <span class="nt">-tulpn</span>
+ Active Internet connections <span class="o">(</span>only servers<span class="o">)</span>
+ Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+ tcp        0      0 127.0.0.1:631           0.0.0.0:<span class="k">*</span>               LISTEN      595/cupsd           
+ tcp        0      0 0.0.0.0:22              0.0.0.0:<span class="k">*</span>               LISTEN      618/sshd: /usr/sbin 
+ tcp6       0      0 :::80                   :::<span class="k">*</span>                    LISTEN      670/apache2         
+ tcp6       0      0 :::22                   :::<span class="k">*</span>                    LISTEN      618/sshd: /usr/sbin 
+ tcp6       0      0 ::1:631                 :::<span class="k">*</span>                    LISTEN      595/cupsd           
+ udp        0      0 0.0.0.0:5353            0.0.0.0:<span class="k">*</span>                           520/avahi-daemon: r 
+ udp        0      0 0.0.0.0:46385           0.0.0.0:<span class="k">*</span>                           520/avahi-daemon: r 
+ udp6       0      0 :::5353                 :::<span class="k">*</span>                                520/avahi-daemon: r 
+ udp6       0      0 :::58253                :::<span class="k">*</span>                                520/avahi-daemon: r
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Conexiones establecidas por la máquina.</p>
 
-<ol>
-  <li>Conexiones establecidas por la máquina.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6165,46 +6162,43 @@ udp6       0      0 :::58253                :::<span class="k">*</span>         
 7
 8
 9
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span>ss <span class="nt">-ta</span>
-State                      Recv-Q                  Send-Q                                     Local Address:Port                                      Peer Address:Port                   Process                  
-LISTEN                     0                       128                                            127.0.0.1:ipp                                            0.0.0.0:<span class="k">*</span>                                               
-LISTEN                     0                       128                                              0.0.0.0:ssh                                            0.0.0.0:<span class="k">*</span>                                               
-TIME-WAIT                  0                       0                                        192.168.122.134:55152                                   146.75.118.132:http                                            
-ESTAB                      0                       0                                        192.168.122.134:ssh                                      192.168.122.1:41756                                           
-LISTEN                     0                       511                                                    <span class="k">*</span>:http                                                 <span class="k">*</span>:<span class="k">*</span>                                               
-LISTEN                     0                       128                                                 <span class="o">[</span>::]:ssh                                               <span class="o">[</span>::]:<span class="k">*</span>                                               
-LISTEN                     0                       128                                                <span class="o">[</span>::1]:ipp                                               <span class="o">[</span>::]:<span class="k">*</span> 
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span>ss <span class="nt">-ta</span>
+ State                      Recv-Q                  Send-Q                                     Local Address:Port                                      Peer Address:Port                   Process                  
+ LISTEN                     0                       128                                            127.0.0.1:ipp                                            0.0.0.0:<span class="k">*</span>                                               
+ LISTEN                     0                       128                                              0.0.0.0:ssh                                            0.0.0.0:<span class="k">*</span>                                               
+ TIME-WAIT                  0                       0                                        192.168.122.134:55152                                   146.75.118.132:http                                            
+ ESTAB                      0                       0                                        192.168.122.134:ssh                                      192.168.122.1:41756                                           
+ LISTEN                     0                       511                                                    <span class="k">*</span>:http                                                 <span class="k">*</span>:<span class="k">*</span>                                               
+ LISTEN                     0                       128                                                 <span class="o">[</span>::]:ssh                                               <span class="o">[</span>::]:<span class="k">*</span>                                               
+ LISTEN                     0                       128                                                <span class="o">[</span>::1]:ipp                                               <span class="o">[</span>::]:<span class="k">*</span> 
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Sesiones de usuario establecidas remotamente.</p>
 
-<ol>
-  <li>Sesiones de usuario establecidas remotamente.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span><span class="nb">who</span> <span class="nt">-a</span>
-           arranque del sistema 2025-02-14 08:57
-           <span class="sb">`</span>run-level<span class="s1">' 5 2025-02-14 08:57
-pablo    + pts/0        2025-02-14 08:57   .          1100 (192.168.122.1)
-           pts/1        2025-02-14 09:01              1295 id=ts/1  term=0 salida=0
-</span></pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span><span class="nb">who</span> <span class="nt">-a</span>
+         arranque del sistema 2025-02-14 08:57
+         <span class="sb">`</span>run-level<span class="s1">' 5 2025-02-14 08:57
+ pablo    + pts/0        2025-02-14 08:57   .          1100 (192.168.122.1)
+         pts/1        2025-02-14 09:01              1295 id=ts/1  term=0 salida=0
+</span></pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Ficheros transferidos recientemente por NetBios.</p>
 
-<ol>
-  <li>Ficheros transferidos recientemente por NetBios.</li>
-</ol>
+    <p>No existe NetBios en Debian.</p>
+  </li>
+  <li>
+    <p>Contenido de la caché DNS.</p>
 
-<p>No existe NetBios en Debian.</p>
-
-<ol>
-  <li>Contenido de la caché DNS.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6286,93 +6280,92 @@ pablo    + pts/0        2025-02-14 08:57   .          1100 (192.168.122.1)
 78
 79
 80
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span><span class="nb">sudo </span>strings /var/cache/nscd/hosts
-localhost
-owave.
-localhost
-ip6-localhost
-ip6-loopback
-forense
-forense
-forense
-localhost
-localhost
-.net
-debian.map.fastlydns.net
-debian.map.fastlydns.net
-debian.map.fastlydns.net
-debian.map.fastlydns.net
-ipv4only.arpa
-ipv4only.arpa
-prod.remote-settings.prod.webservices.mozgcp.net
-firefox.settings.services.mozilla.com
-<span class="s2">"</span><span class="nv">$6P</span><span class="s2">&amp;
-ads-img.mozilla.org
-ads-img.mozilla.org
-muyinteresante.com
-www.muyinteresante.com
-theconversation.com
-theconversation.com
-pis.
-t0.gstatic.com
-t0.gstatic.com
-www.sleuthkit.org
-www.sleuthkit.org
-github.githubassets.com
-github.githubassets.com
-tic.
-avatars.githubusercontent.com
-avatars.githubusercontent.com
-user-images.githubusercontent.com
-user-images.githubusercontent.com
-objects.githubusercontent.com
-objects.githubusercontent.com
-firefox-api-proxy-prod.pocket.prod.cloudops.mozgcp.net
-firefox-api-proxy.cdn.mozilla.net
-debian.map.fastlydns.net
-debian.map.fastlydns.net
-debian.map.fastlydns.net
-debian.map.fastlydns.net
-github.com
-github.com
-cdn.
-t2.gstatic.com
-t2.gstatic.com
-t1.gstatic.com
-t1.gstatic.com
-cdn.
-sleuthkit.hosted-by-discourse.com
-sleuthkit.discourse.group
-t1.gstatic.com
-t1.gstatic.com
-cdn.
-sleuthkit.hosted-by-discourse.com
-sleuthkit.discourse.group
-t1.gstatic.com
-t1.gstatic.com
-cdn.
-sleuthkit.hosted-by-discourse.com
-sleuthkit.discourse.group
-sleuthkit.hosted-by-discourse.com
-sleuthkit.discourse.group
-t1.gstatic.com
-t1.gstatic.com
-cdn.
-ocsp.comodoca.com.cdn.cloudflare.net
-ocsp.sectigo.com
-wp.wpenginepowered.com
-www.autopsy.com
-aistati
-wp.wpenginepowered.com
-www.autopsy.com
-....
-</span></pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span><span class="nb">sudo </span>strings /var/cache/nscd/hosts
+ localhost
+ owave.
+ localhost
+ ip6-localhost
+ ip6-loopback
+ forense
+ forense
+ forense
+ localhost
+ localhost
+ .net
+ debian.map.fastlydns.net
+ debian.map.fastlydns.net
+ debian.map.fastlydns.net
+ debian.map.fastlydns.net
+ ipv4only.arpa
+ ipv4only.arpa
+ prod.remote-settings.prod.webservices.mozgcp.net
+ firefox.settings.services.mozilla.com
+ <span class="s2">"</span><span class="nv">$6P</span><span class="s2">&amp;
+ ads-img.mozilla.org
+ ads-img.mozilla.org
+ muyinteresante.com
+ www.muyinteresante.com
+ theconversation.com
+ theconversation.com
+ pis.
+ t0.gstatic.com
+ t0.gstatic.com
+ www.sleuthkit.org
+ www.sleuthkit.org
+ github.githubassets.com
+ github.githubassets.com
+ tic.
+ avatars.githubusercontent.com
+ avatars.githubusercontent.com
+ user-images.githubusercontent.com
+ user-images.githubusercontent.com
+ objects.githubusercontent.com
+ objects.githubusercontent.com
+ firefox-api-proxy-prod.pocket.prod.cloudops.mozgcp.net
+ firefox-api-proxy.cdn.mozilla.net
+ debian.map.fastlydns.net
+ debian.map.fastlydns.net
+ debian.map.fastlydns.net
+ debian.map.fastlydns.net
+ github.com
+ github.com
+ cdn.
+ t2.gstatic.com
+ t2.gstatic.com
+ t1.gstatic.com
+ t1.gstatic.com
+ cdn.
+ sleuthkit.hosted-by-discourse.com
+ sleuthkit.discourse.group
+ t1.gstatic.com
+ t1.gstatic.com
+ cdn.
+ sleuthkit.hosted-by-discourse.com
+ sleuthkit.discourse.group
+ t1.gstatic.com
+ t1.gstatic.com
+ cdn.
+ sleuthkit.hosted-by-discourse.com
+ sleuthkit.discourse.group
+ sleuthkit.hosted-by-discourse.com
+ sleuthkit.discourse.group
+ t1.gstatic.com
+ t1.gstatic.com
+ cdn.
+ ocsp.comodoca.com.cdn.cloudflare.net
+ ocsp.sectigo.com
+ wp.wpenginepowered.com
+ www.autopsy.com
+ aistati
+ wp.wpenginepowered.com
+ www.autopsy.com
+ ....
+</span></pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Variables de entorno.</p>
 
-<ol>
-  <li>Variables de entorno.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6396,51 +6389,49 @@ www.autopsy.com
 20
 21
 22
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span><span class="nb">printenv
-</span><span class="nv">SHELL</span><span class="o">=</span>/bin/bash
-<span class="nv">PWD</span><span class="o">=</span>/home/pablo
-<span class="nv">LOGNAME</span><span class="o">=</span>pablo
-<span class="nv">XDG_SESSION_TYPE</span><span class="o">=</span><span class="nb">tty
-</span><span class="nv">MOTD_SHOWN</span><span class="o">=</span>pam
-<span class="nv">HOME</span><span class="o">=</span>/home/pablo
-<span class="nv">LANG</span><span class="o">=</span>es_ES.UTF-8
-<span class="nv">LS_COLORS</span><span class="o">=</span><span class="nv">rs</span><span class="o">=</span>0:di<span class="o">=</span>01<span class="p">;</span>34:ln<span class="o">=</span>01<span class="p">;</span>36:mh<span class="o">=</span>00:pi<span class="o">=</span>40<span class="p">;</span>33:so<span class="o">=</span>01<span class="p">;</span>35:do<span class="o">=</span>01<span class="p">;</span>35:bd<span class="o">=</span>40<span class="p">;</span>33<span class="p">;</span>01:cd<span class="o">=</span>40<span class="p">;</span>33<span class="p">;</span>01:or<span class="o">=</span>40<span class="p">;</span>31<span class="p">;</span>01:mi<span class="o">=</span>00:su<span class="o">=</span>37<span class="p">;</span>41:sg<span class="o">=</span>30<span class="p">;</span>43:ca<span class="o">=</span>00:tw<span class="o">=</span>30<span class="p">;</span>42:ow<span class="o">=</span>34<span class="p">;</span>42:st<span class="o">=</span>37<span class="p">;</span>44:ex<span class="o">=</span>01<span class="p">;</span>32:<span class="k">*</span>.tar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tgz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.arc<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.arj<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.taz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lha<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lz4<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lzh<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lzma<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tlz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.txz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tzo<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.t7z<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.zip<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.z<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.dz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.gz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lrz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lzo<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.xz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.zst<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tzst<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.bz2<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.bz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tbz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tbz2<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.deb<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.rpm<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.jar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.war<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.ear<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.sar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.rar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.alz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.ace<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.zoo<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.cpio<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.7z<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.rz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.cab<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.wim<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.swm<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.dwm<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.esd<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.avif<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.jpg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.jpeg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mjpg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mjpeg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.gif<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.bmp<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.pbm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.pgm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ppm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.tga<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xbm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xpm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.tif<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.tiff<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.png<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.svg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.svgz<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mng<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.pcx<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mov<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mpg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mpeg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.m2v<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mkv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.webm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.webp<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ogm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mp4<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.m4v<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mp4v<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.vob<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.qt<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.nuv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.wmv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.asf<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.rm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.rmvb<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.flc<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.avi<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.fli<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.flv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.gl<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.dl<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xcf<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xwd<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.yuv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.cgm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.emf<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ogv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ogx<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.aac<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.au<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.flac<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.m4a<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mid<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.midi<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mka<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mp3<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mpc<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.ogg<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.ra<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.wav<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.oga<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.opus<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.spx<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.xspf<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>~<span class="o">=</span>00<span class="p">;</span>90:<span class="k">*</span><span class="c">#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:</span>
-<span class="nv">SSH_CONNECTION</span><span class="o">=</span>192.168.122.1 41756 192.168.122.134 22
-<span class="nv">XDG_SESSION_CLASS</span><span class="o">=</span>user
-<span class="nv">TERM</span><span class="o">=</span>xterm-256color
-<span class="nv">USER</span><span class="o">=</span>pablo
-<span class="nv">SHLVL</span><span class="o">=</span>1
-<span class="nv">XDG_SESSION_ID</span><span class="o">=</span>2
-<span class="nv">XDG_RUNTIME_DIR</span><span class="o">=</span>/run/user/1000
-<span class="nv">SSH_CLIENT</span><span class="o">=</span>192.168.122.1 41756 22
-<span class="nv">XDG_DATA_DIRS</span><span class="o">=</span>/usr/share/gnome:/usr/local/share/:/usr/share/
-<span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
-<span class="nv">DBUS_SESSION_BUS_ADDRESS</span><span class="o">=</span>unix:path<span class="o">=</span>/run/user/1000/bus
-<span class="nv">SSH_TTY</span><span class="o">=</span>/dev/pts/0
-<span class="nv">_</span><span class="o">=</span>/usr/bin/printenv
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span><span class="nb">printenv
+ </span><span class="nv">SHELL</span><span class="o">=</span>/bin/bash
+ <span class="nv">PWD</span><span class="o">=</span>/home/pablo
+ <span class="nv">LOGNAME</span><span class="o">=</span>pablo
+ <span class="nv">XDG_SESSION_TYPE</span><span class="o">=</span><span class="nb">tty
+ </span><span class="nv">MOTD_SHOWN</span><span class="o">=</span>pam
+ <span class="nv">HOME</span><span class="o">=</span>/home/pablo
+ <span class="nv">LANG</span><span class="o">=</span>es_ES.UTF-8
+ <span class="nv">LS_COLORS</span><span class="o">=</span><span class="nv">rs</span><span class="o">=</span>0:di<span class="o">=</span>01<span class="p">;</span>34:ln<span class="o">=</span>01<span class="p">;</span>36:mh<span class="o">=</span>00:pi<span class="o">=</span>40<span class="p">;</span>33:so<span class="o">=</span>01<span class="p">;</span>35:do<span class="o">=</span>01<span class="p">;</span>35:bd<span class="o">=</span>40<span class="p">;</span>33<span class="p">;</span>01:cd<span class="o">=</span>40<span class="p">;</span>33<span class="p">;</span>01:or<span class="o">=</span>40<span class="p">;</span>31<span class="p">;</span>01:mi<span class="o">=</span>00:su<span class="o">=</span>37<span class="p">;</span>41:sg<span class="o">=</span>30<span class="p">;</span>43:ca<span class="o">=</span>00:tw<span class="o">=</span>30<span class="p">;</span>42:ow<span class="o">=</span>34<span class="p">;</span>42:st<span class="o">=</span>37<span class="p">;</span>44:ex<span class="o">=</span>01<span class="p">;</span>32:<span class="k">*</span>.tar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tgz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.arc<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.arj<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.taz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lha<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lz4<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lzh<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lzma<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tlz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.txz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tzo<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.t7z<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.zip<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.z<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.dz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.gz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lrz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.lzo<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.xz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.zst<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tzst<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.bz2<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.bz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tbz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tbz2<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.tz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.deb<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.rpm<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.jar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.war<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.ear<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.sar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.rar<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.alz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.ace<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.zoo<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.cpio<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.7z<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.rz<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.cab<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.wim<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.swm<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.dwm<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.esd<span class="o">=</span>01<span class="p">;</span>31:<span class="k">*</span>.avif<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.jpg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.jpeg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mjpg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mjpeg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.gif<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.bmp<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.pbm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.pgm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ppm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.tga<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xbm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xpm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.tif<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.tiff<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.png<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.svg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.svgz<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mng<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.pcx<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mov<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mpg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mpeg<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.m2v<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mkv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.webm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.webp<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ogm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mp4<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.m4v<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.mp4v<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.vob<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.qt<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.nuv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.wmv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.asf<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.rm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.rmvb<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.flc<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.avi<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.fli<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.flv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.gl<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.dl<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xcf<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.xwd<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.yuv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.cgm<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.emf<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ogv<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.ogx<span class="o">=</span>01<span class="p">;</span>35:<span class="k">*</span>.aac<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.au<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.flac<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.m4a<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mid<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.midi<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mka<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mp3<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.mpc<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.ogg<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.ra<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.wav<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.oga<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.opus<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.spx<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>.xspf<span class="o">=</span>00<span class="p">;</span>36:<span class="k">*</span>~<span class="o">=</span>00<span class="p">;</span>90:<span class="k">*</span><span class="c">#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:</span>
+ <span class="nv">SSH_CONNECTION</span><span class="o">=</span>192.168.122.1 41756 192.168.122.134 22
+ <span class="nv">XDG_SESSION_CLASS</span><span class="o">=</span>user
+ <span class="nv">TERM</span><span class="o">=</span>xterm-256color
+ <span class="nv">USER</span><span class="o">=</span>pablo
+ <span class="nv">SHLVL</span><span class="o">=</span>1
+ <span class="nv">XDG_SESSION_ID</span><span class="o">=</span>2
+ <span class="nv">XDG_RUNTIME_DIR</span><span class="o">=</span>/run/user/1000
+ <span class="nv">SSH_CLIENT</span><span class="o">=</span>192.168.122.1 41756 22
+ <span class="nv">XDG_DATA_DIRS</span><span class="o">=</span>/usr/share/gnome:/usr/local/share/:/usr/share/
+ <span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+ <span class="nv">DBUS_SESSION_BUS_ADDRESS</span><span class="o">=</span>unix:path<span class="o">=</span>/run/user/1000/bus
+ <span class="nv">SSH_TTY</span><span class="o">=</span>/dev/pts/0
+ <span class="nv">_</span><span class="o">=</span>/usr/bin/printenv
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Dispositivos USB conectados</p>
 
-<ol>
-  <li>Dispositivos USB conectados</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-</pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span>lsusb
-Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-Bus 001 Device 002: ID 0627:0001 Adomax Technology Co., Ltd QEMU Tablet
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td><td class="rouge-code"><pre> pablo@forense:~<span class="nv">$ </span>lsusb
+ Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+ Bus 001 Device 002: ID 0627:0001 Adomax Technology Co., Ltd QEMU Tablet
+ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Redes wifi utilizadas recientemente.</p>
 
-<ol>
-  <li>Redes wifi utilizadas recientemente.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6458,13 +6449,12 @@ pablo@forense:~<span class="nv">$ </span>nmcli c show
 NAME                UUID                                  TYPE      DEVICE 
 Wired connection 1  8fcaf683-6d5c-4944-bd2f-5f9be35c0a36  ethernet  enp1s0 
 lo                  77238d91-b61a-41c7-8df5-b3b3e3fc8122  loopback  lo
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Configuración del firewall de nodo.</p>
 
-<ol>
-  <li>Configuración del firewall de nodo.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6484,13 +6474,12 @@ target     prot opt <span class="nb">source               </span>destination
 
 Chain OUTPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
 target     prot opt <span class="nb">source               </span>destination
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Programas que se ejecutan en el Inicio.</p>
 
-<ol>
-  <li>Programas que se ejecutan en el Inicio.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6604,13 +6593,12 @@ wpa_supplicant-wired@.service              disabled        enabled
 wpa_supplicant.service                     enabled         enabled
 wpa_supplicant@.service                    disabled        enabled
 x11-common.service                         masked          enabled
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Asociación de extensiones de ficheros y aplicaciones.</p>
 
-<ol>
-  <li>Asociación de extensiones de ficheros y aplicaciones.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6760,13 +6748,12 @@ application/vnd.ms-word.template.macroEnabled.12<span class="o">=</span>libreoff
 application/vnd.ms-works<span class="o">=</span>libreoffice-calc.desktop<span class="p">;</span>libreoffice-writer.desktop<span class="p">;</span>
 application/vnd.ms-wpl<span class="o">=</span>org.gnome.Totem.desktop<span class="p">;</span>
 .....
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Aplicaciones usadas recientemente.</p>
 
-<ol>
-  <li>Aplicaciones usadas recientemente.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6778,21 +6765,20 @@ application/vnd.ms-wpl<span class="o">=</span>org.gnome.Totem.desktop<span class
 8
 9
 </pre></td><td class="rouge-code"><pre>pablo@forense:~<span class="nv">$ </span><span class="nb">history</span> | <span class="nb">awk</span> <span class="s1">'{print $2}'</span> | <span class="nb">sort</span> | <span class="nb">uniq</span> <span class="nt">-c</span> | <span class="nb">sort</span> <span class="nt">-nr</span> | <span class="nb">head
-     </span>89 <span class="nb">sudo
-     </span>25 clear
-     19 <span class="nb">ls
-     </span>14 <span class="nb">cd
-      </span>6 dpkg
-      5 ss
-      5 <span class="nb">export
-      </span>4 java
-</pre></td></tr></tbody></table></code></div></div>
+    </span>89 <span class="nb">sudo
+    </span>25 clear
+    19 <span class="nb">ls
+    </span>14 <span class="nb">cd
+    </span>6 dpkg
+    5 ss
+    5 <span class="nb">export
+    </span>4 java
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Ficheros abiertos recientemente.</p>
 
-<ol>
-  <li>Ficheros abiertos recientemente.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6834,13 +6820,12 @@ lsof      1427                            root  mem       REG              254,1
 lsof      1427                            root  mem       REG              254,1    210904     784693 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
 lsof      1427                            root    4r     FIFO               0,13       0t0      23231 pipe
 lsof      1427                            root    7w     FIFO               0,13       0t0      23232 pipe
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Software Instalado.</p>
 
-<ol>
-  <li>Software Instalado.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6914,13 +6899,12 @@ ii  baobab                                  43.0-1                              
 ii  base-files                              12.4+deb12u9                        amd64        Debian base system miscellaneous files
 ii  base-passwd                             3.6.1                               amd64        Debian base system master password and group files
 ii  bash                                    5.2.15-2+b7                         amd64        GNU Bourne Again SHell
-</span></pre></td></tr></tbody></table></code></div></div>
+</span></pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Contraseñas guardadas.</p>
 
-<ol>
-  <li>Contraseñas guardadas.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -6996,13 +6980,12 @@ colord:!:20132::::::
 gnome-initial-setup:!:20132::::::
 Debian-gdm:!:20132::::::
 pablo:<span class="nv">$y$j9T$G</span>.NSU/fZ4YKOk5oWQV5un.<span class="nv">$YPw9I3pAIA1fqI8jiVZYfum1UYHDtx</span>.QKDQWz7ZKjn3:20132:0:99999:7:::
-</pre></td></tr></tbody></table></code></div></div>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>
+    <p>Cuentas de Usuario</p>
 
-<ol>
-  <li>Cuentas de Usuario</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -7078,18 +7061,15 @@ colord:x:110:120:colord colour management daemon,,,:/var/lib/colord:/usr/sbin/no
 gnome-initial-setup:x:111:65534::/run/gnome-initial-setup/:/bin/false
 Debian-gdm:x:112:121:Gnome Display Manager:/var/lib/gdm3:/bin/false
 pablo:x:1000:1000:pablo,,,:/home/pablo:/bin/bash
-</pre></td></tr></tbody></table></code></div></div>
-
-<ol>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
   <li>
     <p>Historial de navegación y descargas. Cookies.</p>
   </li>
   <li>
     <p>Volúmenes cifrados</p>
-  </li>
-</ol>
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
+    <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -7125,9 +7105,8 @@ find: ‘/run/user/1000/gvfs’: Permiso denegado
 find: ‘/run/user/112/gvfs’: Permiso denegado
 /var/lib/fwupd/gnupg/trustdb.gpg
 /home/pablo/.gnupg/trustdb.gpg
-</pre></td></tr></tbody></table></code></div></div>
-
-<ol>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
   <li>
     <p>Archivos con extensión cambiada.</p>
   </li>
