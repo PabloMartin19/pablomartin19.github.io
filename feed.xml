@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-27T15:04:08+01:00</updated>
+  <updated>2025-02-27T15:10:08+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/auditoria/" rel="alternate" type="text/html" title="Auditoría" />
     <published>2025-02-25T21:00:00+01:00</published>
   
-    <updated>2025-02-25T21:00:00+01:00</updated>
+    <updated>2025-02-27T15:10:07+01:00</updated>
   
     <id>/posts/auditoria/</id>
     <content src="/posts/auditoria/" />
@@ -38,7 +38,7 @@
     
   
 
-  <summary>...</summary>
+  <summary>La auditoría en bases de datos es una herramienta esencial para garantizar la seguridad y el control sobre las operaciones que se realizan en un sistema. En este artículo, exploraremos cómo configurar y verificar la auditoría en diferentes bases de datos como Oracle, PostgreSQL, MySQL y MongoDB. Analizaremos desde el registro de accesos fallidos hasta la supervisión de operaciones específicas, ...</summary>
 
   </entry>
 
