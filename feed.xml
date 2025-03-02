@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-02T18:03:07+01:00</updated>
+  <updated>2025-03-02T18:05:29+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/movimiento_datos/" rel="alternate" type="text/html" title="Auditoría" />
     <published>2025-02-28T21:33:00+01:00</published>
   
-    <updated>2025-02-28T21:33:00+01:00</updated>
+    <updated>2025-03-02T18:05:28+01:00</updated>
   
     <id>/posts/movimiento_datos/</id>
     <content src="/posts/movimiento_datos/" />
@@ -38,7 +38,7 @@
     
   
 
-  <summary>...</summary>
+  <summary>En esta práctica, exploraremos diferentes técnicas de exportación e importación de datos entre bases de datos utilizando herramientas de Oracle, MySQL, PostgreSQL y MongoDB. Comenzaremos con la exportación e importación de un esquema de Oracle utilizando Oracle Data Pump, donde se aplicarán filtros específicos y se automatizará la operación. Además, compararemos estos procesos con las herramien...</summary>
 
   </entry>
 
