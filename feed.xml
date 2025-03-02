@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-27T15:10:08+01:00</updated>
+  <updated>2025-03-02T18:03:07+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,30 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Auditoría</title>
+    <link href="/posts/movimiento_datos/" rel="alternate" type="text/html" title="Auditoría" />
+    <published>2025-02-28T21:33:00+01:00</published>
+  
+    <updated>2025-02-28T21:33:00+01:00</updated>
+  
+    <id>/posts/movimiento_datos/</id>
+    <content src="/posts/movimiento_datos/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Base de Datos" />
+    
+  
+
+  <summary>...</summary>
+
+  </entry>
 
   
   <entry>
@@ -117,32 +141,6 @@
   
 
   <summary>En esta práctica implementamos una solución VPN utilizando WireGuard para establecer una conexión segura y eficiente entre dos redes distintas. La configuración permite la comunicación bidireccional entre un cliente en una red local y otro en una red remota, a través de sus respectivos servidores que actúan como gateways. La implementación demuestra la simplicidad y eficacia de WireGuard y una ...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>VPN de acceso remoto con WireGuard</title>
-    <link href="/posts/acceso_remoto_wireguard/" rel="alternate" type="text/html" title="VPN de acceso remoto con WireGuard" />
-    <published>2025-01-27T21:00:00+01:00</published>
-  
-    <updated>2025-01-29T19:04:04+01:00</updated>
-  
-    <id>/posts/acceso_remoto_wireguard/</id>
-    <content src="/posts/acceso_remoto_wireguard/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Seguridad" />
-    
-    <category term="VPN" />
-    
-  
-
-  <summary>En este artículo exploraremos cómo configurar una VPN de acceso remoto utilizando WireGuard, una solución moderna y eficiente.  Los clientes que se conectarán a la VPN estarán en sistemas operativos Linux, Android y Windows, permitiendo así el acceso seguro a los recursos internos desde diversas plataformas y ubicaciones.</summary>
 
   </entry>
 
