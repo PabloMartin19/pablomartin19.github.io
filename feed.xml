@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-02T18:05:29+01:00</updated>
+  <updated>2025-03-02T18:09:14+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -20,11 +20,11 @@
 
   
   <entry>
-    <title>Auditoría</title>
-    <link href="/posts/movimiento_datos/" rel="alternate" type="text/html" title="Auditoría" />
+    <title>Movimiento de datos</title>
+    <link href="/posts/movimiento_datos/" rel="alternate" type="text/html" title="Movimiento de datos" />
     <published>2025-02-28T21:33:00+01:00</published>
   
-    <updated>2025-03-02T18:05:28+01:00</updated>
+    <updated>2025-03-02T18:09:13+01:00</updated>
   
     <id>/posts/movimiento_datos/</id>
     <content src="/posts/movimiento_datos/" />
