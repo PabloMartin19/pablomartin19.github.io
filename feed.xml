@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-03T09:06:28+01:00</updated>
+  <updated>2025-03-03T09:08:38+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/copia-seguridad/" rel="alternate" type="text/html" title="Copias de Seguridad y Restauración" />
     <published>2025-03-03T00:35:00+01:00</published>
   
-    <updated>2025-03-03T09:06:27+01:00</updated>
+    <updated>2025-03-03T09:08:37+01:00</updated>
   
     <id>/posts/copia-seguridad/</id>
     <content src="/posts/copia-seguridad/" />
@@ -38,7 +38,7 @@
     
   
 
-  <summary>...</summary>
+  <summary>Garantizar la integridad y disponibilidad de los datos es clave en cualquier sistema. En esta práctica, se explorarán copias de seguridad lógicas y físicas en PostgreSQL, MySQL y MongoDB, aplicando compresión, cifrado y segmentación. También se abordará la recuperación ante desastres mediante la restauración de ficheros de datos y control, incluyendo el uso de RMAN en entornos con ArchiveLog ha...</summary>
 
   </entry>
 
