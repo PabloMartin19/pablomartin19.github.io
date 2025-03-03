@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-02T23:25:31+01:00</updated>
+  <updated>2025-03-03T08:20:12+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,30 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Copias de Seguridad y Restauración</title>
+    <link href="/posts/copia-seguridad/" rel="alternate" type="text/html" title="Copias de Seguridad y Restauración" />
+    <published>2025-03-03T00:35:00+01:00</published>
+  
+    <updated>2025-03-03T00:35:00+01:00</updated>
+  
+    <id>/posts/copia-seguridad/</id>
+    <content src="/posts/copia-seguridad/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Base de Datos" />
+    
+  
+
+  <summary>...</summary>
+
+  </entry>
 
   
   <entry>
@@ -115,32 +139,6 @@
   
 
   <summary>En un entorno basado en Rocky Linux con SELinux en modo enforcing, garantizar el correcto funcionamiento de servicios como SSHFS, Samba y NFS requiere una configuración precisa y segura de las políticas de SELinux. Además, habilitamos el inicio de sesión remoto como root y cambiamos el puerto SSH a uno no estándar para mejorar la seguridad. Realizamos pruebas exhaustivas para asegurar que los s...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>VPN sitio a sitio con WireGuard</title>
-    <link href="/posts/site_to_site_wireguard/" rel="alternate" type="text/html" title="VPN sitio a sitio con WireGuard" />
-    <published>2025-01-29T20:00:00+01:00</published>
-  
-    <updated>2025-01-29T20:39:27+01:00</updated>
-  
-    <id>/posts/site_to_site_wireguard/</id>
-    <content src="/posts/site_to_site_wireguard/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Seguridad" />
-    
-    <category term="VPN" />
-    
-  
-
-  <summary>En esta práctica implementamos una solución VPN utilizando WireGuard para establecer una conexión segura y eficiente entre dos redes distintas. La configuración permite la comunicación bidireccional entre un cliente en una red local y otro en una red remota, a través de sus respectivos servidores que actúan como gateways. La implementación demuestra la simplicidad y eficacia de WireGuard y una ...</summary>
 
   </entry>
 
