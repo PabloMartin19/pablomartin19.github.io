@@ -47,7 +47,7 @@
 <meta name="twitter:site" content="@Tagarnina10" />
 <meta name="twitter:creator" content="@Tagarnina10" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-03-03T00:35:00+01:00","datePublished":"2025-03-03T00:35:00+01:00","description":"…","headline":"Copias de Seguridad y Restauración","image":"/assets/img/posts/copiaseg/portadita.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/copia-seguridad/"},"url":"/posts/copia-seguridad/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pablo Martín Hidalgo","url":"https://github.com/PabloMartin19/"},"dateModified":"2025-03-03T09:06:27+01:00","datePublished":"2025-03-03T00:35:00+01:00","description":"…","headline":"Copias de Seguridad y Restauración","image":"/assets/img/posts/copiaseg/portadita.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/copia-seguridad/"},"url":"/posts/copia-seguridad/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -964,6 +964,29 @@
 
       <!-- lastmod date -->
       
+        <span>
+          Updated
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1740989187"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Mar  3, 2025
+</time>
+
+        </span>
+      
 
       
         
@@ -1018,9 +1041,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="6208 words"
+  title="7979 words"
 >
-  <em>34 min</em> read</span>
+  <em>44 min</em> read</span>
 
         </div>
       </div>
@@ -2880,9 +2903,553 @@ pablo@servidor-postgre1:~<span class="nv">$ </span><span class="nb">sudo </span>
 
 <p>Documenta el empleo de las herramientas de copia de seguridad y restauración de MySQL.</p>
 
+<p>Para realizar copias de seguridad y restauraciones en MySQL, utilizamos la herramienta mysqldump. En nuestro caso, vamos a 
+hacer una copia de todas las bases de datos del servidor y luego restaurarlas en caso de ser necesario.</p>
+
+<p>Para generar un respaldo de todas las bases de datos, ejecutamos el siguiente comando:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo </span>mysqldump <span class="nt">-u</span> root <span class="nt">-p</span> <span class="nt">--all-databases</span> <span class="o">&gt;</span> respaldo.sql
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Una vez finalizado el proceso, podemos comprobar que el archivo de copia se ha generado correctamente:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lh</span> respaldo.sql
+<span class="nt">-rw-r--r--</span> 1 pablo pablo 5,7M mar  3 08:28 respaldo.sql
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para comprobar que la restauración funciona correctamente, vamos a eliminar algunas bases de datos:</p>
+<div class="language-sql highlighter-rouge"><div class="code-header">
+        <span data-label-text="Sql"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="rouge-code"><pre><span class="n">pablo</span><span class="o">@</span><span class="n">servidor</span><span class="o">-</span><span class="n">mariadb</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">sudo</span> <span class="n">mysql</span>
+<span class="n">Welcome</span> <span class="k">to</span> <span class="n">the</span> <span class="n">MariaDB</span> <span class="n">monitor</span><span class="p">.</span>  <span class="n">Commands</span> <span class="k">end</span> <span class="k">with</span> <span class="p">;</span> <span class="k">or</span> <span class="err">\</span><span class="k">g</span><span class="p">.</span>
+<span class="n">Your</span> <span class="n">MariaDB</span> <span class="k">connection</span> <span class="n">id</span> <span class="k">is</span> <span class="mi">33</span>
+<span class="n">Server</span> <span class="k">version</span><span class="p">:</span> <span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">6</span><span class="o">-</span><span class="n">MariaDB</span><span class="o">-</span><span class="mi">0</span><span class="o">+</span><span class="n">deb12u1</span><span class="o">-</span><span class="n">log</span> <span class="n">Debian</span> <span class="mi">12</span>
+
+<span class="n">Copyright</span> <span class="p">(</span><span class="k">c</span><span class="p">)</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2018</span><span class="p">,</span> <span class="n">Oracle</span><span class="p">,</span> <span class="n">MariaDB</span> <span class="n">Corporation</span> <span class="n">Ab</span> <span class="k">and</span> <span class="n">others</span><span class="p">.</span>
+
+<span class="k">Type</span> <span class="s1">'help;'</span> <span class="k">or</span> <span class="s1">'</span><span class="se">\h</span><span class="s1">'</span> <span class="k">for</span> <span class="n">help</span><span class="p">.</span> <span class="k">Type</span> <span class="s1">'</span><span class="se">\c</span><span class="s1">'</span> <span class="k">to</span> <span class="n">clear</span> <span class="n">the</span> <span class="k">current</span> <span class="k">input</span> <span class="k">statement</span><span class="p">.</span>
+
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="k">SHOW</span> <span class="n">DATABASES</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">--------------------+</span>
+<span class="o">|</span> <span class="k">Database</span>           <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------------+</span>
+<span class="o">|</span> <span class="n">Examen</span>             <span class="o">|</span>
+<span class="o">|</span> <span class="n">datoscsv</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa</span>            <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa_copia</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa_datos</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa_vacia</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">information_schema</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">mysql</span>              <span class="o">|</span>
+<span class="o">|</span> <span class="n">performance_schema</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">practica1_abd</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">sakila</span>             <span class="o">|</span>
+<span class="o">|</span> <span class="n">scott</span>              <span class="o">|</span>
+<span class="o">|</span> <span class="n">sys</span>                <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------------+</span>
+<span class="mi">13</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">001</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="k">DROP</span> <span class="k">DATABASE</span> <span class="n">empresa_copia</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">2</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">038</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="k">DROP</span> <span class="k">DATABASE</span> <span class="n">empresa_datos</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">2</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">014</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="k">DROP</span> <span class="k">DATABASE</span> <span class="n">empresa_vacia</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">2</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">016</span> <span class="n">sec</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Ya hemos eliminado varias bases de datos, por lo tanto, para recuperar todas las bases de datos eliminadas, utilizamos el 
+archivo de respaldo que creamos anteriormente:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span> &lt; respaldo.sql
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Una vez finalizada la restauración, verificamos que las bases de datos han sido recuperadas:</p>
+<div class="language-sql highlighter-rouge"><div class="code-header">
+        <span data-label-text="Sql"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre></td><td class="rouge-code"><pre><span class="n">pablo</span><span class="o">@</span><span class="n">servidor</span><span class="o">-</span><span class="n">mariadb</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">sudo</span> <span class="n">mysql</span>
+<span class="n">Welcome</span> <span class="k">to</span> <span class="n">the</span> <span class="n">MariaDB</span> <span class="n">monitor</span><span class="p">.</span>  <span class="n">Commands</span> <span class="k">end</span> <span class="k">with</span> <span class="p">;</span> <span class="k">or</span> <span class="err">\</span><span class="k">g</span><span class="p">.</span>
+<span class="n">Your</span> <span class="n">MariaDB</span> <span class="k">connection</span> <span class="n">id</span> <span class="k">is</span> <span class="mi">35</span>
+<span class="n">Server</span> <span class="k">version</span><span class="p">:</span> <span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">6</span><span class="o">-</span><span class="n">MariaDB</span><span class="o">-</span><span class="mi">0</span><span class="o">+</span><span class="n">deb12u1</span><span class="o">-</span><span class="n">log</span> <span class="n">Debian</span> <span class="mi">12</span>
+
+<span class="n">Copyright</span> <span class="p">(</span><span class="k">c</span><span class="p">)</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2018</span><span class="p">,</span> <span class="n">Oracle</span><span class="p">,</span> <span class="n">MariaDB</span> <span class="n">Corporation</span> <span class="n">Ab</span> <span class="k">and</span> <span class="n">others</span><span class="p">.</span>
+
+<span class="k">Type</span> <span class="s1">'help;'</span> <span class="k">or</span> <span class="s1">'</span><span class="se">\h</span><span class="s1">'</span> <span class="k">for</span> <span class="n">help</span><span class="p">.</span> <span class="k">Type</span> <span class="s1">'</span><span class="se">\c</span><span class="s1">'</span> <span class="k">to</span> <span class="n">clear</span> <span class="n">the</span> <span class="k">current</span> <span class="k">input</span> <span class="k">statement</span><span class="p">.</span>
+
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="k">SHOW</span> <span class="n">DATABASES</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">--------------------+</span>
+<span class="o">|</span> <span class="k">Database</span>           <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------------+</span>
+<span class="o">|</span> <span class="n">Examen</span>             <span class="o">|</span>
+<span class="o">|</span> <span class="n">datoscsv</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa</span>            <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa_copia</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa_datos</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">empresa_vacia</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">information_schema</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">mysql</span>              <span class="o">|</span>
+<span class="o">|</span> <span class="n">performance_schema</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">practica1_abd</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">sakila</span>             <span class="o">|</span>
+<span class="o">|</span> <span class="n">scott</span>              <span class="o">|</span>
+<span class="o">|</span> <span class="n">sys</span>                <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------------+</span>
+<span class="mi">13</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">001</span> <span class="n">sec</span><span class="p">)</span>
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="n">USE</span> <span class="n">empresa_copia</span><span class="p">;</span>
+<span class="n">Reading</span> <span class="k">table</span> <span class="n">information</span> <span class="k">for</span> <span class="k">completion</span> <span class="k">of</span> <span class="k">table</span> <span class="k">and</span> <span class="k">column</span> <span class="k">names</span>
+<span class="n">You</span> <span class="n">can</span> <span class="n">turn</span> <span class="k">off</span> <span class="n">this</span> <span class="n">feature</span> <span class="k">to</span> <span class="k">get</span> <span class="n">a</span> <span class="n">quicker</span> <span class="n">startup</span> <span class="k">with</span> <span class="o">-</span><span class="n">A</span>
+
+<span class="k">Database</span> <span class="n">changed</span>
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">empresa_copia</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">SHOW</span> <span class="n">TABLES</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-------------------------+</span>
+<span class="o">|</span> <span class="n">Tables_in_empresa_copia</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------------------------+</span>
+<span class="o">|</span> <span class="n">departamentos</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="n">empleados</span>               <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------------------------+</span>
+<span class="mi">2</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">001</span> <span class="n">sec</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Y como podemos ver, las tablas y los datos se han restaurado correctamente.</p>
+
+<p>Para asegurarnos de que se realicen copias de seguridad de forma automática todos los días, creamos un servicio en systemd 
+que ejecutará el comando <code class="language-plaintext highlighter-rouge">mysqldump</code> y guardará la copia con la fecha y la hora en el nombre del archivo.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo cat</span> /etc/systemd/system/backup_mysql.service
+<span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Copia de seguridad de MySQL
+
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>oneshot
+<span class="nv">ExecStart</span><span class="o">=</span>/bin/bash <span class="nt">-c</span> <span class="s1">'mysqldump -u root -p --all-databases &gt; /home/debian/backups/mysql_backup_$(date +"%Y%m%d%H%M%S").sql'</span>
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Guardamos los cambios y creamos un temporizador para que la copia se realice automáticamente todos los días a las 03:00.</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo cat</span> /etc/systemd/system/backup_mysql.timer
+<span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Temporizador para la copia de seguridad de MySQL
+
+<span class="o">[</span>Timer]
+<span class="nv">OnCalendar</span><span class="o">=</span><span class="k">*</span>-<span class="k">*</span>-<span class="k">*</span> 03:00:00
+<span class="nv">Persistent</span><span class="o">=</span><span class="nb">true</span>
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>timers.target
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Guardamos el archivo, recargamos systemd, habilitamos y activamos el temporizador:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>backup_mysql.timer
+Created symlink /etc/systemd/system/timers.target.wants/backup_mysql.timer → /etc/systemd/system/backup_mysql.timer.
+pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl start backup_mysql.timerPodemos comprobar que el temporizador está activo con:
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Podemos comprobar que el temporizador está activo con:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mariadb:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl list-timers <span class="nt">--all</span>
+NEXT                        LEFT          LAST                        PASSED              UNIT                         ACTIVATES                     
+Mon 2025-03-03 11:57:51 CET 3h 15min left Mon 2025-01-20 13:29:53 CET 1 month 11 days ago man-db.timer                 man-db.service
+Mon 2025-03-03 21:34:40 CET 12h left      Mon 2025-03-03 08:34:57 CET 7min ago            apt-daily.timer              apt-daily.service
+Tue 2025-03-04 00:00:00 CET 15h left      -                           -                   dpkg-db-backup.timer         dpkg-db-backup.service
+Tue 2025-03-04 00:00:00 CET 15h left      Mon 2025-03-03 08:25:50 CET 16min ago           logrotate.timer              logrotate.service
+Tue 2025-03-04 03:00:00 CET 18h left      -                           -                   backup_mysql.timer           backup_mysql.service
+Tue 2025-03-04 06:21:11 CET 21h left      Mon 2025-03-03 08:29:27 CET 13min ago           apt-daily-upgrade.timer      apt-daily-upgrade.service
+Tue 2025-03-04 08:40:47 CET 23h left      Mon 2025-03-03 08:40:47 CET 1min 40s ago        systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Sun 2025-03-09 03:10:08 CET 5 days left   Sun 2025-03-02 15:51:15 CET 16h ago             e2scrub_all.timer            e2scrub_all.service
+Mon 2025-03-10 00:06:34 CET 6 days left   Mon 2025-03-03 08:41:36 CET 51s ago             fstrim.timer                 fstrim.service
+
+9 timers listed.
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Con esta configuración, aseguramos que las copias de seguridad se realicen automáticamente y podamos restaurarlas en caso de pérdida de datos.</p>
+
 <h2 id="ejercicio-8"><span class="me-2">Ejercicio 8</span><a href="#ejercicio-8" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <p>Documenta el empleo de las herramientas de copia de seguridad y restauración de MongoDB.</p>
+
+<p>En este caso, vamos a realizar una copia de seguridad de la base de datos tienda en MongoDB utilizando el comando mongodump. 
+Posteriormente, eliminaremos la base de datos y la restauraremos utilizando mongorestore. Además, configuraremos un servicio y un 
+temporizador en systemd para automatizar la realización de copias de seguridad diarias.</p>
+
+<p>Primero, ejecutamos el comando <code class="language-plaintext highlighter-rouge">mongodump</code> para crear una copia de seguridad de la base de datos tienda. 
+Utilizamos las credenciales del usuario pavlo, que tiene permisos para acceder a la base de datos. La copia se guardará en un 
+directorio específico con la fecha y hora actuales.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mongo:~<span class="nv">$ </span>mongodump <span class="nt">-u</span> pavlo <span class="nt">-p</span> pavlo <span class="nt">--db</span> tienda <span class="nt">--authenticationDatabase</span> admin <span class="nt">--out</span> /home/pablo/copia_mongo/copia<span class="si">$(</span><span class="nb">date</span> +%Y%m%d%H%M%S<span class="si">)</span>
+2025-03-03T08:57:01.729+0100	writing tienda.productos to /home/pablo/copia_mongo/copia20250303085701/tienda/productos.bson
+2025-03-03T08:57:01.730+0100	<span class="k">done </span>dumping tienda.productos <span class="o">(</span>5 documents<span class="o">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este comando generará archivos <code class="language-plaintext highlighter-rouge">.bson</code> y <code class="language-plaintext highlighter-rouge">.metadata.json</code> en la ruta especificada, conteniendo los datos y metadatos de las colecciones de la base de datos tienda.</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mongo:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lh</span> copia_mongo/
+total 4,0K
+drwxr-xr-x 3 pablo pablo 4,0K mar  3 08:57 copia20250303085701
+pablo@servidor-mongo:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lh</span> copia_mongo/copia20250303085701/
+total 4,0K
+drwxr-xr-x 2 pablo pablo 4,0K mar  3 08:57 tienda
+pablo@servidor-mongo:~<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lh</span> copia_mongo/copia20250303085701/tienda/
+total 8,0K
+<span class="nt">-rw-r--r--</span> 1 pablo pablo 501 mar  3 08:57 productos.bson
+<span class="nt">-rw-r--r--</span> 1 pablo pablo 298 mar  3 08:57 productos.metadata.json
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para simular una situación en la que necesitamos restaurar la base de datos, primero la eliminaremos. Nos conectamos a MongoDB usando <code class="language-plaintext highlighter-rouge">mongosh</code> y ejecutamos el comando <code class="language-plaintext highlighter-rouge">db.dropDatabase()</code>.</p>
+<div class="language-js highlighter-rouge"><div class="code-header">
+        <span data-label-text="JavaScript"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="nx">pablo</span><span class="p">@</span><span class="nd">servidor</span><span class="o">-</span><span class="nx">mongo</span><span class="p">:</span><span class="o">~</span><span class="nx">$</span> <span class="nx">mongosh</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">pavlo</span> <span class="o">-</span><span class="nx">p</span> <span class="nx">pavlo</span> <span class="o">--</span><span class="nx">authenticationDatabase</span> <span class="nx">admin</span>
+<span class="nx">Current</span> <span class="nx">Mongosh</span> <span class="nx">Log</span> <span class="nx">ID</span><span class="p">:</span>	<span class="mi">67</span><span class="nx">c56120c2c54a2a69fe6910</span>
+<span class="nx">Connecting</span> <span class="nx">to</span><span class="p">:</span>		<span class="nx">mongodb</span><span class="p">:</span><span class="c1">//&lt;credentials&gt;@127.0.0.1:27017/?directConnection=true&amp;serverSelectionTimeoutMS=2000&amp;authSource=admin&amp;appName=mongosh+2.3.2</span>
+<span class="nx">Using</span> <span class="nx">MongoDB</span><span class="p">:</span>		<span class="mf">6.0</span><span class="p">.</span><span class="mi">18</span>
+<span class="nx">Using</span> <span class="nx">Mongosh</span><span class="p">:</span>		<span class="mf">2.3</span><span class="p">.</span><span class="mi">2</span>
+<span class="nx">mongosh</span> <span class="mf">2.4</span><span class="p">.</span><span class="mi">0</span> <span class="nx">is</span> <span class="nx">available</span> <span class="k">for</span> <span class="nx">download</span><span class="p">:</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//www.mongodb.com/try/download/shell</span>
+
+<span class="nx">For</span> <span class="nx">mongosh</span> <span class="nx">info</span> <span class="nx">see</span><span class="p">:</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//www.mongodb.com/docs/mongodb-shell/</span>
+
+<span class="o">------</span>
+   <span class="nx">The</span> <span class="nx">server</span> <span class="nx">generated</span> <span class="nx">these</span> <span class="nx">startup</span> <span class="nx">warnings</span> <span class="nx">when</span> <span class="nx">booting</span>
+   <span class="mi">2025</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span><span class="nx">T08</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mf">29.506</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span> <span class="nx">Using</span> <span class="nx">the</span> <span class="nx">XFS</span> <span class="nx">filesystem</span> <span class="nx">is</span> <span class="nx">strongly</span> <span class="nx">recommended</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">WiredTiger</span> <span class="nx">storage</span> <span class="nx">engine</span><span class="p">.</span> <span class="nx">See</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//dochub.mongodb.org/core/prodnotes-filesystem</span>
+   <span class="mi">2025</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span><span class="nx">T08</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mf">29.819</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span> <span class="o">/</span><span class="nx">sys</span><span class="o">/</span><span class="nx">kernel</span><span class="o">/</span><span class="nx">mm</span><span class="o">/</span><span class="nx">transparent_hugepage</span><span class="o">/</span><span class="nx">enabled</span> <span class="nx">is</span> <span class="dl">'</span><span class="s1">always</span><span class="dl">'</span><span class="p">.</span> <span class="nx">We</span> <span class="nx">suggest</span> <span class="nx">setting</span> <span class="nx">it</span> <span class="nx">to</span> <span class="dl">'</span><span class="s1">never</span><span class="dl">'</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">binary</span> <span class="nx">version</span>
+   <span class="mi">2025</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span><span class="nx">T08</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mf">29.819</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span> <span class="nx">vm</span><span class="p">.</span><span class="nx">max_map_count</span> <span class="nx">is</span> <span class="nx">too</span> <span class="nx">low</span>
+<span class="o">------</span>
+
+<span class="nx">test</span><span class="o">&gt;</span> <span class="nx">use</span> <span class="nx">tienda</span><span class="p">;</span>
+<span class="nx">switched</span> <span class="nx">to</span> <span class="nx">db</span> <span class="nx">tienda</span>
+<span class="nx">tienda</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nf">dropDatabase</span><span class="p">()</span>
+<span class="p">{</span> <span class="nl">ok</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tienda</span><span class="dl">'</span> <span class="p">}</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Esto eliminará la base de datos tienda y todas sus colecciones.</p>
+
+<p>Ahora, utilizaremos el comando <code class="language-plaintext highlighter-rouge">mongorestore</code> para restaurar la base de datos a partir de la copia de seguridad que creamos anteriormente. Especificamos la ruta donde se encuentra la copia y las credenciales del usuario.</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mongo:~<span class="nv">$ </span>mongorestore <span class="nt">-u</span> pavlo <span class="nt">-p</span> pavlo <span class="nt">--db</span> tienda <span class="nt">--authenticationDatabase</span> admin /home/pablo/copia_mongo/copia20250303085701/tienda/
+2025-03-03T09:00:29.797+0100	The <span class="nt">--db</span> and <span class="nt">--collection</span> flags are deprecated <span class="k">for </span>this use-case<span class="p">;</span> please use <span class="nt">--nsInclude</span> instead, i.e. with <span class="nt">--nsInclude</span><span class="o">=</span><span class="k">${</span><span class="nv">DATABASE</span><span class="k">}</span>.<span class="k">${</span><span class="nv">COLLECTION</span><span class="k">}</span>
+2025-03-03T09:00:29.798+0100	building a list of collections to restore from /home/pablo/copia_mongo/copia20250303085701/tienda <span class="nb">dir
+</span>2025-03-03T09:00:29.798+0100	reading metadata <span class="k">for </span>tienda.productos from /home/pablo/copia_mongo/copia20250303085701/tienda/productos.metadata.json
+2025-03-03T09:00:29.823+0100	restoring tienda.productos from /home/pablo/copia_mongo/copia20250303085701/tienda/productos.bson
+2025-03-03T09:00:29.834+0100	finished restoring tienda.productos <span class="o">(</span>5 documents, 0 failures<span class="o">)</span>
+2025-03-03T09:00:29.835+0100	restoring indexes <span class="k">for </span>collection tienda.productos from metadata
+2025-03-03T09:00:29.836+0100	index: &amp;idx.IndexDocument<span class="o">{</span>Options:primitive.M<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">"precio_1_categoria_1"</span>, <span class="s2">"v"</span>:2<span class="o">}</span>, Key:primitive.D<span class="o">{</span>primitive.E<span class="o">{</span>Key:<span class="s2">"precio"</span>, Value:1<span class="o">}</span>, primitive.E<span class="o">{</span>Key:<span class="s2">"categoria"</span>, Value:1<span class="o">}}</span>, PartialFilterExpression:primitive.D<span class="o">(</span>nil<span class="o">)}</span>
+2025-03-03T09:00:29.860+0100	5 document<span class="o">(</span>s<span class="o">)</span> restored successfully. 0 document<span class="o">(</span>s<span class="o">)</span> failed to restore.
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este comando leerá los archivos <code class="language-plaintext highlighter-rouge">.bson</code> y <code class="language-plaintext highlighter-rouge">.metadata.json</code> y restaurará las colecciones y sus datos en la base de datos tienda.</p>
+
+<p>Como podemos ver, se ha restaurado correctamente:</p>
+<div class="language-js highlighter-rouge"><div class="code-header">
+        <span data-label-text="JavaScript"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre><span class="nx">pablo</span><span class="p">@</span><span class="nd">servidor</span><span class="o">-</span><span class="nx">mongo</span><span class="p">:</span><span class="o">~</span><span class="nx">$</span> <span class="nx">mongosh</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">pavlo</span> <span class="o">-</span><span class="nx">p</span> <span class="nx">pavlo</span> <span class="o">--</span><span class="nx">authenticationDatabase</span> <span class="nx">admin</span>
+<span class="nx">Current</span> <span class="nx">Mongosh</span> <span class="nx">Log</span> <span class="nx">ID</span><span class="p">:</span>	<span class="mi">67</span><span class="nx">c561a3dde0282076fe6910</span>
+<span class="nx">Connecting</span> <span class="nx">to</span><span class="p">:</span>		<span class="nx">mongodb</span><span class="p">:</span><span class="c1">//&lt;credentials&gt;@127.0.0.1:27017/?directConnection=true&amp;serverSelectionTimeoutMS=2000&amp;authSource=admin&amp;appName=mongosh+2.3.2</span>
+<span class="nx">Using</span> <span class="nx">MongoDB</span><span class="p">:</span>		<span class="mf">6.0</span><span class="p">.</span><span class="mi">18</span>
+<span class="nx">Using</span> <span class="nx">Mongosh</span><span class="p">:</span>		<span class="mf">2.3</span><span class="p">.</span><span class="mi">2</span>
+<span class="nx">mongosh</span> <span class="mf">2.4</span><span class="p">.</span><span class="mi">0</span> <span class="nx">is</span> <span class="nx">available</span> <span class="k">for</span> <span class="nx">download</span><span class="p">:</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//www.mongodb.com/try/download/shell</span>
+
+<span class="nx">For</span> <span class="nx">mongosh</span> <span class="nx">info</span> <span class="nx">see</span><span class="p">:</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//www.mongodb.com/docs/mongodb-shell/</span>
+
+<span class="o">------</span>
+   <span class="nx">The</span> <span class="nx">server</span> <span class="nx">generated</span> <span class="nx">these</span> <span class="nx">startup</span> <span class="nx">warnings</span> <span class="nx">when</span> <span class="nx">booting</span>
+   <span class="mi">2025</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span><span class="nx">T08</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mf">29.506</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span> <span class="nx">Using</span> <span class="nx">the</span> <span class="nx">XFS</span> <span class="nx">filesystem</span> <span class="nx">is</span> <span class="nx">strongly</span> <span class="nx">recommended</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">WiredTiger</span> <span class="nx">storage</span> <span class="nx">engine</span><span class="p">.</span> <span class="nx">See</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//dochub.mongodb.org/core/prodnotes-filesystem</span>
+   <span class="mi">2025</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span><span class="nx">T08</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mf">29.819</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span> <span class="o">/</span><span class="nx">sys</span><span class="o">/</span><span class="nx">kernel</span><span class="o">/</span><span class="nx">mm</span><span class="o">/</span><span class="nx">transparent_hugepage</span><span class="o">/</span><span class="nx">enabled</span> <span class="nx">is</span> <span class="dl">'</span><span class="s1">always</span><span class="dl">'</span><span class="p">.</span> <span class="nx">We</span> <span class="nx">suggest</span> <span class="nx">setting</span> <span class="nx">it</span> <span class="nx">to</span> <span class="dl">'</span><span class="s1">never</span><span class="dl">'</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">binary</span> <span class="nx">version</span>
+   <span class="mi">2025</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span><span class="nx">T08</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mf">29.819</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span> <span class="nx">vm</span><span class="p">.</span><span class="nx">max_map_count</span> <span class="nx">is</span> <span class="nx">too</span> <span class="nx">low</span>
+<span class="o">------</span>
+
+<span class="nx">test</span><span class="o">&gt;</span> <span class="nx">show</span> <span class="nx">dbs</span><span class="p">;</span>
+<span class="nx">admin</span>            <span class="mf">424.00</span> <span class="nx">KiB</span>
+<span class="nx">biblioteca</span>       <span class="mf">100.00</span> <span class="nx">KiB</span>
+<span class="nx">config</span>           <span class="mf">108.00</span> <span class="nx">KiB</span>
+<span class="nx">ex_usuario</span>       <span class="mf">200.00</span> <span class="nx">KiB</span>
+<span class="nx">examen</span>           <span class="mf">200.00</span> <span class="nx">KiB</span>
+<span class="nx">kk</span>               <span class="mf">200.00</span> <span class="nx">KiB</span>
+<span class="nx">local</span>             <span class="mf">80.00</span> <span class="nx">KiB</span>
+<span class="nx">nueva_tienda</span>      <span class="mf">40.00</span> <span class="nx">KiB</span>
+<span class="nx">practica1_abd</span>    <span class="mf">120.00</span> <span class="nx">KiB</span>
+<span class="nx">prueba</span>           <span class="mf">120.00</span> <span class="nx">KiB</span>
+<span class="nx">pruebas</span>          <span class="mf">184.00</span> <span class="nx">KiB</span>
+<span class="nx">restaurantes_db</span>   <span class="mf">60.00</span> <span class="nx">KiB</span>
+<span class="nx">tienda</span>            <span class="mf">60.00</span> <span class="nx">KiB</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Para asegurarnos de que las copias de seguridad se realicen automáticamente cada día, crearemos un servicio y un temporizador en systemd.</p>
+
+<p>Primero, creamos un archivo de servicio en <code class="language-plaintext highlighter-rouge">/etc/systemd/system/mongo_copia.service</code> con el siguiente contenido:</p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Realiza copias de seguridad de la base de datos tienda en MongoDB
+
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>oneshot
+<span class="nv">ExecStart</span><span class="o">=</span>/bin/bash <span class="nt">-c</span> <span class="s1">'mongodump -u pavlo -p pavlo --db tienda --authenticationDatabase admin --out /home/pablo/copia_mongo/copia$(date +%%Y%%m%%d%%H%%M%%S)'</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este servicio ejecutará el comando <code class="language-plaintext highlighter-rouge">mongodump</code> para crear una copia de seguridad de la base de datos tienda en una carpeta con la fecha y hora actuales.</p>
+
+<p>A continuación, creamos un archivo de temporizador en <code class="language-plaintext highlighter-rouge">/etc/systemd/system/mongo_copia.timer</code> con el siguiente contenido:</p>
+<div class="language-sh highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Ejecuta el servicio de copia de seguridad de MongoDB diariamente a las 03:00
+
+<span class="o">[</span>Timer]
+<span class="nv">OnCalendar</span><span class="o">=</span><span class="k">*</span>-<span class="k">*</span>-<span class="k">*</span> 03:00:00
+<span class="nv">Persistent</span><span class="o">=</span><span class="nb">true</span>
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>timers.target
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Este temporizador programará la ejecución del servicio <code class="language-plaintext highlighter-rouge">mongo_copia.service</code> todos los días a las 03:00.</p>
+
+<p>Finalmente, recargamos el demonio de systemd, habilitamos y activamos el temporizador:</p>
+<div class="language-sh highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mongo:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+pablo@servidor-mongo:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>mongo_copia.timer
+Created symlink /etc/systemd/system/timers.target.wants/mongo_copia.timer → /etc/systemd/system/mongo_copia.timer.
+pablo@servidor-mongo:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl start mongo_copia.timer
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Podemos comprobar que el temporizador está activo con:</p>
+
+<div class="language-sh highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>pablo@servidor-mongo:~<span class="nv">$ </span><span class="nb">sudo </span>systemctl list-timers <span class="nt">--all</span> | <span class="nb">grep </span>mongo
+Tue 2025-03-04 03:00:00 CET 17h left      -                           -                  mongo_copia.timer            mongo_copia.service
+</pre></td></tr></tbody></table></code></div></div>
 
   </div>
 
