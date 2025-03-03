@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-03T09:10:12+01:00</updated>
+  <updated>2025-03-03T09:18:53+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -24,7 +24,7 @@
     <link href="/posts/copia-seguridad/" rel="alternate" type="text/html" title="Copias de Seguridad y Restauración" />
     <published>2025-03-03T00:35:00+01:00</published>
   
-    <updated>2025-03-03T09:10:11+01:00</updated>
+    <updated>2025-03-03T09:18:53+01:00</updated>
   
     <id>/posts/copia-seguridad/</id>
     <content src="/posts/copia-seguridad/" />
@@ -35,6 +35,8 @@
   
     
     <category term="Base de Datos" />
+    
+    <category term="Administración y Seguridad de Bases de Datos" />
     
   
 
@@ -48,7 +50,7 @@
     <link href="/posts/movimiento_datos/" rel="alternate" type="text/html" title="Movimiento de datos" />
     <published>2025-02-28T21:33:00+01:00</published>
   
-    <updated>2025-03-02T18:09:13+01:00</updated>
+    <updated>2025-03-03T09:18:53+01:00</updated>
   
     <id>/posts/movimiento_datos/</id>
     <content src="/posts/movimiento_datos/" />
@@ -59,6 +61,8 @@
   
     
     <category term="Base de Datos" />
+    
+    <category term="Administración y Seguridad de Bases de Datos" />
     
   
 
@@ -72,7 +76,7 @@
     <link href="/posts/auditoria/" rel="alternate" type="text/html" title="Auditoría" />
     <published>2025-02-25T21:00:00+01:00</published>
   
-    <updated>2025-02-27T15:10:07+01:00</updated>
+    <updated>2025-03-03T09:18:53+01:00</updated>
   
     <id>/posts/auditoria/</id>
     <content src="/posts/auditoria/" />
@@ -83,6 +87,8 @@
   
     
     <category term="Base de Datos" />
+    
+    <category term="Administración y Seguridad de Bases de Datos" />
     
   
 
