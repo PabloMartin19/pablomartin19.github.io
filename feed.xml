@@ -4,7 +4,7 @@
   <id>/</id>
   <title>Blog personal</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-03T09:18:53+01:00</updated>
+  <updated>2025-03-07T12:32:46+01:00</updated>
   <author>
     <name>Pablo Martín Hidalgo</name>
     <uri>/</uri>
@@ -17,6 +17,30 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Instalación y configuración inicial de OpenLDAP</title>
+    <link href="/posts/openLDAP/" rel="alternate" type="text/html" title="Instalación y configuración inicial de OpenLDAP" />
+    <published>2025-03-05T19:00:00+01:00</published>
+  
+    <updated>2025-03-05T19:00:00+01:00</updated>
+  
+    <id>/posts/openLDAP/</id>
+    <content src="/posts/openLDAP/" />
+    <author>
+      <name>pablo</name>
+    </author>
+
+  
+    
+    <category term="Sistemas" />
+    
+  
+
+  <summary>En esta práctica, vamos a configurar un servidor OpenLDAP en un entorno de OpenStack, donde utilizaremos el nombre DNS asignado a nuestro proyecto. OpenLDAP nos permitirá gestionar la autenticación centralizada de usuarios, mientras que configuraremos dos máquinas cliente (Debian y Rocky Linux) para validarse en el servidor LDAP con un usuario específico llamado asoprueba. Además, los directori...</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +143,6 @@
   
 
   <summary>En esta práctica realizaremos un análisis forense sobre un disco volcado en Windows 10 y Debian 12. La finalidad de esto es encontrar distintas pruebas sobre lo que estaba ocurriendo en ese momento en el disco, además de mucha información necesaria para recoger evidencias.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Configuración/activación de SELinux</title>
-    <link href="/posts/selinux/" rel="alternate" type="text/html" title="Configuración/activación de SELinux" />
-    <published>2025-01-29T20:00:00+01:00</published>
-  
-    <updated>2025-02-08T13:39:06+01:00</updated>
-  
-    <id>/posts/selinux/</id>
-    <content src="/posts/selinux/" />
-    <author>
-      <name>pablo</name>
-    </author>
-
-  
-    
-    <category term="Sistemas" />
-    
-    <category term="SELinux" />
-    
-  
-
-  <summary>En un entorno basado en Rocky Linux con SELinux en modo enforcing, garantizar el correcto funcionamiento de servicios como SSHFS, Samba y NFS requiere una configuración precisa y segura de las políticas de SELinux. Además, habilitamos el inicio de sesión remoto como root y cambiamos el puerto SSH a uno no estándar para mejorar la seguridad. Realizamos pruebas exhaustivas para asegurar que los s...</summary>
 
   </entry>
 
